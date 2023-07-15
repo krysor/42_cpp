@@ -37,6 +37,7 @@ public:
 	void	setEnergyPoints( unsigned int energyPoints );
 	void	setAttackDamage( unsigned int  attackDamage );
 
+	static	void	attack( ClapTrap& attacker, ClapTrap& victim );
 };
 
 #endif
