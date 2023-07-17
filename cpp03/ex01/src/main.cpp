@@ -18,7 +18,7 @@ void	simulateFight(const ClapTrap& a, const ClapTrap& b)
 		i++;
 	}
 	if (clapTraps[0].getHitPoints() && clapTraps[1].getHitPoints())
-		UI::printLine(std::string(GREEN) + "It's a TIE!" + std::string(RESET));
+		UI::printLine("It's a TIE!");
 	else if (clapTraps[0].getHitPoints() == 0)
 		UI::printLine("ClapTrap " + clapTraps[1].getName() + " has won");
 	else
