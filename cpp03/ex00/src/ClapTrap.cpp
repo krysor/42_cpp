@@ -71,20 +71,22 @@ void	ClapTrap::attack( const std::string& target )
 void	ClapTrap::takeDamage( unsigned int amount )
 {
 	unsigned int	hitPoints;
+	unsigned int	hitPointsNew;
 	std::string		line;
 
 	hitPoints = getHitPoints();
+	hitPointsNew = (int)hitPoints - (int)amount;
 	line = getName();
 	if (hitPoints == 0)
 		line += " is already dead and can't take any more damage";
-	else if ((int)hitPoints - (int)amount <= 0)
+	else if (hitPointsNew <= 0)
 	{
 		setHitPoints(0);
-		line += " has taken " + std::to_string(amount) + " damage and is now dead";
+		line += " has taken " + std::to_string(hitPoints) + " damage and is now dead";
 	}
 	else
 	{
-		setHitPoints(hitPoints - amount);
+		setHitPoints(hitPointsNew);
 		line += " has taken " + std::to_string(amount) + " damage";
 		line += ". " + std::to_string(getHitPoints()) + " HP remaining";
 	}
