@@ -63,7 +63,7 @@ void	ClapTrap::attack( const std::string& target )
 		energyPoints--;
 		setEnergyPoints(energyPoints);
 		line += " attacked " + target + " causing "
-			  + std::to_string(getAttackDamage()) + " amount of damage";
+			  + std::to_string(getAttackDamage()) + " points of damage";
 	}
 	UI::printLine(line);
 }
@@ -86,6 +86,7 @@ void	ClapTrap::takeDamage( unsigned int amount )
 	{
 		setHitPoints(hitPoints - amount);
 		line += " has taken " + std::to_string(amount) + " damage";
+		line += ". " + std::to_string(getHitPoints()) + " HP remaining";
 	}
 	UI::printLine(line);
 }
@@ -100,7 +101,7 @@ void	ClapTrap::beRepaired( unsigned int amount )
 	energyPoints = getEnergyPoints();
 	line = getName();
 	if (hitPoints == 0)
-		line += " is already dead and repair itself";
+		line += " is already dead and can't repair itself";
 	else if (energyPoints == 0)
 		line += " can't repair itself because it has no energy points left";
 	else
@@ -110,6 +111,7 @@ void	ClapTrap::beRepaired( unsigned int amount )
 		hitPoints += amount;
 		setHitPoints(hitPoints);
 		line += " repaired itself restoring " + std::to_string(amount) + " hitpoint(s)";
+		line += ". " + std::to_string(getHitPoints()) + " HP remaining";
 	}
 	UI::printLine(line);
 }
@@ -157,10 +159,15 @@ void	ClapTrap::setAttackDamage( unsigned int attackDamage )
 void	ClapTrap::attack( ClapTrap& attacker, ClapTrap& victim )
 {
 	std::string		nameVictim;
+	unsigned int	energyPointsAttacker;
 	unsigned int	damage;
 	
 	nameVictim = victim.getName();
-	damage = attacker.getAttackDamage();
+	energyPointsAttacker = attacker.getEnergyPoints();
 	attacker.attack(nameVictim);
-	victim.takeDamage(damage);
+	if (energyPointsAttacker != 0)
+	{
+		damage = attacker.getAttackDamage();
+		victim.takeDamage(damage);
+	}
 }
