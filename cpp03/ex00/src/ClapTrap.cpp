@@ -53,7 +53,7 @@ void	ClapTrap::attack( const std::string& target )
 	std::string		line;
 
 	energyPoints = getEnergyPoints();
-	line = getName();
+	line = GREEN + getName();
 	if (getHitPoints() == 0)
 		line += " is dead and can't do anything";
 	else if (energyPoints == 0)
@@ -65,18 +65,18 @@ void	ClapTrap::attack( const std::string& target )
 		line += " attacked " + target + " causing "
 			  + std::to_string(getAttackDamage()) + " points of damage";
 	}
-	UI::printLine(line);
+	UI::printLine(line + RESET);
 }
 
 void	ClapTrap::takeDamage( unsigned int amount )
 {
 	unsigned int	hitPoints;
-	unsigned int	hitPointsNew;
+	int				hitPointsNew;
 	std::string		line;
 
 	hitPoints = getHitPoints();
 	hitPointsNew = (int)hitPoints - (int)amount;
-	line = getName();
+	line = RED + getName();
 	if (hitPoints == 0)
 		line += " is already dead and can't take any more damage";
 	else if (hitPointsNew <= 0)
@@ -84,13 +84,13 @@ void	ClapTrap::takeDamage( unsigned int amount )
 		setHitPoints(0);
 		line += " has taken " + std::to_string(hitPoints) + " damage and is now dead";
 	}
-	else
+	else if (hitPointsNew > 0)
 	{
-		setHitPoints(hitPointsNew);
+		setHitPoints((unsigned int)hitPointsNew);
 		line += " has taken " + std::to_string(amount) + " damage";
 		line += ". " + std::to_string(getHitPoints()) + " HP remaining";
 	}
-	UI::printLine(line);
+	UI::printLine(line + RESET);
 }
 
 void	ClapTrap::beRepaired( unsigned int amount )
@@ -101,7 +101,7 @@ void	ClapTrap::beRepaired( unsigned int amount )
 
 	hitPoints = getHitPoints();
 	energyPoints = getEnergyPoints();
-	line = getName();
+	line = BLUE + getName();
 	if (hitPoints == 0)
 		line += " is already dead and can't repair itself";
 	else if (energyPoints == 0)
@@ -115,7 +115,7 @@ void	ClapTrap::beRepaired( unsigned int amount )
 		line += " repaired itself restoring " + std::to_string(amount) + " hitpoint(s)";
 		line += ". " + std::to_string(getHitPoints()) + " HP remaining";
 	}
-	UI::printLine(line);
+	UI::printLine(line + RESET);
 }
 
 const std::string&		ClapTrap::getName( void ) const
