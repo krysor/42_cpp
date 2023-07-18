@@ -3,7 +3,7 @@
 
 ClapTrap::ClapTrap( void )
 {
-	UI::printLine("Default constructor called");
+	UI::printLine("ClapTrap Default constructor called");
 	setName("NAMELESS");
 	setHitPoints(10);
 	setEnergyPoints(10);
@@ -12,7 +12,7 @@ ClapTrap::ClapTrap( void )
 
 ClapTrap::ClapTrap( std::string name )
 {
-	UI::printLine("Name constructor called");
+	UI::printLine("ClapTrap Name constructor called");
 	setName(name);
 	setHitPoints(10);
 	setEnergyPoints(10);
@@ -21,13 +21,13 @@ ClapTrap::ClapTrap( std::string name )
 
 ClapTrap::ClapTrap( const ClapTrap& clapTrap )
 {
-	UI::printLine("Copy constructor called");
+	UI::printLine("ClapTrap Copy constructor called");
 	operator=(clapTrap);
 }
 
 ClapTrap&	ClapTrap::operator=( const ClapTrap& clapTrap )
 {
-	UI::printLine("Copy assignment operator called");
+	UI::printLine("ClapTrap Copy assignment operator called");
 	std::string		name;
 	unsigned int	hitPoints, energyPoints, attackDamage;
 
@@ -44,7 +44,7 @@ ClapTrap&	ClapTrap::operator=( const ClapTrap& clapTrap )
 
 ClapTrap::~ClapTrap( void )
 {
-	UI::printLine("Destructor called");
+	UI::printLine("ClapTrap Destructor called");
 }
 
 void	ClapTrap::attack( const std::string& target )
