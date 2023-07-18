@@ -4,6 +4,12 @@
 
 #include <iostream>
 
+#define RESET	"\33[0m"
+#define RED		"\33[31m"
+#define GREEN	"\33[32m"
+#define YELLOW	"\33[33m"
+#define BLUE	"\33[34m"
+
 class UI {
 
 public:

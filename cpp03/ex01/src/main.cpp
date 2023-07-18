@@ -6,23 +6,30 @@
 void	simulateFight(const ClapTrap& a, const ClapTrap& b)
 {
 	ClapTrap 		clapTraps[] = {a, b};
-	unsigned int	i 			= 0;
+	unsigned int	i;
+	unsigned int	random;
+	std::string		line;
+	
+	i = 0;
 	while (clapTraps[0].getHitPoints() && clapTraps[0].getEnergyPoints()
 		&& clapTraps[1].getHitPoints() && clapTraps[1].getEnergyPoints())
 	{
-		unsigned index = rand() % 2;
-		if (index == 0)
+		random = rand() % 2;
+		if (random == 0)
 			ClapTrap::attack(clapTraps[i % 2], clapTraps[(i + 1) % 2]);
 		else
 			clapTraps[i % 2].beRepaired(1);
 		i++;
 	}
+	line = YELLOW;
 	if (clapTraps[0].getHitPoints() && clapTraps[1].getHitPoints())
-		UI::printLine("It's a TIE!");
+		line += "It's a TIE!";
 	else if (clapTraps[0].getHitPoints() == 0)
-		UI::printLine("ClapTrap " + clapTraps[1].getName() + " has won");
+		line += clapTraps[1].getName() + " has won";
 	else
-		UI::printLine("ClapTrap " + clapTraps[0].getName() + " has won");
+		line += clapTraps[0].getName() + " has won";
+	line += RESET;
+	UI::printLine(line);
 }
 
 int main( void ) 
