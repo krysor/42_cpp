@@ -4,11 +4,11 @@
 
 #include <iostream>
 
-#define RESET	"\33[0m"
-#define RED		"\33[31m"
-#define GREEN	"\33[32m"
-#define YELLOW	"\33[33m"
-#define BLUE	"\33[34m"
+#define RESET	std::string("\33[0m")
+#define RED		std::string("\33[31m")
+#define GREEN	std::string("\33[32m")
+#define YELLOW	std::string("\33[33m")
+#define BLUE	std::string("\33[34m")
 
 class UI {
 

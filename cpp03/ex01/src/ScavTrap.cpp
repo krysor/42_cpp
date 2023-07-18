@@ -3,42 +3,52 @@
 
 ScavTrap::ScavTrap( void )
 {
-	UI::printLine("ScavTrap Default constructor called");
+	UI::printLine(BLUE
+		+ "ScavTrap Default constructor called"
+			+ RESET);
 	setName("NAMELESS ScavTrap");
 }
 
 ScavTrap::ScavTrap( std::string name )
 {
-	UI::printLine("ScavTrap Name constructor called");
+	UI::printLine(BLUE
+		+ "ScavTrap Name constructor called"
+			+ RESET);
 	setName(name);
 }
 
 ScavTrap::ScavTrap( const ScavTrap& scavTrap )
 {
-	UI::printLine("ScavTrap Copy constructor called");
+	UI::printLine(BLUE
+		+ "ScavTrap Copy constructor called"
+			+ RESET);
 	operator=(scavTrap);
 }
 
 ScavTrap&	ScavTrap::operator=( const ScavTrap& scavTrap )
 {
-	UI::printLine("ScavTrap Copy assignment operator called");
-	// std::string		name;
-	// unsigned int	hitPoints, energyPoints, attackDamage;
+	std::string		name;
+	unsigned int	hitPoints, energyPoints, attackDamage;
 
-	// name = scavTrap.getName();
-	// hitPoints = scavTrap.getHitPoints();
-	// energyPoints = scavTrap.getEnergyPoints();
-	// attackDamage = scavTrap.getAttackDamage();
-	// setName(name);
-	// setHitPoints(hitPoints);
-	// setEnergyPoints(energyPoints);
-	// setAttackDamage(attackDamage);
+	UI::printLine(BLUE
+		+ "ScavTrap Copy assignment operator called"
+			+ RESET);
+	name = scavTrap.getName();
+	hitPoints = scavTrap.getHitPoints();
+	energyPoints = scavTrap.getEnergyPoints();
+	attackDamage = scavTrap.getAttackDamage();
+	setName(name);
+	setHitPoints(hitPoints);
+	setEnergyPoints(energyPoints);
+	setAttackDamage(attackDamage);
 	return (*this);
 }
 
 ScavTrap::~ScavTrap( void )
 {
-	UI::printLine("ScavTrap Destructor called");
+	UI::printLine(BLUE
+		+ "ScavTrap Destructor called"
+			+ RESET);
 }
 
 void	ScavTrap::attack( const std::string& target )
@@ -47,7 +57,7 @@ void	ScavTrap::attack( const std::string& target )
 	std::string		line;
 
 	energyPoints = getEnergyPoints();
-	line = GREEN + "ScavTrap " + getName();
+	line = BLUE + "ScavTrap " + GREEN + getName();
 	if (getHitPoints() == 0)
 		line += " is dead and can't do anything";
 	else if (energyPoints == 0)

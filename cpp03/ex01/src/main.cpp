@@ -33,8 +33,13 @@ void	simulateFight(const ScavTrap& a, const ScavTrap& b)
 
 int main( void ) 
 {
-	ScavTrap a;
-	ScavTrap b("FLY");
+	//constructors + desctructors
+	{
+		ScavTrap a;
+		ScavTrap b("FLY");
+		ScavTrap c(a);
+		ScavTrap d = b;
+	}
 
 	// srand(time(NULL));
 
