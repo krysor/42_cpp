@@ -6,14 +6,16 @@ OBJ_DIR 	= 	obj/
 SRCS		= 	main.cpp \
 				UI.cpp \
 				ClapTrap.cpp \
-				FragTrap.cpp
+				ScavTrap.cpp \
+				FragTrap.cpp \
+				DiamondTrap.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 
 OBJS		=	$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRCS))
 
 ### variables
-NAME		= ex02
+NAME		= ex03
 CC			= c++
 RM			= rm -rf
 INCLUDES	=	-I ./includes
