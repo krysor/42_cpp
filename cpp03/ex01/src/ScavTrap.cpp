@@ -7,6 +7,9 @@ ScavTrap::ScavTrap( void )
 		+ "ScavTrap Default constructor called"
 			+ RESET);
 	setName("NAMELESS ScavTrap");
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(20);
 }
 
 ScavTrap::ScavTrap( std::string name )
@@ -15,6 +18,9 @@ ScavTrap::ScavTrap( std::string name )
 		+ "ScavTrap Name constructor called"
 			+ RESET);
 	setName(name);
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(20);
 }
 
 ScavTrap::ScavTrap( const ScavTrap& scavTrap )
@@ -33,10 +39,10 @@ ScavTrap&	ScavTrap::operator=( const ScavTrap& scavTrap )
 	UI::printLine(BLUE
 		+ "ScavTrap Copy assignment operator called"
 			+ RESET);
-	name = scavTrap.getName();
-	hitPoints = scavTrap.getHitPoints();
-	energyPoints = scavTrap.getEnergyPoints();
-	attackDamage = scavTrap.getAttackDamage();
+	name			=	scavTrap.getName();
+	hitPoints		=	scavTrap.getHitPoints();
+	energyPoints	=	scavTrap.getEnergyPoints();
+	attackDamage	=	scavTrap.getAttackDamage();
 	setName(name);
 	setHitPoints(hitPoints);
 	setEnergyPoints(energyPoints);
@@ -70,6 +76,28 @@ void	ScavTrap::attack( const std::string& target )
 			  + std::to_string(getAttackDamage()) + " points of damage";
 	}
 	UI::printLine(line + RESET);
+}
+
+void	ScavTrap::guardGate( void ) const
+{
+	static unsigned int	i = 0;
+	std::string			line;
+
+	if (i == 0)
+	{
+		i = 1;
+		line = BLUE + "ScavTrap " + getName()
+					+ " is now in Gate keeper mode"
+					+ RESET;
+	}
+	else if (i == 1)
+	{
+		i = 0;
+		line = BLUE + "ScavTrap " + getName()
+			+ " left Gate keeper mode"
+			+ RESET;
+	}
+	UI::printLine(line);
 }
 
 void	ScavTrap::attack( ScavTrap& attacker, ScavTrap& victim )

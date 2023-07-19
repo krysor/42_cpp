@@ -17,7 +17,7 @@ void	simulateFight(const ScavTrap& a, const ScavTrap& b)
 		if (random == 0)
 			ScavTrap::attack(scavTraps[i % 2], scavTraps[(i + 1) % 2]);
 		else
-			scavTraps[i % 2].beRepaired(1);
+			scavTraps[i % 2].beRepaired(10);
 		i++;
 	}
 	line = YELLOW;
@@ -33,7 +33,7 @@ void	simulateFight(const ScavTrap& a, const ScavTrap& b)
 
 int main( void ) 
 {
-	//constructors + desctructors
+	UI::printLine(RED + "\nTEST: constructors + destructor\n" + RESET);
 	{
 		ScavTrap a;
 		ScavTrap b("FLY");
@@ -41,20 +41,22 @@ int main( void )
 		ScavTrap d = b;
 	}
 
-	// srand(time(NULL));
+	UI::printLine(RED + "\nTEST: guardGate()\n" + RESET);
+	{
+		ScavTrap a("Bonjour");
+		a.guardGate();
+		a.guardGate();
+	}
 
-	// //simulate default fight
-	// simulateFight(a, b);
+	UI::printLine(RED + "\nTEST: fight\n" + RESET);
+	{
+		ScavTrap a("MOI");
+		ScavTrap b("TOI");
+		
+		srand(time(NULL));
 
-	// //simulate fight with attack damage set to 1
-	// a.setAttackDamage(1);
-	// b.setAttackDamage(1);
-	// simulateFight(a, b);
+		simulateFight(a, b);
+	}
 
-	// //simulate fight with attack damage set to 3
-	// a.setAttackDamage(3);
-	// b.setAttackDamage(3);
-	// simulateFight(a, b);
-	
 	return (EXIT_SUCCESS);
 }
