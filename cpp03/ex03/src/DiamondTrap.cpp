@@ -7,9 +7,9 @@ DiamondTrap::DiamondTrap( void )
 		+ "DiamondTrap Default constructor called"
 			+ RESET);
 	setName("NAMELESS DiamondTrap");
-	setHitPoints(100);
-	setEnergyPoints(100);
-	setAttackDamage(30);
+	setHitPoints(FragTrap::getHitPoints());
+	setEnergyPoints(ScavTrap::getEnergyPoints());
+	setAttackDamage(FragTrap::getAttackDamage());
 }
 
 DiamondTrap::DiamondTrap( std::string name )
@@ -19,9 +19,9 @@ DiamondTrap::DiamondTrap( std::string name )
 			+ RESET);
 	this->name = name;
 	setName(name + "_clap_name");
-	setHitPoints(100);
-	setEnergyPoints(100);
-	setAttackDamage(30);
+	setHitPoints(FragTrap::getHitPoints());
+	setEnergyPoints(ScavTrap::getEnergyPoints());
+	setAttackDamage(FragTrap::getAttackDamage());
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap& DiamondTrap )
@@ -34,20 +34,20 @@ DiamondTrap::DiamondTrap( const DiamondTrap& DiamondTrap )
 
 DiamondTrap&	DiamondTrap::operator=( const DiamondTrap& DiamondTrap )
 {
-	std::string		name;
-	unsigned int	hitPoints, energyPoints, attackDamage;
+	std::string		nameTmp;
+	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
 
 	UI::printLine(YELLOW
 		+ "DiamondTrap Copy assignment operator called"
 			+ RESET);
-	name			=	DiamondTrap.getName();
-	hitPoints		=	DiamondTrap.getHitPoints();
-	energyPoints	=	DiamondTrap.getEnergyPoints();
-	attackDamage	=	DiamondTrap.getAttackDamage();
-	setName(name);
-	setHitPoints(hitPoints);
-	setEnergyPoints(energyPoints);
-	setAttackDamage(attackDamage);
+	nameTmp			=	DiamondTrap.getName();
+	hitPointsTmp	=	DiamondTrap.getHitPoints();
+	energyPointsTmp	=	DiamondTrap.getEnergyPoints();
+	attackDamageTmp	=	DiamondTrap.getAttackDamage();
+	setName(nameTmp);
+	setHitPoints(hitPointsTmp);
+	setEnergyPoints(energyPointsTmp);
+	setAttackDamage(attackDamageTmp);
 	return (*this);
 }
 
