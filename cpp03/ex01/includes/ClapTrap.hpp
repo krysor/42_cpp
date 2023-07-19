@@ -23,9 +23,9 @@ public:
 	ClapTrap&	operator=( const ClapTrap& clapTrap );
 	~ClapTrap( void );
 
-	void	attack( const std::string& target );
-	void	takeDamage( unsigned int amount );
-	void	beRepaired( unsigned int amount );
+	virtual	void	attack( const std::string& target );
+	void			takeDamage( unsigned int amount );
+	void			beRepaired( unsigned int amount );
 
 	const std::string&	getName( void ) const;
 	const unsigned int&	getHitPoints( void ) const;
@@ -37,7 +37,7 @@ public:
 	void	setEnergyPoints( unsigned int energyPoints );
 	void	setAttackDamage( unsigned int  attackDamage );
 
-	static	void	attack( ClapTrap& attacker, ClapTrap& victim );
+	static	void	attackAndTakeDamage( ClapTrap& attacker, ClapTrap& victim );
 };
 
 #endif

@@ -53,7 +53,7 @@ void	ClapTrap::attack( const std::string& target )
 	std::string		line;
 
 	energyPoints = getEnergyPoints();
-	line = GREEN + getName();
+	line = "ClapTrap " + GREEN + getName();
 	if (getHitPoints() == 0)
 		line += " is dead and can't do anything";
 	else if (energyPoints == 0)
@@ -158,7 +158,7 @@ void	ClapTrap::setAttackDamage( unsigned int attackDamage )
 	this->_attackDamage = attackDamage;
 }
 
-void	ClapTrap::attack( ClapTrap& attacker, ClapTrap& victim )
+void	ClapTrap::attackAndTakeDamage( ClapTrap& attacker, ClapTrap& victim )
 {
 	std::string		nameVictim;
 	unsigned int	energyPointsAttacker;

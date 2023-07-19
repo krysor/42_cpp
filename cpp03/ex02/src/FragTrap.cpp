@@ -57,24 +57,8 @@ FragTrap::~FragTrap( void )
 			+ RESET);
 }
 
-void	FragTrap::highFivesGuys( void ) const
+void	FragTrap::highFivesGuys( void )
 {
 	UI::printLine(getName()
 				+ ": ha fives guys!");
-}
-
-void	FragTrap::attack( FragTrap& attacker, FragTrap& victim )
-{
-	std::string		nameVictim;
-	unsigned int	energyPointsAttacker;
-	unsigned int	damage;
-	
-	nameVictim = victim.getName();
-	energyPointsAttacker = attacker.getEnergyPoints();
-	attacker.attack(nameVictim);
-	if (energyPointsAttacker != 0)
-	{
-		damage = attacker.getAttackDamage();
-		victim.takeDamage(damage);
-	}
 }

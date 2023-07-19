@@ -99,19 +99,3 @@ void	ScavTrap::guardGate( void ) const
 	}
 	UI::printLine(line);
 }
-
-void	ScavTrap::attack( ScavTrap& attacker, ScavTrap& victim )
-{
-	std::string		nameVictim;
-	unsigned int	energyPointsAttacker;
-	unsigned int	damage;
-	
-	nameVictim = victim.getName();
-	energyPointsAttacker = attacker.getEnergyPoints();
-	attacker.attack(nameVictim);
-	if (energyPointsAttacker != 0)
-	{
-		damage = attacker.getAttackDamage();
-		victim.takeDamage(damage);
-	}
-}

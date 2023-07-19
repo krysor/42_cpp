@@ -15,7 +15,7 @@ void	simulateFight(const FragTrap& a, const FragTrap& b)
 	{
 		random = rand() % 2;
 		if (random == 0)
-			FragTrap::attack(fragTraps[i % 2], fragTraps[(i + 1) % 2]);
+			FragTrap::attackAndTakeDamage(fragTraps[i % 2], fragTraps[(i + 1) % 2]);
 		else
 			fragTraps[i % 2].beRepaired(10);
 		i++;

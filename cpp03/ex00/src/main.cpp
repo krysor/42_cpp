@@ -16,7 +16,7 @@ void	simulateFight(const ClapTrap& a, const ClapTrap& b)
 	{
 		random = rand() % 2;
 		if (random == 0)
-			ClapTrap::attack(clapTraps[i % 2], clapTraps[(i + 1) % 2]);
+			ClapTrap::attackAndTakeDamage(clapTraps[i % 2], clapTraps[(i + 1) % 2]);
 		else
 			clapTraps[i % 2].beRepaired(1);
 		i++;

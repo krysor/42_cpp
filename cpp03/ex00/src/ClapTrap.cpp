@@ -158,7 +158,7 @@ void	ClapTrap::setAttackDamage( unsigned int attackDamage )
 	this->_attackDamage = attackDamage;
 }
 
-void	ClapTrap::attack( ClapTrap& attacker, ClapTrap& victim )
+void	ClapTrap::attackAndTakeDamage( ClapTrap& attacker, ClapTrap& victim )
 {
 	std::string		nameVictim;
 	unsigned int	energyPointsAttacker;

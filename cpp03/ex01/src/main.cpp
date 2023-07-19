@@ -15,7 +15,7 @@ void	simulateFight(const ScavTrap& a, const ScavTrap& b)
 	{
 		random = rand() % 2;
 		if (random == 0)
-			ScavTrap::attack(scavTraps[i % 2], scavTraps[(i + 1) % 2]);
+			ClapTrap::attackAndTakeDamage(scavTraps[i % 2], scavTraps[(i + 1) % 2]);
 		else
 			scavTraps[i % 2].beRepaired(10);
 		i++;

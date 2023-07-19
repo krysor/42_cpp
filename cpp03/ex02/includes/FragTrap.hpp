@@ -16,8 +16,6 @@ public:
 	~FragTrap( void );
 
 	void	highFivesGuys( void );
-
- 	static void	attack( FragTrap& attacker, FragTrap& victim );
 };
 
 #endif

@@ -18,7 +18,7 @@ public:
 	void	attack( const std::string& target );
 	void	guardGate( void ) const;
 
- 	static void	attack( ScavTrap& attacker, ScavTrap& victim );
+ 	//static void	fullAttack( ScavTrap& attacker, ScavTrap& victim );
 };
 
 #endif
