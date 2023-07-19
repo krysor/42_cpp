@@ -36,33 +36,36 @@ int main( void )
 	UI::printLine(RED + "\nTEST: constructors + destructor\n" + RESET);
 	{
 		DiamondTrap a;
+		UI::printLine("HP    :" + std::to_string(a.getHitPoints()));
+		UI::printLine("Energy:" + std::to_string(a.getEnergyPoints()));
+		UI::printLine("Damage:" + std::to_string(a.getAttackDamage()));
 		UI::printLine("\n");
-		DiamondTrap b("FLY");
-		UI::printLine("\n");
-		DiamondTrap c(a);
-		UI::printLine("\n");
-		DiamondTrap d = b;
-		UI::printLine("\n");
+		// DiamondTrap b("FLY");
+		// UI::printLine("\n");
+		// DiamondTrap c(a);
+		// UI::printLine("\n");
+		// DiamondTrap d = b;
+		// UI::printLine("\n");
 	}
 
-	UI::printLine(RED + "\nTEST: special functions\n" + RESET);
-	{
-		DiamondTrap a("Bonjour");
+	// UI::printLine(RED + "\nTEST: special functions\n" + RESET);
+	// {
+	// 	DiamondTrap a("Bonjour");
 		
-		a.guardGate();
-		a.highFivesGuys();
-		a.whoAmI();
-	}
+	// 	a.guardGate();
+	// 	a.highFivesGuys();
+	// 	a.whoAmI();
+	// }
 
-	UI::printLine(RED + "\nTEST: fight\n" + RESET);
-	{
-		DiamondTrap a("MOI");
-		DiamondTrap b("TOI");
+	// UI::printLine(RED + "\nTEST: fight\n" + RESET);
+	// {
+	// 	DiamondTrap a("MOI");
+	// 	DiamondTrap b("TOI");
 		
-		srand(time(NULL));
+	// 	srand(time(NULL));
 
-		simulateFight(a, b);
-	}
+	// 	simulateFight(a, b);
+	// }
 
 	return (EXIT_SUCCESS);
 }

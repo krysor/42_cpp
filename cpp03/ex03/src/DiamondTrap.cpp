@@ -3,25 +3,35 @@
 
 DiamondTrap::DiamondTrap( void )
 {
+	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
+
 	UI::printLine(YELLOW
 		+ "DiamondTrap Default constructor called"
 			+ RESET);
 	setName("NAMELESS DiamondTrap");
-	setHitPoints(FragTrap::getHitPoints());
-	setEnergyPoints(ScavTrap::getEnergyPoints());
-	setAttackDamage(FragTrap::getAttackDamage());
+	hitPointsTmp	=	FragTrap::getHitPoints();
+	energyPointsTmp	=	ScavTrap::getEnergyPoints();
+	attackDamageTmp	=	FragTrap::getAttackDamage();
+	setHitPoints(hitPointsTmp);
+	setEnergyPoints(energyPointsTmp);
+	setAttackDamage(attackDamageTmp);
 }
 
 DiamondTrap::DiamondTrap( std::string name )
 {
+	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
+	
 	UI::printLine(YELLOW
 		+ "DiamondTrap Name constructor called"
 			+ RESET);
-	this->name = name;
+	this->_name = name;
 	setName(name + "_clap_name");
-	setHitPoints(FragTrap::getHitPoints());
-	setEnergyPoints(ScavTrap::getEnergyPoints());
-	setAttackDamage(FragTrap::getAttackDamage());
+	hitPointsTmp	=	FragTrap::getHitPoints();
+	energyPointsTmp	=	ScavTrap::getEnergyPoints();
+	attackDamageTmp	=	FragTrap::getAttackDamage();
+	setHitPoints(hitPointsTmp);
+	setEnergyPoints(energyPointsTmp);
+	setAttackDamage(attackDamageTmp);
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap& DiamondTrap )
@@ -62,7 +72,7 @@ void	DiamondTrap::whoAmI( void )
 {
 	std::string	line;
 
-	line = "My Diamond  name is: " + this->name;
+	line = "My Diamond  name is: " + this->_name;
 	UI::printLine(line);
 	line = "My ClapTrap name is: " + getName();
 	UI::printLine(line);
