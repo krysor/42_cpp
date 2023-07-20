@@ -3,35 +3,26 @@
 
 DiamondTrap::DiamondTrap( void )
 {
-	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
-
 	UI::printLine(YELLOW
 		+ "DiamondTrap Default constructor called"
 			+ RESET);
-	setName("NAMELESS DiamondTrap");
-	hitPointsTmp	=	FragTrap::getHitPoints();
-	energyPointsTmp	=	ScavTrap::getEnergyPoints();
-	attackDamageTmp	=	FragTrap::getAttackDamage();
-	setHitPoints(hitPointsTmp);
-	setEnergyPoints(energyPointsTmp);
-	setAttackDamage(attackDamageTmp);
+	this->_name = "NAMELESS DiamondTrap";
+	setName("NAMELESS DiamondTrap" + std::string("_clap_name"));
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(30);
 }
 
 DiamondTrap::DiamondTrap( std::string name )
 {
-	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
-	
 	UI::printLine(YELLOW
 		+ "DiamondTrap Name constructor called"
 			+ RESET);
 	this->_name = name;
 	setName(name + "_clap_name");
-	hitPointsTmp	=	FragTrap::getHitPoints();
-	energyPointsTmp	=	ScavTrap::getEnergyPoints();
-	attackDamageTmp	=	FragTrap::getAttackDamage();
-	setHitPoints(hitPointsTmp);
-	setEnergyPoints(energyPointsTmp);
-	setAttackDamage(attackDamageTmp);
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(30);
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap& DiamondTrap )
@@ -44,17 +35,19 @@ DiamondTrap::DiamondTrap( const DiamondTrap& DiamondTrap )
 
 DiamondTrap&	DiamondTrap::operator=( const DiamondTrap& DiamondTrap )
 {
-	std::string		nameTmp;
+	std::string		nameClapTmp;
 	unsigned int	hitPointsTmp, energyPointsTmp, attackDamageTmp;
 
 	UI::printLine(YELLOW
 		+ "DiamondTrap Copy assignment operator called"
 			+ RESET);
-	nameTmp			=	DiamondTrap.getName();
+	nameClapTmp		=	DiamondTrap.getName();
 	hitPointsTmp	=	DiamondTrap.getHitPoints();
 	energyPointsTmp	=	DiamondTrap.getEnergyPoints();
 	attackDamageTmp	=	DiamondTrap.getAttackDamage();
-	setName(nameTmp);
+	this->_name = nameClapTmp.erase(nameClapTmp.length(),
+					nameClapTmp.length() - std::string("_clap_name").length());
+	setName(nameClapTmp);
 	setHitPoints(hitPointsTmp);
 	setEnergyPoints(energyPointsTmp);
 	setAttackDamage(attackDamageTmp);
