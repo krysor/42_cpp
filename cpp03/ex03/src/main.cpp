@@ -36,16 +36,27 @@ int main( void )
 	UI::printLine(RED + "\nTEST: constructors + destructor\n" + RESET);
 	{
 		DiamondTrap a;
-		UI::printLine("HP    : " + std::to_string(a.getHitPoints()));
-		UI::printLine("Energy: " + std::to_string(a.getEnergyPoints()));
-		UI::printLine("Damage: " + std::to_string(a.getAttackDamage()));
+		// UI::printLine("HP    : " + std::to_string(a.getHitPoints()));
+		// UI::printLine("Energy: " + std::to_string(a.getEnergyPoints()));
+		// UI::printLine("Damage: " + std::to_string(a.getAttackDamage()));
+		a.whoAmI();
+		a.attack("TARGET");
 		UI::printLine("\n");
-		// DiamondTrap b("FLY");
-		// UI::printLine("\n");
-		// DiamondTrap c(a);
-		// UI::printLine("\n");
-		// DiamondTrap d = b;
-		// UI::printLine("\n");
+
+		DiamondTrap b("FLY");
+		b.whoAmI();
+		b.attack("TARGET");
+		UI::printLine("\n");
+
+		DiamondTrap c(a);
+		c.whoAmI();
+		c.attack("TARGET");
+		UI::printLine("\n");
+
+		DiamondTrap d = b;
+		d.whoAmI();
+		d.attack("TARGET");
+		UI::printLine("\n");
 	}
 
 	// UI::printLine(RED + "\nTEST: special functions\n" + RESET);

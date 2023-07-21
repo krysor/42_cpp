@@ -45,8 +45,8 @@ DiamondTrap&	DiamondTrap::operator=( const DiamondTrap& DiamondTrap )
 	hitPointsTmp	=	DiamondTrap.getHitPoints();
 	energyPointsTmp	=	DiamondTrap.getEnergyPoints();
 	attackDamageTmp	=	DiamondTrap.getAttackDamage();
-	this->_name = nameClapTmp.erase(nameClapTmp.length(),
-					nameClapTmp.length() - std::string("_clap_name").length());
+	this->_name = nameClapTmp.substr(0, nameClapTmp.length()
+					- std::string("_clap_name").length());
 	setName(nameClapTmp);
 	setHitPoints(hitPointsTmp);
 	setEnergyPoints(energyPointsTmp);

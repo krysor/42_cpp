@@ -21,13 +21,7 @@ public:
 	DiamondTrap&	operator=( const DiamondTrap& diamondTrap );
 	~DiamondTrap( void );
 
-	// using FragTrap::getHitPoints;
-	// using ScavTrap::getEnergyPoints;
-	// using FragTrap::getAttackDamage;
-
-	// using FragTrap::setHitPoints;
-	// using ScavTrap::setEnergyPoints;
-	// using FragTrap::setAttackDamage;
+	using	ScavTrap::attack;
 
 	void	whoAmI( void );
 };
