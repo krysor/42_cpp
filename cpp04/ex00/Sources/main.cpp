@@ -1,21 +1,56 @@
-#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 #include "UI.hpp"
 
 int main( void ) 
 {
-	Animal	animal1;
-	Animal	animal2("dog");
-	Animal	animal3(animal1);
-	Animal	animal4 = animal2;
-
 	//contructor test
-	assert(animal1.getType().empty());
-	assert(animal2.getType() == std::string("dog"));
-	assert(animal3.getType().empty());
-	assert(animal4.getType() == std::string("dog"));
+	{
+		Animal	animal1;
+		Animal	animal2("dog");
+		Animal	animal3(animal1);
+		Animal	animal4 = animal2;
 
-	animal4.setType("cat");
-	assert(animal4.getType() == std::string("cat"));
+		assert(!animal1.getType().empty());
+		assert(animal2.getType() == std::string("dog"));
+		assert(animal3.getType().empty());
+		assert(animal4.getType() == std::string("dog"));
 
-	return (EXIT_SUCCESS);
+		animal4.setType("cat");
+		assert(animal4.getType() == std::string("cat"));
+	}
+	
+	// subject main test
+	// {
+	// 	const Animal* meta = new Animal();
+	// 	const Animal* j = new Dog();
+	// 	const Animal* i = new Cat();
+
+	// 	std::cout << j->getType() << " " << std::endl;
+	// 	std::cout << i->getType() << " " << std::endl;
+	// 	i->makeSound(); //will output the cat sound!
+	// 	j->makeSound();
+	// 	meta->makeSound();
+
+	// 	delete meta;
+	// 	delete j;
+	// 	delete i;
+	// }
+
+	// return (EXIT_SUCCESS);
 }
+
+// int main()
+// {
+// 	const Animal* meta = new Animal();
+// 	const Animal* j = new Dog();
+// 	const Animal* i = new Cat();
+
+// 	std::cout << j->getType() << " " << std::endl;
+// 	std::cout << i->getType() << " " << std::endl;
+// 	i->makeSound(); //will output the cat sound!
+// 	j->makeSound();
+// 	meta->makeSound();
+	
+// 	return 0;
+// }

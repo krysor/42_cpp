@@ -4,8 +4,10 @@ OBJ_DIR 	= 	Objects/
 
 ### files
 SRCS		= 	main.cpp \
+				UI.cpp \
 				Animal.cpp \
-				UI.cpp
+				Dog.cpp \
+				Cat.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 

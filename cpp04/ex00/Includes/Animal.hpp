@@ -18,7 +18,9 @@ public:
 	Animal( std::string type );
 	Animal( const Animal& animal );
 	Animal&	operator=( const Animal& animal );
-	~Animal( void );
+	virtual ~Animal( void );
+
+	virtual void	makeSound( void ) const;
 
 	const std::string&	getType( void ) const;
 	void				setType( const std::string type );

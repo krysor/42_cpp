@@ -3,24 +3,24 @@
 
 Animal::Animal( void )
 {
-	UI::printLine("Default constructor called");
+	UI::printLine("[Animal] Default constructor called");
 }
 
 Animal::Animal( std::string type ) : _type(type)
 {
-	UI::printLine("Name constructor called");
+	UI::printLine("[Animal] Name constructor called");
 	//setType(type);
 }
 
 Animal::Animal( const Animal& other ) : _type(other.getType())
 {
-	UI::printLine("Copy constructor called");
+	UI::printLine("[Animal] Copy constructor called");
 	//operator=(other);
 }
 
 Animal&	Animal::operator=( const Animal& other )
 {
-	UI::printLine("Copy assignment operator called");
+	UI::printLine("[Animal] Copy assignment operator called");
 	std::string	type;
 
 	type = other.getType();
@@ -30,7 +30,7 @@ Animal&	Animal::operator=( const Animal& other )
 
 Animal::~Animal( void )
 {
-	UI::printLine("Destructor called");
+	UI::printLine("[Animal] Destructor called");
 }
 
 const std::string&	Animal::getType( void ) const
@@ -41,4 +41,9 @@ const std::string&	Animal::getType( void ) const
 void	Animal::setType( const std::string type )
 {
 	this->_type = type;
+}
+
+void	Animal::makeSound( void ) const
+{
+	UI::printLine("<Undefined animal sound>");
 }

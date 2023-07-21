@@ -2,26 +2,25 @@
 #ifndef __DOG_H__
 #define __DOG_H__
 
-#include <string>
+#include "Animal.hpp"
 
 class Dog : public Animal {
 
 
-// protected:
+protected:
 
-// 	std::string	_type;
+	std::string	_type;
 
 
-// public:
+public:
 
-// 	Dog( void );
-// 	Dog( std::string type );
-// 	Dog( const Dog& Dog );
-// 	Dog&	operator=( const Dog& Dog );
-// 	~Dog( void );
+	Dog( void );
+	Dog( std::string type );
+	Dog( const Dog& Dog );
+	Dog&	operator=( const Dog& Dog );
+	~Dog( void );
 
-// 	const std::string&	getType( void ) const;
-// 	void				setType( const std::string type );
+	void	makeSound( void ) const;
 };
 
 #endif
