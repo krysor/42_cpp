@@ -6,16 +6,16 @@ Animal::Animal( void )
 	UI::printLine("Default constructor called");
 }
 
-Animal::Animal( std::string type )
+Animal::Animal( std::string type ) : _type(type)
 {
 	UI::printLine("Name constructor called");
-	setType(type);
+	//setType(type);
 }
 
-Animal::Animal( const Animal& animal )
+Animal::Animal( const Animal& other ) : _type(other.getType())
 {
 	UI::printLine("Copy constructor called");
-	operator=(animal);
+	//operator=(other);
 }
 
 Animal&	Animal::operator=( const Animal& other )
@@ -35,10 +35,10 @@ Animal::~Animal( void )
 
 const std::string&	Animal::getType( void ) const
 {
-	return (this->type);
+	return (this->_type);
 }
 
 void	Animal::setType( const std::string type )
 {
-	this->type = type;
+	this->_type = type;
 }
