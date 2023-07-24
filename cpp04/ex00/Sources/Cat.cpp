@@ -1,21 +1,21 @@
 #include "Cat.hpp"
 #include "UI.hpp"
 
-Cat::Cat( void ) : _type("Cat")
+Cat::Cat( void ) : Animal("Cat")
 {
 	UI::printLine("[Cat] Default constructor called");
 }
 
-Cat::Cat( std::string type ) : _type("Cat")
+Cat::Cat( std::string type ) : Animal("Cat")
 {
 	UI::printLine("[Cat] Name constructor called");
 	(void)type;
 }
 
-Cat::Cat( const Cat& other ) : _type("Cat")
+Cat::Cat( const Cat& other ) : Animal("Cat")
 {
 	UI::printLine("[Cat] Copy constructor called");
-	setType(other.getType());
+	(void)other;
 }
 
 Cat&	Cat::operator=( const Cat& other )

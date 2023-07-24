@@ -7,11 +7,6 @@
 class Cat : public Animal {
 
 
-protected:
-
-	std::string	_type;
-
-
 public:
 
 	Cat( void );

@@ -1,21 +1,21 @@
 #include "Dog.hpp"
 #include "UI.hpp"
 
-Dog::Dog( void ) : _type("Dog")
+Dog::Dog( void ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Default constructor called");
 }
 
-Dog::Dog( std::string type ) : _type("Dog")
+Dog::Dog( std::string type ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Name constructor called");
 	(void)type;
 }
 
-Dog::Dog( const Dog& other ) : _type("Dog")
+Dog::Dog( const Dog& other ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Copy constructor called");
-	setType(other.getType());
+	(void)other;
 }
 
 Dog&	Dog::operator=( const Dog& other )
