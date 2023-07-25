@@ -4,28 +4,28 @@
 Dog::Dog( void ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Default constructor called");
+	this->type = "Dog";
 }
 
 Dog::Dog( std::string type ) : Animal("Dog")
 {
-	UI::printLine("[Dog] Name constructor called");
 	(void)type;
+	UI::printLine("[Dog] Name constructor called");
+	this->type = "Dog";
 }
 
 Dog::Dog( const Dog& other ) : Animal("Dog")
 {
-	UI::printLine("[Dog] Copy constructor called");
 	(void)other;
+	UI::printLine("[Dog] Copy constructor called");
+	this->type = "Dog";
 }
 
 Dog&	Dog::operator=( const Dog& other )
 {
+	(void)other;
 	UI::printLine("[Dog] Copy assignment operator called");
-	std::string	type;
-
-	type = other.getType();
-	setType(type);
-	this->_type = "Dog";
+	this->type = "Dog";
 	return (*this);
 }
 

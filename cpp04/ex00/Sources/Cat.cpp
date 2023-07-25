@@ -4,28 +4,28 @@
 Cat::Cat( void ) : Animal("Cat")
 {
 	UI::printLine("[Cat] Default constructor called");
+	this->type = "Cat";
 }
 
 Cat::Cat( std::string type ) : Animal("Cat")
 {
-	UI::printLine("[Cat] Name constructor called");
 	(void)type;
+	UI::printLine("[Cat] Name constructor called");
+	this->type = "Cat";
 }
 
 Cat::Cat( const Cat& other ) : Animal("Cat")
 {
-	UI::printLine("[Cat] Copy constructor called");
 	(void)other;
+	UI::printLine("[Cat] Copy constructor called");
+	this->type = "Cat";
 }
 
 Cat&	Cat::operator=( const Cat& other )
 {
+	(void)other;
 	UI::printLine("[Cat] Copy assignment operator called");
-	std::string	type;
-
-	type = other.getType();
-	setType(type);
-	this->_type = "Cat";
+	this->type = "Cat";
 	return (*this);
 }
 
