@@ -38,3 +38,8 @@ void	Cat::makeSound( void ) const
 {
 	UI::printLine("Meeeeuuuuuuw!");
 }
+
+const std::string&	Cat::getType( void ) const
+{
+	return (this->type);
+}

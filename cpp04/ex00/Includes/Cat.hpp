@@ -16,6 +16,8 @@ public:
 	~Cat( void );
 
 	void	makeSound( void ) const;
+
+	const std::string&	getType( void ) const;
 };
 
 #endif

@@ -38,3 +38,8 @@ void	Dog::makeSound( void ) const
 {
 	UI::printLine("Woof! Woof!");
 }
+
+const std::string&	Dog::getType( void ) const
+{
+	return (this->type);
+}
