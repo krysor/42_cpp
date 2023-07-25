@@ -36,7 +36,7 @@ Dog::~Dog( void )
 
 void	Dog::makeSound( void ) const
 {
-	UI::printLine("Woof! Woof!");
+	UI::printLine("[Dog]: Woof! Woof!");
 }
 
 const std::string&	Dog::getType( void ) const

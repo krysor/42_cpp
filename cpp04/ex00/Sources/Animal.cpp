@@ -40,5 +40,5 @@ void	Animal::setType( const std::string type )
 
 void	Animal::makeSound( void ) const
 {
-	UI::printLine("<Undefined animal sound>");
+	UI::printLine("[Animal]: <Undefined animal sound>");
 }

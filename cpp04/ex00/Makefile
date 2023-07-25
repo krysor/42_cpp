@@ -7,7 +7,9 @@ SRCS		= 	main.cpp \
 				UI.cpp \
 				Animal.cpp \
 				Dog.cpp \
-				Cat.cpp
+				Cat.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 

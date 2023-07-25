@@ -36,7 +36,7 @@ Cat::~Cat( void )
 
 void	Cat::makeSound( void ) const
 {
-	UI::printLine("Meeeeuuuuuuw!");
+	UI::printLine("[Cat]: Meeeeuuuuuuw!");
 }
 
 const std::string&	Cat::getType( void ) const

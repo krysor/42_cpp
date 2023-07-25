@@ -11,8 +11,8 @@ public:
 
 	Dog( void );
 	Dog( std::string type );
-	Dog( const Dog& Dog );
-	Dog&	operator=( const Dog& Dog );
+	Dog( const Dog& other );
+	Dog&	operator=( const Dog& other );
 	~Dog( void );
 
 	void	makeSound( void ) const;

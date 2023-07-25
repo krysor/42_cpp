@@ -11,8 +11,8 @@ public:
 
 	Cat( void );
 	Cat( std::string type );
-	Cat( const Cat& Cat );
-	Cat&	operator=( const Cat& Cat );
+	Cat( const Cat& other );
+	Cat&	operator=( const Cat& other );
 	~Cat( void );
 
 	void	makeSound( void ) const;
