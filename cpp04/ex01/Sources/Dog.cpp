@@ -19,14 +19,16 @@ Dog::Dog( std::string type ) : Animal("Dog")
 Dog::Dog( const Dog& other ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Copy constructor called");
-	operator=(other);
+	this->type = "Dog";
+	this->_brain = new Brain();
+	this->_brain->setIdeas(other._brain->getIdeas());
 }
 
 Dog&	Dog::operator=( const Dog& other )
 {
 	UI::printLine("[Dog] Copy assignment operator called");
-	delete this->_brain;
 	this->type = "Dog";
+	delete this->_brain;
 	this->_brain = new Brain();
 	this->_brain->setIdeas(other._brain->getIdeas());
 	return (*this);
@@ -34,8 +36,8 @@ Dog&	Dog::operator=( const Dog& other )
 
 Dog::~Dog( void )
 {
-	UI::printLine("[Dog] Destructor called");
 	delete this->_brain;
+	UI::printLine("[Dog] Destructor called");
 }
 
 void	Dog::makeSound( void ) const

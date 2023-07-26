@@ -22,7 +22,7 @@ public:
 	~Brain( void );
 
 	const std::string*	getIdeas( void ) const;
-	void				setIdeas( const std::string ideas[100] );
+	void				setIdeas( const std::string ideas[IDEASSIZE] );
 };
 
 #endif

@@ -19,14 +19,16 @@ Cat::Cat( std::string type ) : Animal("Cat")
 Cat::Cat( const Cat& other ) : Animal("Cat")
 {
 	UI::printLine("[Cat] Copy constructor called");
-	operator=(other);
+	this->type = "Cat";
+	this->_brain = new Brain();
+	this->_brain->setIdeas(other._brain->getIdeas());
 }
 
 Cat&	Cat::operator=( const Cat& other )
 {
 	UI::printLine("[Cat] Copy assignment operator called");
-	delete this->_brain;
 	this->type = "Cat";
+	delete this->_brain;
 	this->_brain = new Brain();
 	this->_brain->setIdeas(other._brain->getIdeas());
 	return (*this);
@@ -34,8 +36,8 @@ Cat&	Cat::operator=( const Cat& other )
 
 Cat::~Cat( void )
 {
-	UI::printLine("[Cat] Destructor called");
 	delete this->_brain;
+	UI::printLine("[Cat] Destructor called");
 }
 
 void	Cat::makeSound( void ) const
