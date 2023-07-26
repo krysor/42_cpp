@@ -6,20 +6,22 @@ Brain::Brain( void )
 	UI::printLine("[Brain] Default constructor called");
 }
 
-Brain::Brain( std::string ideas[100] ) : _ideas(ideas)
+Brain::Brain( std::string ideas[IDEASSIZE] )
 {
 	UI::printLine("[Brain] Name constructor called");
+	setIdeas(ideas);
 }
 
-Brain::Brain( const Brain& other ) : _ideas(other._ideas)
+Brain::Brain( const Brain& other )
 {
 	UI::printLine("[Brain] Copy constructor called");
+	operator=(other);
 }
 
 Brain&	Brain::operator=( const Brain& other )
 {
 	UI::printLine("[Brain] Copy assignment operator called");
-	this->_ideas = other.getIdeas();
+	setIdeas(other._ideas);
 	return (*this);
 }
 
@@ -33,7 +35,9 @@ const std::string*	Brain::getIdeas( void ) const
 	return (this->_ideas);
 }
 
-void	Brain::setIdeas( const std::string ideas[100] )
+void	Brain::setIdeas( const std::string ideas[IDEASSIZE] )
 {
-	this->_ideas = ideas;
+	for (unsigned int i = 0; i < IDEASSIZE; i++) {
+		this->_ideas[i] = ideas[i];
+	}
 }

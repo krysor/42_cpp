@@ -2,7 +2,6 @@
 #include "Cat.hpp"
 #include "UI.hpp"
 #include "WrongCat.hpp"
-#include "Brain.hpp"
 
 int main( void ) 
 {
@@ -17,6 +16,32 @@ int main( void )
 
 		brain4 = brain2;
 	}
+
+	UI::printLine("\n");
+
+	//TEST Cat
+	{
+		Cat	cat1;
+		Cat	cat2("dog");
+		Cat cat3(cat1);
+		Cat	cat4;
+
+		cat4 = cat2;
+	}
+
+	// UI::printLine("\n");
+
+	// //TEST Dog
+	// {
+	// 	Dog	dog1;
+	// 	Dog	dog2("dog");
+	// 	Dog	dog3(dog1);
+	// 	Dog	dog4;
+
+	// 	dog4 = dog2;
+	// }
+
+	//system("leaks ex01");
 
 	return (EXIT_SUCCESS);
 }

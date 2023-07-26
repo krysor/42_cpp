@@ -3,6 +3,7 @@
 #define __ANIMAL_H__
 
 #include <string>
+#include <Brain.hpp>
 
 class Animal {
 

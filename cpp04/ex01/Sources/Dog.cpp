@@ -5,6 +5,7 @@ Dog::Dog( void ) : Animal("Dog")
 {
 	UI::printLine("[Dog] Default constructor called");
 	this->type = "Dog";
+	this->_brain = new Brain();
 }
 
 Dog::Dog( std::string type ) : Animal("Dog")
@@ -12,26 +13,29 @@ Dog::Dog( std::string type ) : Animal("Dog")
 	(void)type;
 	UI::printLine("[Dog] Name constructor called");
 	this->type = "Dog";
+	this->_brain = new Brain();
 }
 
 Dog::Dog( const Dog& other ) : Animal("Dog")
 {
-	(void)other;
 	UI::printLine("[Dog] Copy constructor called");
-	this->type = "Dog";
+	operator=(other);
 }
 
 Dog&	Dog::operator=( const Dog& other )
 {
-	(void)other;
 	UI::printLine("[Dog] Copy assignment operator called");
+	delete this->_brain;
 	this->type = "Dog";
+	this->_brain = new Brain();
+	this->_brain->setIdeas(other._brain->getIdeas());
 	return (*this);
 }
 
 Dog::~Dog( void )
 {
 	UI::printLine("[Dog] Destructor called");
+	delete this->_brain;
 }
 
 void	Dog::makeSound( void ) const
