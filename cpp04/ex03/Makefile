@@ -5,19 +5,16 @@ OBJ_DIR 	= 	Objects/
 ### files
 SRCS		= 	main.cpp \
 				UI.cpp \
-				Animal.cpp \
-				Dog.cpp \
-				Cat.cpp \
-				WrongAnimal.cpp \
-				WrongCat.cpp \
-				Brain.cpp
+				AMateria.cpp \
+				Ice.cpp \
+				Cure.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 
 OBJS		=	$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRCS))
 
 ### variables
-NAME		= ex02
+NAME		= ex03
 CC			= c++
 RM			= rm -rf
 INCLUDES	=	-I ./includes
