@@ -18,6 +18,7 @@ public:
 
 	std::string const & getType() const;
 	virtual Ice* clone() const;
+	//void use(ICharacter& target);
 
 };
 

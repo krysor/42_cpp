@@ -20,8 +20,8 @@ Ice::Ice( const Ice& other ) : AMateria("ice")
 
 Ice&	Ice::operator=( const Ice& other )
 {
+	(void)other;
 	UI::printLine("[Ice] Copy assignment operator called");
-	this->_type = other._type;
 	return (*this);
 }
 
@@ -39,3 +39,8 @@ Ice* Ice::clone() const
 {
 	return (new Ice(*this));
 }
+
+// void use(ICharacter& target)
+// {
+// 	UI::printLine("* shoots an ice bolt at " + <NAME> + " *");
+// }

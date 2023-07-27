@@ -26,5 +26,16 @@ int main( void )
 		Ice4 = Ice2;
 	}
 
+	UI::printLine("\n");
+	UI::printLine("Test [Cure]\n");
+	{
+		Cure	Cure1;
+		Cure	Cure2("someType");
+		Cure	Cure3(Cure1);
+		Cure	Cure4;
+
+		Cure4 = Cure2;
+	}
+
 	return (EXIT_SUCCESS);
 }

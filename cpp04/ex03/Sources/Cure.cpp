@@ -20,8 +20,8 @@ Cure::Cure( const Cure& other ) : AMateria("cure")
 
 Cure&	Cure::operator=( const Cure& other )
 {
+	(void)other;
 	UI::printLine("[Cure] Copy assignment operator called");
-	this->_type = other._type;
 	return (*this);
 }
 
@@ -39,3 +39,8 @@ Cure* Cure::clone() const
 {
 	return (new Cure(*this));
 }
+
+// void use(ICharacter& target)
+// {
+// 	UI::printLine("* heals " + <NAME> + "’s wounds *");
+// }
