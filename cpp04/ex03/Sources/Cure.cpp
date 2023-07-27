@@ -40,7 +40,7 @@ Cure* Cure::clone() const
 	return (new Cure(*this));
 }
 
-// void use(ICharacter& target)
-// {
-// 	UI::printLine("* heals " + <NAME> + "’s wounds *");
-// }
+void use(ICharacter& target)
+{
+	UI::printLine("* heals " + target.getName() + "’s wounds *");
+}

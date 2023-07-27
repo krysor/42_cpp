@@ -1,56 +1,81 @@
 #include "Character.hpp"
 #include "UI.hpp"
 
-Character::Character( void )
+Character::Character( void ) _inventory()
 {
 	UI::printLine("[Character] Default constructor called");
-	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		this->_inventory[i] = NULL;
-	}
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	this->_inventory[i] = NULL;
+	// }
 }
 
-Character::Character( std::string const & name )
+Character::Character( std::string const & name ) _inventory()
 {
 	UI::printLine("[Character] Name constructor called");
 	this->_name = name;
-	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		this->_inventory[i] = NULL;
-	}
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	this->_inventory[i] = NULL;
+	// }
 }
 
 Character::Character( const Character& other )
 {
 	UI::printLine("[Character] Copy constructor called");
-	this->_name = other._name;
-	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		this->_inventory[i] = new other._inventory[i];
-	}
+	operator=(other);
 }
 
 Character&	Character::operator=( const Character& other )
 {
 	UI::printLine("[Character] Copy assignment operator called");
-	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		delete this->_inventory[i];
-		this->_inventory[i] = NULL;
-	}
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	delete this->_inventory[i];
+	// 	this->_inventory[i] = NULL;
+	// }
 	this->_name = other._name;
 	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		this->_inventory[i] = new other._inventory[i];
+		this->_inventory[i] = other._inventory[i];
 	}
+	// this->_name = other._name;
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	this->_inventory[i] = new other._inventory[i];
+	// }
 	return (*this);
 }
 
 Character::~Character( void )
 {
 	UI::printLine("[Character] Destructor called");
-	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-		delete this->_inventory[i];
-		this->_inventory[i] = NULL;
-	}
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	if (this->_inventory[i] != NULL)
+	// 		delete this->_inventory[i];
+	// 	this->_inventory[i] = NULL;
+	// }
 }
 
 std::string const & Character::getName() const
 {
 	return (this->_name);
+}
+
+Character::void equip(AMateria* m)
+{
+	for (unsigned int i = 0 ; i < INVENTORYSIZE ; i++) {
+		if (this->_inventory[i] == NULL) {
+			this->_inventory[i] = m;
+			break ;
+		}
+	}
+	if (i = 4) {
+		UI::printLine("The inventory is full.");
+	}
+}
+
+Character::void unequip(int idx)
+{
+	this->_inventory[i] == NULL;
+}
+
+Character::void use(int idx, ICharacter& target)
+{
+	this->_inventory[i].use(target);
 }

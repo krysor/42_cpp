@@ -40,7 +40,7 @@ Ice* Ice::clone() const
 	return (new Ice(*this));
 }
 
-// void use(ICharacter& target)
-// {
-// 	UI::printLine("* shoots an ice bolt at " + <NAME> + " *");
-// }
+void use(ICharacter& target)
+{
+	UI::printLine("* shoots an ice bolt at " + target.getName() + " *");
+}
