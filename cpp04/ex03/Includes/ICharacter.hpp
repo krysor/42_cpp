@@ -3,13 +3,16 @@
 #define __ICHARACTER_H__
 
 #include <string>
+#include "AMateria.hpp"
 
 class ICharacter
 {
 
 public:
 
-
+	ICharacter( void );
+	ICharacter( const ICharacter& other );
+	ICharacter&	operator=( const ICharacter& other );
 
 	virtual ~ICharacter() {}
 	virtual std::string const & getName() const = 0;
