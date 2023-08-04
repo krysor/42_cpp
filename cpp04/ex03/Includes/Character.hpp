@@ -3,6 +3,7 @@
 #define __CHARACTER_H__
 
 #include <string>
+#include "ICharacter.hpp"
 
 #define INVENTORYSIZE 4
 
@@ -17,7 +18,7 @@ protected:
 public:
 
 	Character( void );
-	Character( const Character& name );
+	Character( const Character& other );
 	Character&	operator=( const Character& other );
 	~Character( void );
 

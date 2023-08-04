@@ -1,7 +1,7 @@
 #include "Character.hpp"
 #include "UI.hpp"
 
-Character::Character( void ) _inventory()
+Character::Character( void ) : _inventory()
 {
 	UI::printLine("[Character] Default constructor called");
 	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
@@ -9,14 +9,14 @@ Character::Character( void ) _inventory()
 	// }
 }
 
-Character::Character( std::string const & name ) _inventory()
-{
-	UI::printLine("[Character] Name constructor called");
-	this->_name = name;
-	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-	// 	this->_inventory[i] = NULL;
-	// }
-}
+// Character::Character( std::string const & name ) : _inventory()
+// {
+// 	UI::printLine("[Character] Name constructor called");
+// 	this->_name = name;
+// 	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+// 	// 	this->_inventory[i] = NULL;
+// 	// }
+// }
 
 Character::Character( const Character& other )
 {
@@ -72,10 +72,10 @@ Character::void equip(AMateria* m)
 
 Character::void unequip(int idx)
 {
-	this->_inventory[i] == NULL;
+	this->_inventory[idx] == NULL;
 }
 
 Character::void use(int idx, ICharacter& target)
 {
-	this->_inventory[i].use(target);
+	this->_inventory[idx].use(target);
 }
