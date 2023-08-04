@@ -57,25 +57,27 @@ std::string const & Character::getName() const
 	return (this->_name);
 }
 
-Character::void equip(AMateria* m)
+void Character::equip(AMateria* m)
 {
-	for (unsigned int i = 0 ; i < INVENTORYSIZE ; i++) {
+	unsigned int i;
+
+	for (i = 0 ; i < INVENTORYSIZE ; i++) {
 		if (this->_inventory[i] == NULL) {
 			this->_inventory[i] = m;
 			break ;
 		}
 	}
-	if (i = 4) {
+	if (i == 4) {
 		UI::printLine("The inventory is full.");
 	}
 }
 
-Character::void unequip(int idx)
+void Character::unequip(int idx)
 {
-	this->_inventory[idx] == NULL;
+	this->_inventory[idx] = NULL;
 }
 
-Character::void use(int idx, ICharacter& target)
+void Character::use(int idx, ICharacter& target)
 {
-	this->_inventory[idx].use(target);
+	this->_inventory[idx]->use(target);
 }

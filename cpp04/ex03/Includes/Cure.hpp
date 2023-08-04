@@ -18,7 +18,7 @@ public:
 
 	std::string const & getType() const;
 	virtual Cure* clone() const;
-	//void use(ICharacter& target);
+	void use(ICharacter& target);
 
 };
 
