@@ -8,13 +8,13 @@ ICharacter::ICharacter( void )
 
 ICharacter::ICharacter( const ICharacter& other )
 {
+	(void)other;
 	UI::printLine("[ICharacter] Copy constructor called");
-	operator=(other);
 }
 
 ICharacter&	ICharacter::operator=( const ICharacter& other )
 {
 	(void)other;
-	UI::printLine("[ICharacter] Copy constructor called");
+	UI::printLine("[ICharacter] Copy assignment operator called");
 	return (*this);
 }

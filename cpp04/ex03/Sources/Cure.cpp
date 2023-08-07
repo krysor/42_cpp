@@ -4,18 +4,14 @@
 Cure::Cure( void ) : AMateria("cure")
 {
 	UI::printLine("[Cure] Default constructor called");
-}
-
-Cure::Cure( std::string const & type ) : AMateria("cure")
-{
-	UI::printLine("[Cure] Name constructor called");
-	this->_type = type;
+	this->_type = "cure";
 }
 
 Cure::Cure( const Cure& other ) : AMateria("cure")
 {
+	(void)other;
 	UI::printLine("[Cure] Copy constructor called");
-	this->_type = other._type;
+	this->_type = "cure";
 }
 
 Cure&	Cure::operator=( const Cure& other )
@@ -35,7 +31,7 @@ std::string const & Cure::getType() const
 	return (this->_type);
 }
 
-Cure* Cure::clone() const
+AMateria* Cure::clone() const
 {
 	return (new Cure(*this));
 }

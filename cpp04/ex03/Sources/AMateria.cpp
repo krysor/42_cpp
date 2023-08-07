@@ -1,14 +1,14 @@
 #include "AMateria.hpp"
 #include "UI.hpp"
 
-AMateria::AMateria( void )
+AMateria::AMateria( void ) : _type("")
 {
 	UI::printLine("[AMateria] Default constructor called");
 }
 
 AMateria::AMateria( std::string const & type ) : _type(type)
 {
-	UI::printLine("[AMateria] Name constructor called");
+	UI::printLine("[AMateria] Type constructor called");
 }
 
 AMateria::AMateria( const AMateria& other ) : _type(other._type)
@@ -31,4 +31,10 @@ AMateria::~AMateria( void )
 std::string const & AMateria::getType() const
 {
 	return (this->_type);
+}
+
+void	AMateria::use(ICharacter& target)
+{
+	(void)target;
+	UI::printLine("[AMateria] use function does nothing when called on an AMateria object");
 }

@@ -4,8 +4,11 @@
 
 int main( void ) 
 {
-	UI::printLine("\n");
-	UI::printLine("Test [AMateria]\n");
+	/* [AMateria] tests don't compile because AMateria is 
+		an abstract class (= interface) and cannot be instantiated */
+	
+	// UI::printLine("\n");
+	// UI::printLine("Test [AMateria]\n");
 	{
 		// AMateria	AMateria1;
 		// AMateria	AMateria2("someType");
@@ -19,22 +22,36 @@ int main( void )
 	UI::printLine("Test [Ice]\n");
 	{
 		Ice	Ice1;
-		Ice	Ice2("someType");
-		Ice	Ice3(Ice1);
-		Ice	Ice4;
+		Ice	Ice2(Ice1);
+		Ice	Ice3;
 
-		Ice4 = Ice2;
+		Ice3 = Ice2;
+
+		assert(Ice1.getType() == "ice");
+		assert(Ice2.getType() == "ice");
+		assert(Ice3.getType() == "ice");
+
+		AMateria* IcePnt = Ice1.clone();
+		assert(IcePnt->getType() == "ice");
+		delete IcePnt;
 	}
 
 	UI::printLine("\n");
 	UI::printLine("Test [Cure]\n");
 	{
 		Cure	Cure1;
-		Cure	Cure2("someType");
-		Cure	Cure3(Cure1);
-		Cure	Cure4;
+		Cure	Cure2(Cure1);
+		Cure	Cure3;
 
-		Cure4 = Cure2;
+		Cure3 = Cure2;
+
+		assert(Cure1.getType() == "cure");
+		assert(Cure2.getType() == "cure");
+		assert(Cure3.getType() == "cure");
+
+		AMateria* CurePnt = Cure1.clone();
+		assert(CurePnt->getType() == "cure");
+		delete CurePnt;
 	}
 
 	return (EXIT_SUCCESS);

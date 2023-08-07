@@ -4,18 +4,14 @@
 Ice::Ice( void ) : AMateria("ice")
 {
 	UI::printLine("[Ice] Default constructor called");
-}
-
-Ice::Ice( std::string const & type ) : AMateria("ice")
-{
-	UI::printLine("[Ice] Name constructor called");
-	this->_type = type;
+	this->_type = "ice";
 }
 
 Ice::Ice( const Ice& other ) : AMateria("ice")
 {
+	(void)other;
 	UI::printLine("[Ice] Copy constructor called");
-	this->_type = other._type;
+	this->_type = "ice";
 }
 
 Ice&	Ice::operator=( const Ice& other )
@@ -35,7 +31,7 @@ std::string const & Ice::getType() const
 	return (this->_type);
 }
 
-Ice* Ice::clone() const
+AMateria* Ice::clone() const
 {
 	return (new Ice(*this));
 }
