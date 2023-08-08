@@ -9,14 +9,14 @@ Character::Character( void ) : _inventory()
 	// }
 }
 
-// Character::Character( std::string const & name ) : _inventory()
-// {
-// 	UI::printLine("[Character] Name constructor called");
-// 	this->_name = name;
-// 	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-// 	// 	this->_inventory[i] = NULL;
-// 	// }
-// }
+Character::Character( std::string const & name ) : _inventory()
+{	
+	UI::printLine("[Character] Name constructor called");
+	this->_name = name;
+	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
+	// 	this->_inventory[i] = NULL;
+	// }
+}
 
 Character::Character( const Character& other )
 {

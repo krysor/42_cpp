@@ -18,6 +18,7 @@ protected:
 public:
 
 	Character( void );
+	Character( std::string const & name );
 	Character( const Character& other );
 	Character&	operator=( const Character& other );
 	~Character( void );
