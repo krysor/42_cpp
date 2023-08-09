@@ -7,7 +7,6 @@ MateriaSource::MateriaSource( void ) : Character() {
 
 MateriaSource::MateriaSource( const MateriaSource& other ) : Character() {
 	UI::printLine("[MateriaSource] Copy constructor called");
-	(void)other;
 }
 
 MateriaSource&	MateriaSource::operator=( const MateriaSource& other ) {

@@ -5,7 +5,7 @@
 #include "IMateriaSource.hpp"
 #include "Character.hpp"
 
-#define MEMORYSIZE 4
+// #define MEMORYSIZE 4
 
 class MateriaSource : public IMateriaSource, public Character {
 
