@@ -1,23 +1,11 @@
 #include "UI.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
 
 int main( void ) 
 {
-	/* [AMateria] tests don't compile because AMateria is 
-		an abstract class (= interface) and cannot be instantiated */
-	
-	// UI::printLine("\n");
-	// UI::printLine("Test [AMateria]\n");
-	{
-		// AMateria	AMateria1;
-		// AMateria	AMateria2("someType");
-		// AMateria	AMateria3(AMateria1);
-		// AMateria	AMateria4;
-
-		// AMateria4 = AMateria2;
-	}
-
 	UI::printLine("\n");
 	UI::printLine("Test [Ice]\n");
 	{
@@ -34,6 +22,7 @@ int main( void )
 		AMateria* IcePnt = Ice1.clone();
 		assert(IcePnt->getType() == "ice");
 		delete IcePnt;
+
 	}
 
 	UI::printLine("\n");
@@ -53,6 +42,73 @@ int main( void )
 		assert(CurePnt->getType() == "cure");
 		delete CurePnt;
 	}
+
+	UI::printLine("\n");
+	UI::printLine("Test [Character] Simple initialization and getName()\n");
+	{
+		Character	Character1;
+		Character	Character2("characterName");
+		Character	Character3(Character1);
+		Character	Character4;
+
+		Character4 = Character2;
+		
+		assert(Character1.getName() == "");
+		assert(Character2.getName() == "characterName");
+		assert(Character3.getName() == "");
+		assert(Character4.getName() == "characterName");
+	}
+
+	UI::printLine("\n");
+	UI::printLine("Test [Character] equip, unequip, use\n");
+	{
+		Character	Character1("testCharacter");
+		Character	Character2("testTarget");
+		Ice			Ice;
+		Cure		Cure;
+		AMateria*	arrPnt[INVENTORYSIZE + 1];
+
+		//try to equip nullpt
+		Character1.equip(nullptr);
+
+		//prepare an array of Materias
+		for (int i = 0 ; i <= INVENTORYSIZE / 2 ; i++) {
+			arrPnt[i] = Ice.clone();
+		}
+		for (int i = INVENTORYSIZE / 2 ; i <= INVENTORYSIZE ; i++) {
+			arrPnt[i] = Cure.clone();
+		}
+
+		//equip all Materias
+		for (int i = 0 ; i <= INVENTORYSIZE ; i++) {
+			Character1.equip(arrPnt[i]);
+		}
+
+		//use all Materias
+		for (int i = -1 ; i <= INVENTORYSIZE ; i++) {
+			Character1.use(i, Character2);
+		}
+
+		//unequip all Materias
+		for (int i = 0 ; i < INVENTORYSIZE + 1 ; i++) {
+			Character1.unequip(i);
+		}
+
+		//delete all Materias
+		for (int i = 0 ; i <= INVENTORYSIZE ; i++) {
+			if (arrPnt[i] != nullptr) {
+				delete arrPnt[i];
+			}
+		}
+	}
+
+	UI::printLine("\n");
+	UI::printLine("Test [MateriaSource]\n");
+	{
+		MateriaSource	MateriaSource1;
+	}
+
+	system("leaks ex03");
 
 	return (EXIT_SUCCESS);
 }

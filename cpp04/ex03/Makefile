@@ -9,7 +9,8 @@ SRCS		= 	main.cpp \
 				Ice.cpp \
 				Cure.cpp \
 				ICharacter.cpp \
-				Character.cpp
+				Character.cpp \
+				MateriaSource.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 
