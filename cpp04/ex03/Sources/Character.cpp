@@ -4,18 +4,12 @@
 Character::Character( void ) : _inventory()
 {
 	UI::printLine("[Character] Default constructor called");
-	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-	// 	this->_inventory[i] = NULL;
-	// }
 }
 
 Character::Character( std::string const & name ) : _inventory()
 {	
 	UI::printLine("[Character] Name constructor called");
 	this->_name = name;
-	// for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
-	// 	this->_inventory[i] = NULL;
-	// }
 }
 
 Character::Character( const Character& other ) : _inventory()
@@ -26,7 +20,6 @@ Character::Character( const Character& other ) : _inventory()
 		if (other._inventory[i] != nullptr)
 			this->_inventory[i] = other._inventory[i]->clone();
 	}
-	// operator=(other);
 }
 
 Character&	Character::operator=( const Character& other )
