@@ -106,9 +106,18 @@ int main( void )
 	UI::printLine("Test [MateriaSource]\n");
 	{
 		MateriaSource	MateriaSource1;
+		Ice				Ice1;
+		AMateria*		AMateriaPnt;
+
+		MateriaSource1.learnMateria(&Ice1);
+
+		AMateriaPnt = MateriaSource1.createMateria("ice");
+		assert(AMateriaPnt->getType() == "ice");
+		delete AMateriaPnt;
 	}
 
-	system("leaks ex03");
+	UI::printLine("\n");
+	//system("leaks ex03");
 
 	return (EXIT_SUCCESS);
 }
