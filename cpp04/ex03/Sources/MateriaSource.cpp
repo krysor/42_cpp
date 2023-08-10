@@ -2,15 +2,15 @@
 #include "UI.hpp"
 
 MateriaSource::MateriaSource( void ) : Character() {
-	UI::printLine("[MateriaSource] Default constructor called");
+	//UI::printLine("[MateriaSource] Default constructor called");
 }
 
 MateriaSource::MateriaSource( const MateriaSource& other ) : Character(other) {
-	UI::printLine("[MateriaSource] Copy constructor called");
+	//UI::printLine("[MateriaSource] Copy constructor called");
 }
 
 MateriaSource&	MateriaSource::operator=( const MateriaSource& other ) {
-	UI::printLine("[MateriaSource] Copy assignment operator called");
+	//UI::printLine("[MateriaSource] Copy assignment operator called");
 	//delete loop
 	for (int i = 0 ; i < INVENTORYSIZE ; i++) {
 		if (_inventory[i] != nullptr) {
@@ -27,14 +27,14 @@ MateriaSource&	MateriaSource::operator=( const MateriaSource& other ) {
 }
 
 MateriaSource::~MateriaSource( void ) {
-	UI::printLine("[MateriaSource] Destructor called");
+	//UI::printLine("[MateriaSource] Destructor called");
 }
 
 void 		MateriaSource::learnMateria(AMateria* m) {
 	if (m != nullptr && _inventory[INVENTORYSIZE - 1] == nullptr)
 		equip(m->clone());
-	else
-		UI::printLine("[learnMateria]: Incorrect input or memory is full");
+	// else
+	// 	UI::printLine("[learnMateria]: Incorrect input or memory is full");
 }
 
 AMateria*	MateriaSource::createMateria(std::string const & type) {

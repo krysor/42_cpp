@@ -3,18 +3,18 @@
 
 Character::Character( void ) : _inventory()
 {
-	UI::printLine("[Character] Default constructor called");
+	//UI::printLine("[Character] Default constructor called");
 }
 
 Character::Character( std::string const & name ) : _inventory()
 {	
-	UI::printLine("[Character] Name constructor called");
+	//UI::printLine("[Character] Name constructor called");
 	this->_name = name;
 }
 
 Character::Character( const Character& other ) : _inventory()
 {
-	UI::printLine("[Character] Copy constructor called");
+	//UI::printLine("[Character] Copy constructor called");
 	this->_name = other._name;
 	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
 		if (other._inventory[i] != nullptr)
@@ -24,7 +24,7 @@ Character::Character( const Character& other ) : _inventory()
 
 Character&	Character::operator=( const Character& other )
 {
-	UI::printLine("[Character] Copy assignment operator called");
+	//UI::printLine("[Character] Copy assignment operator called");
 	this->_name = other._name;
 	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
 		delete this->_inventory[i];
@@ -39,7 +39,7 @@ Character&	Character::operator=( const Character& other )
 
 Character::~Character( void )
 {
-	UI::printLine("[Character] Destructor called");
+	//UI::printLine("[Character] Destructor called");
 	for (unsigned int i = 0; i < INVENTORYSIZE; i++) {
 		if (this->_inventory[i] != nullptr) {
 			delete this->_inventory[i];
@@ -66,14 +66,14 @@ void Character::equip(AMateria* m)
 		}
 	}
 	if (i == 4) {
-		UI::printLine("The " + this->_name + "'s inventory is full.");
+		//UI::printLine("The " + this->_name + "'s inventory is full.");
 	}
 }
 
 void Character::unequip(int idx)
 {
 	if (idx < 0 || idx >= INVENTORYSIZE) {
-		UI::printLine("The given inventory index " + std::to_string(idx) + " is incorrect.");
+		//UI::printLine("The given inventory index " + std::to_string(idx) + " is incorrect.");
 		return ;
 	}
 	this->_inventory[idx] = nullptr;
@@ -82,11 +82,11 @@ void Character::unequip(int idx)
 void Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx >= INVENTORYSIZE) {
-		UI::printLine("The given inventory index " + std::to_string(idx) + " is incorrect.");
+		//UI::printLine("The given inventory index " + std::to_string(idx) + " is incorrect.");
 		return ;
 	}
 	if (this->_inventory[idx] == nullptr) {
-		UI::printLine(this->_name + "has no Materia at index " + std::to_string(idx));
+		//UI::printLine(this->_name + "has no Materia at index " + std::to_string(idx));
 		return ;
 	}
 	this->_inventory[idx]->use(target);
