@@ -3,6 +3,7 @@
 #define __BUREAUCRAT_H__
 
 #include <string>
+#include <exception>
 
 class Bureaucrat {
 
@@ -22,11 +23,18 @@ public:
 	Bureaucrat( long int grade, std::string name );
 	Bureaucrat( const Bureaucrat& other );
 	Bureaucrat&	operator=( const Bureaucrat& other );
-	~Bureaucrat( void );
+	~Bureaucrat( void ) throw();
 
 	const std::string&	getName() const;
 	unsigned char		getGrade() const;
 
+	class GradeTooHighException : public exception {
+		const char* what() const throw();
+	}
+
+	class GradeTooLowException : public exception {
+		const char* what() const throw();
+	}
 };
 
 #endif

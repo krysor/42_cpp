@@ -3,10 +3,10 @@
 
 void	checkGrade(long int grade) {
 	if (grade < 1) {
-		throw std::invalid_argument( "GradeTooHighException" );
+		throw Bureaucrat::GradeTooHighException;
     }
 	else if (grade > 150) {
-		throw std::invalid_argument( "GradeTooLowException" );
+		throw Bureaucrat::GradeTooLowException;
     }
 }
 
@@ -19,7 +19,7 @@ Bureaucrat::Bureaucrat( std::string name ) : _name(name), _grade(150) {
 }
 
 Bureaucrat::Bureaucrat( long int grade ) : _name(""), _grade(grade) {
-	UI::printLine("[Bureaucrat] Name constructor called");
+	UI::printLine("[Bureaucrat] Grade constructor called");
 	checkGrade(grade);
 	//this->_grade = grade;
 }
@@ -46,7 +46,7 @@ Bureaucrat&	Bureaucrat::operator=( const Bureaucrat& other ) {
 	return (*this);
 }
 
-Bureaucrat::~Bureaucrat( void )
+Bureaucrat::~Bureaucrat( void ) throw()
 {
 	UI::printLine("[Bureaucrat] Destructor called");
 }
