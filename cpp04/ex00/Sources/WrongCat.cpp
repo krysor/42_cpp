@@ -34,6 +34,11 @@ WrongCat::~WrongCat( void )
 	UI::printLine("[WrongCat] Destructor called");
 }
 
+void	WrongCat::makeSound( void ) const
+{
+	UI::printLine("[WrongCat]: Meeeeuuuuuuw!");
+}
+
 const std::string&	WrongCat::getType( void ) const
 {
 	return (this->type);

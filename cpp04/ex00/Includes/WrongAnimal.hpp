@@ -20,7 +20,7 @@ public:
 	WrongAnimal&	operator=( const WrongAnimal& other );
 	virtual ~WrongAnimal( void );
 
-	virtual void	makeSound( void ) const;
+	void	makeSound( void ) const;
 
 	const std::string&	getType( void ) const;
 	void				setType( const std::string type );
