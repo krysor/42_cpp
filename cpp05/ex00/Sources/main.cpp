@@ -4,7 +4,7 @@
 int main( void ) 
 {
 	{
-		UI::printLine("Test Bureaucraat with correct values");
+		UI::printLine(RED + "Test Bureaucraat with correct values" + RESET);
 
 		//Default constructor
 		Bureaucrat	bureaucrat1;
@@ -51,13 +51,63 @@ int main( void )
 	UI::printLine("\n");
 
 	{
-		UI::printLine("Test Bureaucraat with incorrect grade values");
+		UI::printLine(RED + "Test Bureaucraat with incorrect grade values" + RESET);
 		
 		try {
-			Bureaucrat	bureaucrat1;
+			Bureaucrat	bureaucrat2(0);
 		}
 		catch (std::exception & e) {
-			//	UI::printLine(e);
+			UI::printLine(e.what());
+		}
+	}
+
+	UI::printLine("\n");
+
+	{
+		UI::printLine(RED + "Test Bureaucraat correct increment and decrement" + RESET);
+		
+		Bureaucrat	bureaucrat1("John", 75);
+		
+		std::cout << bureaucrat1 << std::endl;
+		std::cout << ++bureaucrat1 << std::endl;
+		std::cout << bureaucrat1++ << std::endl;
+		std::cout << bureaucrat1 << std::endl;
+		std::cout << --bureaucrat1 << std::endl;
+		std::cout << bureaucrat1-- << std::endl;
+		std::cout << bureaucrat1 << std::endl;
+	}
+
+	UI::printLine("\n");
+
+	{
+		UI::printLine(RED + "Test Bureaucraat incorrect increment" + RESET);
+
+		try {
+			Bureaucrat	bureaucrat1("John", 1);
+	
+			std::cout << bureaucrat1 << std::endl;
+			std::cout << ++bureaucrat1 << std::endl;
+			std::cout << bureaucrat1 << std::endl;
+		}
+		catch (const std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
+
+	UI::printLine("\n");
+
+	{
+		UI::printLine(RED + "Test Bureaucraat incorrect decrement" + RESET);
+
+		try {
+			Bureaucrat	bureaucrat1("John", 150);
+	
+			std::cout << bureaucrat1 << std::endl;
+			std::cout << --bureaucrat1 << std::endl;
+			std::cout << bureaucrat1 << std::endl;
+		}
+		catch (const std::exception & e) {
+			UI::printLine(e.what());
 		}
 	}
 }

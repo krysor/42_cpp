@@ -11,7 +11,7 @@ class Bureaucrat {
 private:
 
 	const std::string	_name;
-	unsigned char		_grade;
+	int					_grade;
 
 
 public:
@@ -26,15 +26,24 @@ public:
 	~Bureaucrat( void ) throw();
 
 	const std::string&	getName() const;
-	unsigned char		getGrade() const;
+	int					getGrade() const;
 
-	class GradeTooHighException : public exception {
+	class GradeTooHighException : public std::exception {
 		const char* what() const throw();
-	}
+	};
 
-	class GradeTooLowException : public exception {
+	class GradeTooLowException : public std::exception {
 		const char* what() const throw();
-	}
+	};
+
+	const Bureaucrat&	operator++( void );
+	const Bureaucrat	operator++( int );
+	const Bureaucrat&	operator--( void );
+	const Bureaucrat	operator--( int );
+
+
 };
+
+std::ostream&	operator <<( std::ostream& os, const Bureaucrat& bureaucrat );
 
 #endif
