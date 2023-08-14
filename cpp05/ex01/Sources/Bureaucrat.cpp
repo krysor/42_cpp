@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "UI.hpp"
 
-void	checkGrade(long int grade) {
+void	Bureaucrat::checkGrade(long int grade) {
 	if (grade < GRADEMAX) {
 		throw Bureaucrat::GradeTooHighException();
     }

@@ -31,6 +31,8 @@ public:
 	const std::string&	getName() const;
 	int					getGrade() const;
 
+	static void			checkGrade(long int grade);
+
 	class GradeTooHighException : public std::exception {
 		const char* what() const throw();
 	};

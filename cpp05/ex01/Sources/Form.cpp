@@ -1,25 +1,18 @@
 #include "Form.hpp"
 #include "UI.hpp"
-
-void	checkGrade(long int grade) {
-	if (grade < GRADEMAX) {
-		throw Form::GradeTooHighException();
-    }
-	else if (grade > GRADEMIN) {
-		throw Form::GradeTooLowException();
-    }
-}
+#include "Bureaucrat.hpp"
 
 Form::Form( void ) : _name(""), _signed(false), 
-					_gradeToSign(GRADEMAX), _gradeToExecute(GRADEMIN) {
+					_gradeToSign(GRADEMAX), _gradeToExecute(GRADEMAX) {
 	UI::printLine("[Form] Default constructor called");
 }
 
-Form::Form( std::string name, bool sign, long int gradeToSign, long int gradeToExecute )
-			: _name(name), _signed(sign), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+Form::Form( std::string name, long int gradeToSign, long int gradeToExecute )
+			: _name(name), _signed(false), _gradeToSign(gradeToSign),
+				_gradeToExecute(gradeToExecute) {
 	UI::printLine("[Form] Default constructor called");
-	gradecheck(gradeToSign);
-	gradecheck(gradeToExecute);
+	Bureaucrat::checkGrade(gradeToSign);
+	Bureaucrat::checkGrade(gradeToExecute);
 }
 
 Form::Form( const Form& other ) : _name(other._name), _signed(other._signed), 
@@ -48,12 +41,12 @@ bool	Form::getSigned( void ) const
 	return (this->_signed);
 }
 
-const int	Form::getGradeToSign( void ) const
+int	Form::getGradeToSign( void ) const
 {
 	return (this->_gradeToSign);
 }
 
-const int	Form::getGradeToExecute( void ) const
+int	Form::getGradeToExecute( void ) const
 {
 	return (this->_gradeToExecute);
 }
@@ -71,7 +64,11 @@ const char* Form::GradeTooLowException::what() const throw()
 std::ostream&	operator<<( std::ostream& os,
 							const Form& Form )
 {
-	os << Form.getName() + ", Form grade "
-		  + std::to_string(Form.getGrade()) + ".";
+	os << Form.getName() + ", " + "form" + " "
+		  + (Form.getSigned() ? "signed" : "unsigned") + " "
+		  + "grade to sign:" + " "
+		  		+ std::to_string(Form.getGradeToSign()) + " "
+		  + "grade to execute:" + " "
+		  		+ std::to_string(Form.getGradeToExecute()) + " ";
 	return (os);
 }

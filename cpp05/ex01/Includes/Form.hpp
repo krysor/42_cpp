@@ -2,6 +2,7 @@
 #ifndef __FORM_H__
 #define __FORM_H__
 
+#include <string>
 
 class Form {
 
@@ -16,16 +17,16 @@ private:
 public:
 
 	Form( void );
-	Form( std::string name, bool sign, 
-			long int gradeToSign, long int gradeToExecute );
+	Form( std::string name, long int gradeToSign, 
+			long int gradeToExecute );
 	Form( const Form& other );
 	Form&	operator=( const Form& other );
 	~Form( void ) throw();
 
 	const std::string&	getName() const;
 	bool				getSigned( void ) const;
-	const int			getGradeToSign( void ) const;
-	const int			getGradeToExecute( void ) const;
+	int					getGradeToSign( void ) const;
+	int					getGradeToExecute( void ) const;
 
 	class GradeTooHighException : public std::exception {
 		const char* what() const throw();
