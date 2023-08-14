@@ -107,24 +107,28 @@ const Bureaucrat		Bureaucrat::operator--( int )
 
 void Bureaucrat::signForm(Form& form)
 {
-	bool	alreadySigned;
+	bool	signedOld;
 	
-	alreadySigned = form.getSigned();
-	form.beSigned(*this);
-	if (!alreadySigned && form.getSigned() == true) {
-		UI::printLine(this->getName()
-					  + " signed "
+	signedOld = form.getSigned();
+	if (signedOld == false
+		&& this->getGrade() <= form.getGradeToSign()) {
+		UI::printLine("Bureaucrat "
+					  + this->getName()
+					  + " signed the form "
 					  + form.getName());
 	}
 	else {
-		UI::printLine(this->getName()
-				+ " couldn't sign "
+		UI::printLine("Bureaucrat "
+				+ this->getName()
+				+ " couldn't sign the form "
 				+ form.getName()
 				+ " because "
-				+ (alreadySigned ?
+				+ (signedOld ?
 					"it has already been signed"
-					: "the bureaucrat's level is too low"));
+				  : "the bureaucrat's level is too low"));
 	}
+	if (signedOld == false)
+		form.beSigned(*this);
 }
 
 std::ostream&	operator<<( std::ostream& os,
