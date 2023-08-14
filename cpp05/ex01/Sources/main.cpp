@@ -8,6 +8,7 @@ int main( void )
 
 		//Default constructor
 		Form	Form1;
+		std::cout << Form1 << std::endl;
 		assert(Form1.getName().empty());
 		assert(Form1.getSigned() == false);
 		assert(Form1.getGradeToSign() == GRADEMAX);
@@ -15,6 +16,7 @@ int main( void )
 
 		//Input constructor
 		Form	Form2("paperwork", 75, 150);
+		std::cout << Form2 << std::endl;
 		assert(Form2.getName() == "paperwork");
 		assert(Form2.getSigned() == false);
 		assert(Form2.getGradeToSign() == 75);
@@ -22,6 +24,7 @@ int main( void )
 
 		//Copy constructor
 		Form Form3(Form2);
+		std::cout << Form3 << std::endl;
 		assert(Form3.getName() == Form2.getName());
 		assert(Form3.getSigned() == false);
 		assert(Form3.getGradeToSign() == Form2.getGradeToSign());
@@ -30,6 +33,7 @@ int main( void )
 		//Copy assingment operator
 		Form Form4("Bonjour", 123, 123);
 		Form4 = Form1;
+		std::cout << Form4 << std::endl;
 		assert(Form4.getName() == "Bonjour");
 		assert(Form4.getSigned() == false);
 		assert(Form4.getGradeToSign() == 123);
@@ -58,54 +62,75 @@ int main( void )
 		}
 	}
 
-	// UI::printLine("\n");
+	UI::printLine("\n");
+	{
+		UI::printLine(RED + "Test beSigned with high enough value Bureaucrat" + RESET);
+		try {
+			Bureaucrat	bureaucrat1("Steve", 74);
+			Form		form1("test", 75, 75);
+			
+			form1.beSigned(bureaucrat1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 
-	// {
-	// 	UI::printLine(RED + "Test Bureaucraat correct increment and decrement" + RESET);
-		
-	// 	Form	Form1("John", 75);
-		
-	// 	std::cout << Form1 << std::endl;
-	// 	std::cout << ++Form1 << std::endl;
-	// 	std::cout << Form1++ << std::endl;
-	// 	std::cout << Form1 << std::endl;
-	// 	std::cout << --Form1 << std::endl;
-	// 	std::cout << Form1-- << std::endl;
-	// 	std::cout << Form1 << std::endl;
-	// }
+	UI::printLine("\n");
+	{
+		UI::printLine(RED + "Test beSigned with incorrect value Bureaucrat" + RESET);
+		try {
+			Bureaucrat	bureaucrat1("Steve", 75);
+			Form		form1("test", 74, 75);
+			
+			form1.beSigned(bureaucrat1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 
-	// UI::printLine("\n");
+	UI::printLine("\n");
+	{
+		UI::printLine(RED + "Test signForm with correct value" + RESET);
+		try {
+			Bureaucrat	bureaucrat1("Steve", 75);
+			Form		form1("test", 75, 75);
+			
+			bureaucrat1.signForm(form1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 
-	// {
-	// 	UI::printLine(RED + "Test Bureaucraat incorrect increment" + RESET);
+	UI::printLine("\n");
+	{
+		UI::printLine(RED + "Test signForm with incorrect value" + RESET);
+		try {
+			Bureaucrat	bureaucrat1("Steve", 75);
+			Form		form1("test", 74, 75);
+			
+			bureaucrat1.signForm(form1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 
-	// 	try {
-	// 		Form	Form1("John", 1);
-	
-	// 		std::cout << Form1 << std::endl;
-	// 		std::cout << ++Form1 << std::endl;
-	// 		std::cout << Form1 << std::endl;
-	// 	}
-	// 	catch (const std::exception & e) {
-	// 		UI::printLine(e.what());
-	// 	}
-	// }
-
-	// UI::printLine("\n");
-
-	// {
-	// 	UI::printLine(RED + "Test Bureaucraat incorrect decrement" + RESET);
-
-	// 	try {
-	// 		Form	Form1("John", 150);
-	
-	// 		std::cout << Form1 << std::endl;
-	// 		std::cout << --Form1 << std::endl;
-	// 		std::cout << Form1 << std::endl;
-	// 	}
-	// 	catch (const std::exception & e) {
-	// 		UI::printLine(e.what());
-	// 	}
-	// }
+	UI::printLine("\n");
+	{
+		UI::printLine(RED + "Test signForm with an already signed form" + RESET);
+		try {
+			Bureaucrat	bureaucrat1("Steve", 75);
+			Form		form1("test", 75, 75);
+			
+			bureaucrat1.signForm(form1);
+			bureaucrat1.signForm(form1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 }
 

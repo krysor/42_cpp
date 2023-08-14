@@ -61,22 +61,35 @@ int	Form::getGradeToExecute( void ) const
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return ("The grade is too high (smaller than 1)");
+	return ("The grade is too high");
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return ("The grade is too low (higher than 150)");
+	return ("The grade is too low");
+}
+
+void	Form::beSigned(Bureaucrat& bureaucrat)
+{
+	if (this->_signed == true)
+		return ;
+	if (bureaucrat.getGrade() > this->getGradeToSign())
+		throw Form::GradeTooLowException();
+	else
+		this->_signed = true;
 }
 
 std::ostream&	operator<<( std::ostream& os,
 							const Form& Form )
 {
-	os << Form.getName() + ", " + "form" + " "
-		  + (Form.getSigned() ? "signed" : "unsigned") + " "
-		  + "grade to sign:" + " "
-		  		+ std::to_string(Form.getGradeToSign()) + " "
-		  + "grade to execute:" + " "
-		  		+ std::to_string(Form.getGradeToExecute()) + " ";
+	os << "Form" << std::endl
+	   << std::left << std::setw(20) << "Name" << ": "
+		  + Form.getName() << std::endl
+	   << std::setw(20) << "Status" << ": "
+	   	  + std::string(Form.getSigned() ? "signed" : "unsigned") << std::endl
+	   << std::setw(20) << "Grade to sign" << ": "
+	   	  + std::to_string(Form.getGradeToSign()) << std::endl
+	   << std::setw(20) << "Grade to execute" << ": "
+		  + std::to_string(Form.getGradeToExecute()) << std::endl;
 	return (os);
 }
