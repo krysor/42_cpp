@@ -1,6 +1,14 @@
 #include "Form.hpp"
 #include "UI.hpp"
-#include "Bureaucrat.hpp"
+
+void	Form::checkGrade(long int grade) {
+	if (grade < GRADEMAX) {
+		throw Form::GradeTooHighException();
+    }
+	else if (grade > GRADEMIN) {
+		throw Form::GradeTooLowException();
+    }
+}
 
 Form::Form( void ) : _name(""), _signed(false), 
 					_gradeToSign(GRADEMAX), _gradeToExecute(GRADEMAX) {
@@ -10,12 +18,12 @@ Form::Form( void ) : _name(""), _signed(false),
 Form::Form( std::string name, long int gradeToSign, long int gradeToExecute )
 			: _name(name), _signed(false), _gradeToSign(gradeToSign),
 				_gradeToExecute(gradeToExecute) {
-	UI::printLine("[Form] Default constructor called");
-	Bureaucrat::checkGrade(gradeToSign);
-	Bureaucrat::checkGrade(gradeToExecute);
+	UI::printLine("[Form] Input constructor called");
+	checkGrade(gradeToSign);
+	checkGrade(gradeToExecute);
 }
 
-Form::Form( const Form& other ) : _name(other._name), _signed(other._signed), 
+Form::Form( const Form& other ) : _name(other._name), _signed(false), 
 					_gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {
 	UI::printLine("[Form] Copy constructor called");
 }

@@ -3,6 +3,7 @@
 #define __FORM_H__
 
 #include <string>
+#include "Bureaucrat.hpp"
 
 class Form {
 
@@ -27,6 +28,8 @@ public:
 	bool				getSigned( void ) const;
 	int					getGradeToSign( void ) const;
 	int					getGradeToExecute( void ) const;
+
+	static void			checkGrade(long int grade);
 
 	class GradeTooHighException : public std::exception {
 		const char* what() const throw();
