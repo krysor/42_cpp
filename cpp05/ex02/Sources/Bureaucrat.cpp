@@ -105,7 +105,7 @@ const Bureaucrat		Bureaucrat::operator--( int )
 	return (bureaucrat);
 }
 
-void Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(AForm& form)
 {
 	bool	signedOld;
 	

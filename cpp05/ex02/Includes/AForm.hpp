@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __FORM_H__
-#define __FORM_H__
+#ifndef __AFORM_H__
+#define __AFORM_H__
 
 #include <string>
 #include "Bureaucrat.hpp"
@@ -8,7 +8,7 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
 
 private:
 
@@ -20,12 +20,12 @@ private:
 
 public:
 
-	Form( void );
-	Form( std::string name, long int gradeToSign, 
+	AForm( void );
+	AForm( std::string name, long int gradeToSign, 
 			long int gradeToExecute );
-	Form( const Form& other );
-	Form&	operator=( const Form& other );
-	~Form( void ) throw();
+	AForm( const AForm& other );
+	AForm&	operator=( const AForm& other );
+	~AForm( void ) throw();
 
 	virtual	void	dummyFunction( void ) = 0;
 
@@ -49,6 +49,6 @@ public:
 };
 
 std::ostream&	operator<<( std::ostream& os,
-							const Form& Form );
+							const AForm& AForm );
 
 #endif

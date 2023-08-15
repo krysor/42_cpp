@@ -2,14 +2,26 @@
 #ifndef __SHRUBBERYCREATIONFORM_H__
 #define __SHRUBBERYCREATIONFORM_H__
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class ShrubberyCreationForm : public Form {
+#define SCDEFAULTGRADETOSIGN 145
+#define SCDEFAULTGRADETOEXEC 137
+
+class ShrubberyCreationForm : public AForm {
 	
+private:
+
+	std::string	_target;
+
+public:
+
 	ShrubberyCreationForm( void );
-	ShrubberyCreationForm( const Form& other );
-	ShrubberyCreationForm&	operator=( const Form& other );
+	ShrubberyCreationForm( std::string target );
+	ShrubberyCreationForm( const ShrubberyCreationForm& other );
+	ShrubberyCreationForm&	operator=( const ShrubberyCreationForm& other );
 	~ShrubberyCreationForm( void ) throw();
+
+	const std::string&	getTarget( void ) const;
 
 	void	dummyFunction( void );
 };

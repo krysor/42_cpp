@@ -6,7 +6,8 @@ OBJ_DIR 	= 	Objects/
 SRCS		= 	main.cpp \
 				UI.cpp \
 				Bureaucrat.cpp \
-				Form.cpp
+				AForm.cpp \
+				ShrubberyCreationForm.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 

@@ -4,12 +4,12 @@
 
 #include <string>
 #include <exception>
-#include <Form.hpp>
+#include <AForm.hpp>
 
 #define GRADEMAX 1
 #define GRADEMIN 150
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 
@@ -49,7 +49,7 @@ public:
 	const Bureaucrat&	operator--( void );
 	const Bureaucrat	operator--( int );
 
-	void	signForm(Form& form);
+	void	signForm(AForm& form);
 };
 
 std::ostream&	operator <<( std::ostream& os, const Bureaucrat& bureaucrat );
