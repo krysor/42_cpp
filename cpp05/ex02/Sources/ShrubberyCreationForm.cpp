@@ -38,7 +38,8 @@ const std::string&	ShrubberyCreationForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	ShrubberyCreationForm::dummyFunction( void )
+void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
+	(void)executor;
 	return ;
 }

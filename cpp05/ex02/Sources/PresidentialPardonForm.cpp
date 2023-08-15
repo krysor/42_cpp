@@ -38,7 +38,8 @@ const std::string&	PresidentialPardonForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	PresidentialPardonForm::dummyFunction( void )
+void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
+	(void)executor;
 	return ;
 }

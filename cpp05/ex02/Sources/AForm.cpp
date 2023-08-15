@@ -79,10 +79,10 @@ void	AForm::beSigned( Bureaucrat& bureaucrat )
 		this->_signed = true;
 }
 
-void	AForm::dummyFunction( void )
-{
-	return ;
-}
+// void	AForm::execute(Bureaucrat const & executor) const;
+// {
+// 	return ;
+// }
 
 std::ostream&	operator<<( std::ostream& os,
 							const AForm& AForm )

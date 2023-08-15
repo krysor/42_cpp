@@ -38,7 +38,8 @@ const std::string&	RobotomyRequestForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	RobotomyRequestForm::dummyFunction( void )
+void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+	(void)executor;
 	return ;
 }
