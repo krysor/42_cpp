@@ -27,7 +27,7 @@ public:
 	AForm&	operator=( const AForm& other );
 	~AForm( void ) throw();
 
-	void			execute(Bureaucrat const & executor) const;
+	bool			execute(Bureaucrat const & executor) const;
 	virtual	void	executeAction( void ) const = 0;
 
 	const std::string&	getName( void ) const;

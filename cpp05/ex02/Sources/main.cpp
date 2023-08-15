@@ -182,5 +182,47 @@ int main( void )
 			UI::printLine(e.what());
 		}
 	}
+	UI::printLine("\n");
+	{
+		srand(time(NULL));
+		UI::printLine(RED + "Test executeForm without error" + RESET);
+
+		Bureaucrat				Bureaucrat1("Steve", SCDEFAULTGRADETOEXEC);
+		ShrubberyCreationForm	Form1("test");
+
+		Bureaucrat1.signForm(Form1);
+		Bureaucrat1.executeForm(Form1);
+	}
+	UI::printLine("\n");
+	{
+		try {
+			srand(time(NULL));
+			UI::printLine(RED + "Test executeForm with an unsigned for" + RESET);
+
+			Bureaucrat				Bureaucrat1("Steve", SCDEFAULTGRADETOEXEC);
+			ShrubberyCreationForm	Form1("test");
+
+			Bureaucrat1.executeForm(Form1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
+	UI::printLine("\n");
+	{
+		try {
+			srand(time(NULL));
+			UI::printLine(RED + "Test executeForm with a too weak Bureaucrat" + RESET);
+
+			Bureaucrat				Bureaucrat1("Steve", SCDEFAULTGRADETOEXEC + 1);
+			ShrubberyCreationForm	Form1("test");
+
+			Bureaucrat1.signForm(Form1);
+			Bureaucrat1.executeForm(Form1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
 }
 

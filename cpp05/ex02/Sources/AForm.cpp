@@ -84,7 +84,7 @@ void	AForm::beSigned( Bureaucrat& bureaucrat )
 		this->_signed = true;
 }
 
-void	AForm::execute(Bureaucrat const & executor) const
+bool	AForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_signed == false)
 		throw AForm::UnsignedException();
@@ -92,6 +92,7 @@ void	AForm::execute(Bureaucrat const & executor) const
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->executeAction();
+	return (true);
 }
 
 void	AForm::executeAction( void ) const

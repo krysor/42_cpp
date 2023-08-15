@@ -131,6 +131,14 @@ void Bureaucrat::signForm(AForm& form)
 		form.beSigned(*this);
 }
 
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	if (form.execute(*this) == true)
+		UI::printLine(this->_name + " executed " + form.getName());
+	else
+		UI::printLine("an explicit error message");
+}
+
 std::ostream&	operator<<( std::ostream& os,
 							const Bureaucrat& bureaucrat )
 {

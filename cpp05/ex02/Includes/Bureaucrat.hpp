@@ -50,6 +50,7 @@ public:
 	const Bureaucrat	operator--( int );
 
 	void	signForm(AForm& form);
+	void	executeForm(AForm const & form);
 };
 
 std::ostream&	operator <<( std::ostream& os, const Bureaucrat& bureaucrat );
