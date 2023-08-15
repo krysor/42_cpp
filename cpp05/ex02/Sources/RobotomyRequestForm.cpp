@@ -38,7 +38,7 @@ const std::string&	RobotomyRequestForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	RobotomyRequestForm::executeAction( void )
+void	RobotomyRequestForm::executeAction( void ) const
 {
 	std::string	msg;
 

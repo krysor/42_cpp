@@ -82,7 +82,8 @@ void	AForm::beSigned( Bureaucrat& bureaucrat )
 void	AForm::execute(Bureaucrat const & executor) const
 {
 	//condition
-	this.executeAction();
+	(void)executor;
+	this->executeAction();
 }
 
 void	AForm::executeAction( void ) const

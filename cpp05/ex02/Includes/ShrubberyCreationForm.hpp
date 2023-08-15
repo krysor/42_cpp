@@ -24,7 +24,7 @@ public:
 
 	const std::string&	getTarget( void ) const;
 
-	void	executeAction( void );
+	void	executeAction( void ) const ;
 };
 
 #endif
