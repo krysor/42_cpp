@@ -40,6 +40,17 @@ const std::string&	ShrubberyCreationForm::getTarget( void ) const
 
 void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
+	//add a check
 	(void)executor;
-	return ;
+
+	std::ofstream	output;
+
+	output.open((this->getTarget() + "_shrubbery").c_str(),
+					std::ios::out | std::ios::trunc);
+	if (output == NULL) {
+		std::cout << "Opening of the output file failed" << std::endl;
+		return ;
+	}
+	output << "ASCII trees";	
+	output.close();
 }

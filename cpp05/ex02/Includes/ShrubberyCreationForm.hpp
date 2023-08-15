@@ -3,6 +3,7 @@
 #define __SHRUBBERYCREATIONFORM_H__
 
 #include "AForm.hpp"
+#include <fstream>
 
 #define SCDEFAULTGRADETOSIGN 145
 #define SCDEFAULTGRADETOEXEC 137

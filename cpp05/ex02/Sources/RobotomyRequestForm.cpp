@@ -40,6 +40,14 @@ const std::string&	RobotomyRequestForm::getTarget( void ) const
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+	//add a check
 	(void)executor;
-	return ;
+
+	std::string	msg;
+
+	UI::printLine("<some drilling noises>");
+	msg = (rand() % 2) ? 
+			this->getTarget() + " has been successfully robotomized"
+		: 	"The robotomy failed";
+	UI::printLine(msg);
 }

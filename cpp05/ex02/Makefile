@@ -36,7 +36,7 @@ run:		all
 			./${NAME}
 
 clean:
-			${RM} $(OBJ_DIR)
+			${RM} $(OBJ_DIR) *_shrubbery
 
 fclean:		clean
 			${RM} ${NAME}
