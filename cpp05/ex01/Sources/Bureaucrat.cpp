@@ -113,19 +113,19 @@ void Bureaucrat::signForm(Form& form)
 	if (signedOld == false
 		&& this->getGrade() <= form.getGradeToSign()) {
 		UI::printLine("Bureaucrat "
-					  + this->getName()
-					  + " signed the form "
-					  + form.getName());
+					+ this->getName()
+					+ " signed the form "
+					+ form.getName());
 	}
 	else {
 		UI::printLine("Bureaucrat "
-				+ this->getName()
-				+ " couldn't sign the form "
-				+ form.getName()
-				+ " because "
-				+ (signedOld ?
-					"it has already been signed"
-				  : "the bureaucrat's level is too low"));
+			+ this->getName()
+			+ " couldn't sign the form "
+			+ form.getName()
+			+ " because "
+			+ (signedOld ?
+				"it has already been signed"
+			: "the bureaucrat's level is too low"));
 	}
 	if (signedOld == false)
 		form.beSigned(*this);
