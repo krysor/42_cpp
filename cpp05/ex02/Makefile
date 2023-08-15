@@ -7,7 +7,9 @@ SRCS		= 	main.cpp \
 				UI.cpp \
 				Bureaucrat.cpp \
 				AForm.cpp \
-				ShrubberyCreationForm.cpp
+				ShrubberyCreationForm.cpp \
+				RobotomyRequestForm.cpp \
+				PresidentialPardonForm.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 
