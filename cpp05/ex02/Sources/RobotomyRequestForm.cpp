@@ -38,11 +38,8 @@ const std::string&	RobotomyRequestForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
+void	RobotomyRequestForm::executeAction( void )
 {
-	//add a check
-	(void)executor;
-
 	std::string	msg;
 
 	UI::printLine("<some drilling noises>");

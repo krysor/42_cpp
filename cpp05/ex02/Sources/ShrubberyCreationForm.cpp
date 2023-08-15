@@ -38,14 +38,11 @@ const std::string&	ShrubberyCreationForm::getTarget( void ) const
 	return (this->_target);
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void	ShrubberyCreationForm::executeAction( void )
 {
-	//add a check
-	(void)executor;
-
 	std::ofstream	output;
 
-	output.open((this->getTarget() + "_shrubbery").c_str(),
+	output.open((target + "_shrubbery").c_str(),
 					std::ios::out | std::ios::trunc);
 	if (output == NULL) {
 		std::cout << "Opening of the output file failed" << std::endl;

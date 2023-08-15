@@ -79,10 +79,16 @@ void	AForm::beSigned( Bureaucrat& bureaucrat )
 		this->_signed = true;
 }
 
-// void	AForm::execute(Bureaucrat const & executor) const;
-// {
-// 	return ;
-// }
+void	AForm::execute(Bureaucrat const & executor) const
+{
+	//condition
+	this.executeAction();
+}
+
+void	AForm::executeAction( void ) const
+{
+	return ;
+}
 
 std::ostream&	operator<<( std::ostream& os,
 							const AForm& AForm )

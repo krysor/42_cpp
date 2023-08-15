@@ -23,7 +23,7 @@ public:
 
 	const std::string&	getTarget( void ) const;
 
-	void	execute(Bureaucrat const & executor) const;
+	void	executeAction( void );
 };
 
 #endif

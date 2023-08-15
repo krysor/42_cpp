@@ -27,7 +27,8 @@ public:
 	AForm&	operator=( const AForm& other );
 	~AForm( void ) throw();
 
-	virtual	void	execute(Bureaucrat const & executor) const = 0;
+	void			execute(Bureaucrat const & executor) const;
+	virtual	void	executeAction( void ) const = 0;
 
 	const std::string&	getName( void ) const;
 	bool				getSigned( void ) const;
