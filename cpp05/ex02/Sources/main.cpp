@@ -133,7 +133,7 @@ int main( void )
 	UI::printLine("\n");
 	{
 		srand(time(NULL));
-		UI::printLine(RED + "Test execute" + RESET);
+		UI::printLine(RED + "Test execute with signed forms and highest level Bureaucrat" + RESET);
 
 		Bureaucrat				Bureaucrat1(1);
 		ShrubberyCreationForm	Form1("test");
@@ -150,6 +150,37 @@ int main( void )
 		Form2.execute(Bureaucrat1);
 		Form2.execute(Bureaucrat1);
 		Form3.execute(Bureaucrat1);
+	}
+	UI::printLine("\n");
+	{
+		srand(time(NULL));
+		UI::printLine(RED + "Test execute with unsigned form" + RESET);
+
+		try {
+			Bureaucrat				Bureaucrat1(1);
+			ShrubberyCreationForm	Form1("test");
+
+			Form1.execute(Bureaucrat1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
+	}
+	UI::printLine("\n");
+	{
+		srand(time(NULL));
+		UI::printLine(RED + "Test execute with a too weak Bureaucrat" + RESET);
+
+		try {
+			Bureaucrat				Bureaucrat1(SCDEFAULTGRADETOEXEC + 1);
+			ShrubberyCreationForm	Form1("test");
+
+			Bureaucrat1.signForm(Form1);
+			Form1.execute(Bureaucrat1);
+		}
+		catch (std::exception & e) {
+			UI::printLine(e.what());
+		}
 	}
 }
 
