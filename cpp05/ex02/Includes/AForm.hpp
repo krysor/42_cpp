@@ -45,6 +45,10 @@ public:
 		const char* what() const throw();
 	};
 
+	class UnsignedException : public std::exception {
+		const char* what() const throw();
+	};
+
 	void	beSigned(Bureaucrat& bureaucrat);
 
 };

@@ -135,11 +135,15 @@ int main( void )
 		srand(time(NULL));
 		UI::printLine(RED + "Test execute" + RESET);
 
-		Bureaucrat				Bureaucrat1;
+		Bureaucrat				Bureaucrat1(1);
 		ShrubberyCreationForm	Form1("test");
 		RobotomyRequestForm		Form2("test2");
 		PresidentialPardonForm	Form3("test3");
 
+		Bureaucrat1.signForm(Form1);
+		Bureaucrat1.signForm(Form2);
+		Bureaucrat1.signForm(Form3);
+		
 		Form1.execute(Bureaucrat1);
 		Form2.execute(Bureaucrat1);
 		Form2.execute(Bureaucrat1);
