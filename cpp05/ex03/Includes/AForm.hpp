@@ -26,7 +26,7 @@ public:
 			long int gradeToExecute );
 	Form( const Form& other );
 	Form&	operator=( const Form& other );
-	~Form( void ) throw();
+	virtual	~Form( void ) throw();
 
 	bool			execute(Bureaucrat const & executor) const;
 	virtual	void	executeAction( void ) const = 0;

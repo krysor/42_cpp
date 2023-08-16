@@ -4,7 +4,6 @@ Intern::Intern( void ) {
 	UI::printLine("[Intern] Default constructor called");
 }
 
-
 Intern::Intern( const Intern& other ) {
 	(void)other;
 	UI::printLine("[Intern] Copy constructor called");
@@ -31,7 +30,8 @@ Form*	Intern::makeForm( std::string nameForm, std::string targetForm )
 		if (names[i] == nameForm)
 			break ;
 	}
-	UI::printLine("Intern creates " + names[i]);
+	if (i < sizeof(names)/sizeof(names[0]))
+		UI::printLine("Intern creates " + names[i]);
 	switch (i) {
 		case 0:
 			return (new ShrubberyCreationForm(targetForm));

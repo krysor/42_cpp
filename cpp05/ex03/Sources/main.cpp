@@ -1,7 +1,4 @@
 #include "UI.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
 int main( void ) 
@@ -15,5 +12,21 @@ int main( void )
 
 		Intern3 = Intern2;
 	}
+	{
+		UI::printLine(RED + "Test Intern unexisting form" + RESET);
+		
+		Intern someRandomIntern;
+		Form* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	}
+	{
+		UI::printLine(RED + "Test Intern existing form" + RESET);
+		
+		Intern someRandomIntern;
+		Form* rrf;
+		rrf = someRandomIntern.makeForm("PresidentialPardonForm", "cllequen");
+		delete rrf;
+	}
+	//system("leaks ex03");
 }
 
