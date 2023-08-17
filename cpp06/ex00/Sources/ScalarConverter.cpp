@@ -1,5 +1,4 @@
 #include "ScalarConverter.hpp"
-#include "UI.hpp"
 
 ScalarConverter::ScalarConverter( void )
 {
@@ -24,7 +23,11 @@ ScalarConverter::~ScalarConverter( void )
 	UI::printLine("[ScalarConverter] Destructor called");
 }
 
-void	ScalarConverter::convert( std::string literal )
+void	ScalarConverter::convert( char *literal )
 {
+	if (std::to_string(literal).size() == 1)
+	 && std::isprint(*literal))
+		
+	(void)str;
 	return ;
 }

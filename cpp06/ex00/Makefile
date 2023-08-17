@@ -28,9 +28,6 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
 
 all:		${NAME}
 
-run:		all
-			./${NAME}
-
 clean:
 			${RM} $(OBJ_DIR)
 

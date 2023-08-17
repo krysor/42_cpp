@@ -3,6 +3,7 @@
 #define __SCALARCONVERTER_H__
 
 #include <string>
+#include "UI.hpp"
 
 class ScalarConverter {
 
@@ -16,7 +17,7 @@ private:
 
 public:
 
-	static void	convert( std::string literal );
+	static void	convert( char *str );
 
 };
 
