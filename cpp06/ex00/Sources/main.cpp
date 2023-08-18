@@ -8,7 +8,7 @@ int main( int argc, char *argv[] )
 	}
 	
 	
-	
+	UI::printLine(std::to_string(12.f));
 	
 	ScalarConverter::convert(argv[1]);
 	return (EXIT_SUCCESS);

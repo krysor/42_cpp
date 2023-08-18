@@ -5,7 +5,8 @@ OBJ_DIR 	= 	Objects/
 ### files
 SRCS		= 	main.cpp \
 				UI.cpp \
-				ScalarConverter.cpp
+				ScalarConverter.cpp \
+				isType.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 

@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "isType.hpp"
 
 ScalarConverter::ScalarConverter( void )
 {
@@ -23,34 +24,6 @@ ScalarConverter::~ScalarConverter( void )
 	UI::printLine("[ScalarConverter] Destructor called");
 }
 
-bool	isChar( char *s )
-{
-	if (s[1] != '\0')
-		return (false);
-	if (s[0] < 32 || 126 < s[0])
-		return (false);
-	if ('0' <= s[0] && s[0] <= '9')
-		return (false);
-	return (true);
-}
-
-bool	isInt( char *s )
-{
-	(void)s;
-	return (false);
-}
-
-bool	isFloat( char *s )
-{
-	(void)s;
-	return (false);
-}
-
-bool	isDouble( char *s )
-{
-	(void)s;
-	return (false);
-}
 
 void	ScalarConverter::convert( char *s )
 {
@@ -63,11 +36,20 @@ void	ScalarConverter::convert( char *s )
 		//convert
 		return ;
 	}
-	if (isInt(s))
-		;
-	if (isFloat(s))
-		;
-	if (isDouble(s))
-		;
+	if (isInt(s)) {
+		UI::printLine("The input string is an int");
+		//convert
+		return ;
+	}
+	if (isFloat(s)) {
+		UI::printLine("The input string is a float");
+		//convert
+		return ;
+	}
+	if (isDouble(s)) {
+		UI::printLine("The input string is a double");
+		//convert
+		return ;
+	}
 	UI::printLine("The input string is neither a char, an int, a float nor a double");
 }
