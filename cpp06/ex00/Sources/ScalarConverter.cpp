@@ -58,6 +58,7 @@ void	ScalarConverter::convert( char *s )
 		printInt(std::atoi(s));
 	}
 	else if (isFloat(s)) {
+	
 		UI::printLine("The input string is a float");
 		//convert
 		return ;
