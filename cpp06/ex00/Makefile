@@ -13,7 +13,7 @@ SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 OBJS		=	$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRCS))
 
 ### variables
-NAME		= ex00
+NAME		= convert
 CC			= c++
 RM			= rm -rf
 INCLUDES	=	-I ./includes

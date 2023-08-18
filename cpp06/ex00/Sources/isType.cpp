@@ -13,15 +13,30 @@ bool	isChar( char *s )
 
 bool	isInt( char *s )
 {
+	bool			sign;
 	unsigned int	i;
+	std::string		str;
 
+	sign = false;
 	i = 0;
-	if (s[i] == '+' || s[i] == '-')
+	if (s[i] == '+' || s[i] == '-') {
+		sign = true;
 		i++;
+	}
 	while (s[i]) {
 		if (s[i] < '0' || '9' < s[i])
 			return (false);
 		i++;
+	}
+	if ((sign == false && i > 10) || (sign == true && i > 11))
+		return (false);
+	if ((sign == false && i == 10) || (sign == true && i == 11)) {
+		if (s[0] == '+' && str + s > str + "+2147483647")
+			return (false);
+		else if (s[0] == '-' && str + s > str + "-2147483648")
+			return (false);
+		else if (str + s  > str + "2147483647")
+			return (false);
 	}
 	return (true);
 }

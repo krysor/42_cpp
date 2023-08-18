@@ -8,7 +8,12 @@ int main( int argc, char *argv[] )
 	}
 	
 	
-	UI::printLine(std::to_string(12.f));
+	// UI::printLine(std::to_string(12.f));
+
+	std::string	test1 = "test";
+	std::string	test2 = "qwe";
+
+	UI::printLine(test1 < test2 ? "true" : "false");
 	
 	ScalarConverter::convert(argv[1]);
 	return (EXIT_SUCCESS);

@@ -19,6 +19,9 @@ public:
 
 	static void	convert( char *str );
 
+	static void	printChar( char c );
+	static void	printInt( int i );
+
 };
 
 #endif
