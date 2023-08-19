@@ -1,4 +1,5 @@
 #include "isType.hpp"
+#include "UI.hpp"
 
 bool	isChar( char *s )
 {
@@ -43,72 +44,136 @@ bool	isInt( char *s )
 
 bool	isFloat( char *s )
 {
-	std::string		str;
-	bool			dot;
-	bool			f;
-	bool			sign;
-	// bool			zero;
-	unsigned int	i;
+	float		f;
+	char		*str_end;
 
-	str += s;
-	if (str == "-inff" || str == "+inff" || str == "nanf")
-		return (true);
-	dot = false;
-	f = false;
-	sign = false;
-	// zero = false;
-	i = 0;
-	if (s[i] == '+' || s[i] == '-') {
-		sign = true;
-		i++;
-	}
-	while (s[i]) {
-		if (s[i] == '.' && dot == false)
-			dot = true;
-		else if (s[i] == '.' && dot == true) 
-			return (false);
-		else if (s[i] == 'f' && f == false)
-			f = true;
-		else if (s[i] == 'f' && f == true )
-			return (false);
-		else if (s[i] < '0' || '9' < s[i])
-			return (false);
-
-		// else if (s[i] == '0')
-		// else if ('1' <= s[i] || s[i] <= '9')
-		// 	zero = true;
-		
-		i++;
-	}
-	if (dot == true && f == true
-		&& ((sign == true && i > 3) || (sign == false && i > 2)))
+	f = std::strtof(s, &str_end);
+	// UI::printLine("float: ");
+	// UI::printLine(std::to_string(f));
+	// UI::printLine("str_end: ");
+	// UI::printLine(str_end);
+	if (*str_end == 'f' && *(str_end + 1) == '\0')
 		return (true);
 	return (false);
 }
 
 bool	isDouble( char *s )
 {
-	std::string		str;
-	unsigned int	i;
-	bool			dot;
+	double		d;
+	char		*str_end;
 
-	str += s;
-	if (str == "-inf" || str == "+inf" || str == "nan")
-		return (true);
-	i = 0;
-	if (s[i] == '+' || s[i] == '-')
-		i++;
-	dot = false;
-	while (s[i]) {
-		if (s[i] == '.' && dot == false)
-			dot = true;
-		else if (s[i] == '.' && dot == true) 
-			return (false);
-		else if (s[i] < '0' || '9' < s[i])
-			return (false);
-		i++;
-	}
-	if (dot == true)
+	d = std::strtod(s, &str_end);
+	// UI::printLine("double: ");
+	// UI::printLine(std::to_string(d));
+	// UI::printLine("str_end: ");
+	// UI::printLine(str_end);
+	if (*str_end == '\0')
 		return (true);
 	return (false);
 }
+
+//isInt (OLD)
+// bool	isInt( char *s )
+// {
+// 	bool			sign;
+// 	unsigned int	i;
+// 	std::string		str;
+
+// 	sign = false;
+// 	i = 0;
+// 	if (s[i] == '+' || s[i] == '-') {
+// 		sign = true;
+// 		i++;
+// 	}
+// 	while (s[i]) {
+// 		if (s[i] < '0' || '9' < s[i])
+// 			return (false);
+// 		i++;
+// 	}
+// 	if ((sign == false && i > 10) || (sign == true && i > 11))
+// 		return (false);
+// 	if ((sign == false && i == 10) || (sign == true && i == 11)) {
+// 		if (s[0] == '+' && str + s > str + "+2147483647")
+// 			return (false);
+// 		else if (s[0] == '-' && str + s > str + "-2147483648")
+// 			return (false);
+// 		else if (str + s  > str + "2147483647")
+// 			return (false);
+// 	}
+// 	return (true);
+// }
+
+//isFloat (OLD)
+// bool	isFloat( char *s )
+// {
+// 	std::string		str;
+// 	bool			dot;
+// 	bool			f;
+// 	bool			sign;
+// 	// bool			zero;
+// 	unsigned int	i;
+
+// 	str += s;
+// 	if (str == "-inff" || str == "+inff" || str == "nanf")
+// 		return (true);
+// 	dot = false;
+// 	f = false;
+// 	sign = false;
+// 	// zero = false;
+// 	i = 0;
+// 	if (s[i] == '+' || s[i] == '-') {
+// 		sign = true;
+// 		i++;
+// 	}
+// 	while (s[i]) {
+// 		if (s[i] == '.' && dot == false)
+// 			dot = true;
+// 		else if (s[i] == '.' && dot == true) 
+// 			return (false);
+// 		else if (s[i] == 'f' && f == false)
+// 			f = true;
+// 		else if (s[i] == 'f' && f == true )
+// 			return (false);
+// 		else if (s[i] < '0' || '9' < s[i])
+// 			return (false);
+
+// 		// else if (s[i] == '0')
+// 		// else if ('1' <= s[i] || s[i] <= '9')
+// 		// 	zero = true;
+		
+// 		i++;
+// 	}
+// 	if (dot == true && f == true
+// 		&& ((sign == true && i > 3) || (sign == false && i > 2)))
+// 		return (true);
+// 	return (false);
+// }
+
+
+//isDouble (OLD)
+// bool	isDouble( char *s )
+// {
+// 	std::string		str;
+// 	unsigned int	i;
+// 	bool			dot;
+
+// 	str += s;
+// 	if (str == "-inf" || str == "+inf" || str == "nan")
+// 		return (true);
+// 	i = 0;
+// 	if (s[i] == '+' || s[i] == '-')
+// 		i++;
+// 	dot = false;
+// 	while (s[i]) {
+// 		if (s[i] == '.' && dot == false)
+// 			dot = true;
+// 		else if (s[i] == '.' && dot == true) 
+// 			return (false);
+// 		else if (s[i] < '0' || '9' < s[i])
+// 			return (false);
+// 		i++;
+// 	}
+// 	if (dot == true)
+// 		return (true);
+// 	return (false);
+// }

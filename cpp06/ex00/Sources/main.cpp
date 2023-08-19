@@ -7,13 +7,12 @@ int main( int argc, char *argv[] )
 		return (EXIT_FAILURE);
 	}
 	
-	
-	//UI::printLine(std::to_string(.0f));
+	//UI::printLine(std::to_string(123.123f));
 
-	std::string	test1 = "test";
-	std::string	test2 = "qwe";
+	// std::string	test1 = "test";
+	// std::string	test2 = "qwe";
 
-	UI::printLine(test1 < test2 ? "true" : "false");
+	// UI::printLine(test1 < test2 ? "true" : "false");
 	
 	ScalarConverter::convert(argv[1]);
 	return (EXIT_SUCCESS);

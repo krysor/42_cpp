@@ -34,7 +34,7 @@ void	ScalarConverter::convert( char *s )
 	else if (isInt(s))
 		printInt(std::atoi(s));
 	else if (isFloat(s))
-		printFloat(std::atof(s));
+		printFloat(std::strtof(s, NULL));
 	else if (isDouble(s))
 		printDouble(std::strtod(s, NULL));
 	else
