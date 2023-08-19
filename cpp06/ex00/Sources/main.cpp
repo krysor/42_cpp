@@ -8,7 +8,7 @@ int main( int argc, char *argv[] )
 	}
 	
 	
-	// UI::printLine(std::to_string(12.f));
+	//UI::printLine(std::to_string(.0f));
 
 	std::string	test1 = "test";
 	std::string	test2 = "qwe";

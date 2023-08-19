@@ -46,6 +46,8 @@ bool	isFloat( char *s )
 	std::string		str;
 	bool			dot;
 	bool			f;
+	bool			sign;
+	// bool			zero;
 	unsigned int	i;
 
 	str += s;
@@ -53,9 +55,13 @@ bool	isFloat( char *s )
 		return (true);
 	dot = false;
 	f = false;
+	sign = false;
+	// zero = false;
 	i = 0;
-	if (s[i] == '+' || s[i] == '-')
+	if (s[i] == '+' || s[i] == '-') {
+		sign = true;
 		i++;
+	}
 	while (s[i]) {
 		if (s[i] == '.' && dot == false)
 			dot = true;
@@ -67,9 +73,15 @@ bool	isFloat( char *s )
 			return (false);
 		else if (s[i] < '0' || '9' < s[i])
 			return (false);
+
+		// else if (s[i] == '0')
+		// else if ('1' <= s[i] || s[i] <= '9')
+		// 	zero = true;
+		
 		i++;
 	}
-	if (dot == true && f == true)
+	if (dot == true && f == true
+		&& ((sign == true && i > 3) || (sign == false && i > 2)))
 		return (true);
 	return (false);
 }
