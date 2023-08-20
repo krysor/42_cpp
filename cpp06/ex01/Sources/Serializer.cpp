@@ -23,14 +23,12 @@ Serializer::~Serializer( void )
 	UI::printLine("[Serializer] Destructor called");
 }
 
-uintptr_t	serialize(Data* ptr)
+uintptr_t	Serializer::serialize(Data* ptr)
 {
-	(void)ptr;
-	return (0);
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
-Data* 		deserialize(uintptr_t raw)
+Data* 		Serializer::deserialize(uintptr_t raw)
 {
-	(void)raw;
-	return (nullptr);
+	return (reinterpret_cast<Data*>(raw));
 }
