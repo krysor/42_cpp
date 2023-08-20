@@ -95,7 +95,9 @@ void	printDouble( double d )
 
 	//print float
 	std::cout << "float: ";
-	if (static_cast<double>(static_cast<float>(d)) != d)
+	if (d != d)
+		std::cout << "nanf" << std::endl;
+	else if (static_cast<double>(static_cast<float>(d)) != d)
 		std::cout << "Impossible" << std::endl;
 	else {
 		std::cout << static_cast<float>(d);
