@@ -2,14 +2,14 @@
 #ifndef __C_H__
 #define __C_H__
 
+#include "Base.hpp"
+
 class C : public Base {
 
-// public:
+public:
 
-// 	C( void );
-// 	C( const C& other );
-// 	C&	operator=( const C& other );
-// 	~C( void );
+	C( void );
+ 	~C( void );
 };
 
 #endif

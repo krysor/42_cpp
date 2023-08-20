@@ -6,6 +6,9 @@ OBJ_DIR 	= 	Objects/
 SRCS		= 	main.cpp \
 				UI.cpp \
 				Base.cpp \
+				A.cpp \
+				B.cpp \
+				C.cpp \
 				functions.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))

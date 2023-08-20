@@ -3,6 +3,8 @@
 #define __FUNCTIONS_H__
 
 #include "Base.hpp"
+#include <time.h>
+#include <cstdlib>
 
 Base*	generate(void);
 void	identify(Base* p);
