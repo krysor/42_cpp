@@ -12,6 +12,7 @@ int main( void )
 	raw = Serializer::serialize(&test);
 	ptr = Serializer::deserialize(raw);
 
+	assert(&test == ptr);
 	assert(ptr->myNum == 42);
 	assert(ptr->myString == "Dziendobry");
 
