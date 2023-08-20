@@ -1,7 +1,5 @@
 #include "functions.hpp"
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
+
 
 Base*	generate( void )
 {
@@ -22,10 +20,24 @@ Base*	generate( void )
 
 void	identify(Base* p)
 {
-	
+	if (dynamic_cast<A*>(p) != NULL)
+		UI::printLine("it's an A");
+	else if (dynamic_cast<B*>(p) != NULL)
+		UI::printLine("it's a B");
+	else if (dynamic_cast<C*>(p) != NULL)
+		UI::printLine("it's a C");
+	else
+		UI::printLine("it's neither A,B nor C");
 }
 
 void	identify(Base& p)
-{
-	(void)p;
+{	
+	if (dynamic_cast<A&>(p) != NULL)
+		UI::printLine("it's an A");
+	else if (dynamic_cast<B&>(p) != NULL)
+		UI::printLine("it's a B");
+	else if (dynamic_cast<C&>(p) != NULL)
+		UI::printLine("it's a C");
+	else
+		UI::printLine("it's neither A,B nor C");
 }

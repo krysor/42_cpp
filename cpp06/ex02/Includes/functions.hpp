@@ -5,6 +5,10 @@
 #include "Base.hpp"
 #include <time.h>
 #include <cstdlib>
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include "UI.hpp"
 
 Base*	generate(void);
 void	identify(Base* p);
