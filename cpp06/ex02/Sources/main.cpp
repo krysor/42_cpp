@@ -10,8 +10,14 @@ int main( void )
 	identify(ptr);
 	delete ptr;
 
-	A	test;
-	identify(test);
+	A		test1;
+	B		test2;
+	C		test3;
+	Base	test4;
+	identify(test1);
+	identify(test2);
+	identify(test3);
+	identify(test4);
 
 	return (0);
 }
