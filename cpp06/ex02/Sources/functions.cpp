@@ -32,12 +32,26 @@ void	identify(Base* p)
 
 void	identify(Base& p)
 {	
-	if (dynamic_cast<A&>(p) != NULL)
-		UI::printLine("it's an A");
-	else if (dynamic_cast<B&>(p) != NULL)
+	try {
+		(void)dynamic_cast<A&>(p);
+	}
+	catch (std::exception & e) {
+		try {
+			(void)dynamic_cast<B&>(p);
+		}
+		catch (std::exception & e) {
+			try {
+				(void)dynamic_cast<C&>(p);
+			}
+			catch (std::exception & e) {
+				UI::printLine("it's neither A,B nor C");
+				return ;
+			}
+			UI::printLine("it's a C");
+			return ;
+		}
 		UI::printLine("it's a B");
-	else if (dynamic_cast<C&>(p) != NULL)
-		UI::printLine("it's a C");
-	else
-		UI::printLine("it's neither A,B nor C");
+		return ;
+	}
+	UI::printLine("it's an A");
 }

@@ -10,7 +10,7 @@ int main( void )
 	identify(ptr);
 	delete ptr;
 
-	A		test;
+	A	test;
 	identify(test);
 
 	return (0);
