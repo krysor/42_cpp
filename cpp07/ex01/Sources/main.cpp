@@ -1,4 +1,4 @@
-//#include "iter.hpp"
+#include "iter.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -7,7 +7,7 @@
 int main( void ) {
 	int			arri[] = {1, 2, 3, 4, 5};
 	char		arrc[] = {'a', 'b', 'c', 'd'};
-	std::string	s = "bonjour"; 
+	std::string	str = "bonjour"; 
 
 
 	std::cout << "___BEFORE___" << std::endl;
@@ -24,10 +24,14 @@ int main( void ) {
 	}
 	std::cout << std::endl;
 
-	std::cout << std::left << std::setw(WIDTH) << "s" << ": " << s << std::endl;
+	//std::cout << std::left << std::setw(WIDTH) << "s" << ": " << str << std::endl;
 
 
 	std::cout << "___AFTER___" << std::endl;
+
+	::iter(arri, sizeof(arri)/sizeof(int), ::dummy);
+	::iter(arrc, sizeof(arrc)/sizeof(char), ::dummy);
+	//::iter(&str, str.length(), ::dummy);
 
 	std::cout << std::left << std::setw(WIDTH) << "arri" << ": ";
 	for (unsigned int i = 0; i < sizeof(arri)/sizeof(int); i++) {
@@ -41,7 +45,7 @@ int main( void ) {
 	}
 	std::cout << std::endl;
 
-	std::cout << std::left << std::setw(WIDTH) << "s" << ": " << s << std::endl;
+	//std::cout << std::left << std::setw(WIDTH) << "s" << ": " << str << std::endl;
 
 
 	return 0;
