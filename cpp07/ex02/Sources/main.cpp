@@ -48,6 +48,15 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
+	for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] == numbers[i])
+        {
+            std::cerr << "shouldn't have the same value!!" << std::endl;
+            return 1;
+        }
+    }
     delete [] mirror;//
+	//system("leaks ex02");
     return 0;
 }
