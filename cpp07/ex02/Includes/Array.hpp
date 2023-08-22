@@ -7,30 +7,28 @@ class Array {
 
 private:
 
-		T*				ptr;
 		unsigned int	length;
+		T*				ptr;
 
 public:
 
 		Array( void ) {
-			ptr = nullptr;
 			length = 0;
+			ptr = nullptr;
 		}
 
 		Array( unsigned int i ) {
 			length = i;
+			ptr = nullptr;
 			if (length > 0)
 				ptr = new T[i];
-			else
-				ptr = nullptr;
 		}
 
 		Array( const Array& other ) {
 			length = other.size();
-			if (other.size() == 0) {
-				ptr = nullptr;
+			ptr = nullptr;
+			if (other.size() == 0)
 				return ;
-			}	
 			ptr = new T[other.size()];
 			for (unsigned int i = 0; i < other.size(); i++) {
 				ptr[i] = other[i];
@@ -39,11 +37,10 @@ public:
 
 		Array&	operator=( const Array& other ) {
 			delete [] ptr;
+			ptr = nullptr;
 			length = other.size();
-			if (other.size() == 0) {
-				ptr = nullptr;
+			if (other.size() == 0)
 				return ;
-			}	
 			ptr = new T[other.size()];
 			for (unsigned int i = 0; i < other.size(); i++) {
 				ptr[i] = other[i];

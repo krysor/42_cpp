@@ -11,11 +11,12 @@ void dummy(T& input)
 }
 
 template <typename T>
-void iter(T* address, size_t length, void f(T&))
+void iter(T* address, unsigned int length, void f(T&))
 {
-	for (size_t i = 0; i < length; i++) {
-		f(*address);
-		address++;
+	if (address == nullptr)
+		return ;
+	for (unsigned int i = 0; i < length; i++) {
+		f(*(address + i));
 	}
 }
 
