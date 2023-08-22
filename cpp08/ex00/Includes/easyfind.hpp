@@ -2,13 +2,17 @@
 #ifndef __EASYFIND_H__
 #define __EASYFIND_H__
 
+#include <algorithm>
+
 template <typename T>
-T* easyfind(T& haystack, int needle)
+typename T::iterator	easyfind(T& container, int target)
 {
-	T*
-	
-	//find first occurance and return
-	//if not found, throw an exception   
+	typename T::iterator	iter;
+
+	iter = std::find(container.begin(), container.end(), target);
+	if (iter != container.end())
+		return (iter);
+	throw std::range_error ("The given target hasn't been found inside the container");
 }
 
 #endif
