@@ -8,37 +8,52 @@
 
 #define SIZE 1000
 
+template <typename T>
+void	printNonList(std::string containerName, T& container, int target)
+{
+	try {
+		int	i = easyfind(container, target) - container.begin(); 
+		std::cout << "Number found inside " << containerName << " at index: " << std::to_string(i) << std::endl; 	
+	}
+	catch (std::exception & e) {
+		std::cout << e.what() << " " << containerName <<  std::endl;
+	}
+}
+
+template <typename T>
+void	printList(std::string containerName, T& container, int target)
+{	
+	try {
+		(void)easyfind(container, target);
+		std::cout << "the number " << std::to_string(target) << " was found inside the " << containerName << std::endl;
+	}
+	catch (std::exception & e) {
+		std::cout << e.what() << " " << containerName <<  std::endl;
+	}
+}
+
 int main( void ) {
 
-	std::array<int, SIZE>	a;
+	//std::array<int, SIZE>	a;
 	std::vector<int>		v(SIZE);
 	std::deque<int>			d(SIZE);
-	std::forward_list<int>	fl;
+	//std::forward_list<int>	fl;
 	std::list<int>			l;	
 
 	srand(time(NULL));
 	for (int i = 0; i < SIZE; i++) {
-		a[i] = i;
-		v[i] = i;
-		d[i] = i;
-		fl.push_front(i);
-		l.push_back(i);
+		//a[i] = rand() % SIZE;
+		v[i] = rand() % SIZE;
+		d[i] = rand() % SIZE;
+		//fl.push_front(rand() % SIZE);
+		l.push_back(rand() % SIZE);
 	}
-	a[SIZE / 4] = 42;
-	v[SIZE / 3] = 42;
-	d[SIZE / 2] = 42;
-	fl.pop_front();
-	fl.push_front(42);
-	l.pop_back();
-	l.push_back(42);
 
-	std::cout << "number found:" << std::endl;
-   
-	std::cout << "array : " << easyfind(a, 42) - a.begin() << std::endl;
-	std::cout << "vector: " << easyfind(v, 42) - v.begin() << std::endl;
-	std::cout << "deque : " << easyfind(d, 42) - d.begin() << std::endl;
-	std::cout << "flist : " << *easyfind(fl, 42) << std::endl;
-	std::cout << "list  : " << *easyfind(l, 42) << std::endl;
-
+	//printNonList("array", a, 42);
+	printNonList("vector", v, 42);
+	printNonList("deque", d, 42);
+	//printList("flist", fl, 42);
+	printList("list", l, 42);
+	
 	return (EXIT_SUCCESS);
 }
