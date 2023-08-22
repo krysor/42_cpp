@@ -36,7 +36,8 @@ public:
 		}
 
 		Array&	operator=( const Array& other ) {
-			delete [] ptr;
+			if (ptr != nullptr)
+				delete [] ptr;
 			ptr = nullptr;
 			length = other.size();
 			if (other.size() == 0)

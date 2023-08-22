@@ -24,8 +24,8 @@ int main( void ) {
 	std::cout << std::endl;
 
 
-	::iter(arri, sizeof(arri)/sizeof(int), ::dummy);
-	::iter(arrc, sizeof(arrc)/sizeof(char), ::dummy);
+	::iter(arri, sizeof(arri)/sizeof(int), ::dummy<int>);
+	::iter(arrc, sizeof(arrc)/sizeof(char), ::dummy<char>);
 
 
 	std::cout << "___AFTER___" << std::endl;
