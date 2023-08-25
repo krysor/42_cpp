@@ -3,6 +3,7 @@
 #define __SPAN_HPP__
 
 #include <vector>
+#include <iterator>
 #include "UI.hpp"
 
 class Span {
@@ -21,16 +22,19 @@ public:
 	~Span( void );
 
 	void	addNumber( int nb );
+
+	void	addRange(std::vector<int>::iterator  start,
+					 std::vector<int>::iterator end);
 	
 	class SpanFull : public std::exception {
 		const char* what() const throw();
 	};
 
-	class longestSpan : public std::exception {
+	class LongestSpan : public std::exception {
 		const char* what() const throw();
 	};
 
-	class shortestSpan : public std::exception {
+	class ShortestSpan : public std::exception {
 		const char* what() const throw();
 	};
 

@@ -40,7 +40,7 @@ const char* Span::LongestSpan::what() const throw()
 
 const char* Span::ShortestSpan::what() const throw()
 {
-	return ("The sportest span can't be calculated because span is empty or contains only one element");
+	return ("The shortest span can't be calculated because span is empty or contains only one element");
 }
 
 void	Span::addNumber( int nb )
@@ -52,20 +52,42 @@ void	Span::addNumber( int nb )
 		throw Span::SpanFull();
 }
 
+void	Span::addRange(std::vector<int>::iterator  start,
+					   std::vector<int>::iterator end)
+{
+	long int		rangeWidth;
+	unsigned int	nbEmptyIntegers;
+	unsigned int	numbersToAdd;
+
+	rangeWidth = end - start;
+	if (rangeWidth <= 0)
+		return ;
+	nbEmptyIntegers = size - integers.size();
+	if (rangeWidth > nbEmptyIntegers)
+		numbersToAdd = nbEmptyIntegers;
+	else
+		numbersToAdd = static_cast<unsigned int>(rangeWidth);
+	integers.insert(integers.end(), start, start + numbersToAdd);
+	if (rangeWidth > nbEmptyIntegers)
+		throw Span::SpanFull();
+}
+
 unsigned int	Span::shortestSpan( void ) const {
 	std::vector<int>	clone;
 	long				result;
 
 	if (integers.size() == 0 || integers.size() == 1)
-		throw Span::LongestSpan();
+		throw Span::ShortestSpan();
 	clone = integers;
 	sort(clone.begin(), clone.end());
-	for (std::vector<int>::iterator it = clone.begin(); (it + 1) != clone.end(); it++) {
+	for (std::vector<int>::iterator it = clone.begin();
+			(it + 1) != clone.end(); it++)
+	{
 		long	delta = abs(static_cast<long>(*it) - *(it + 1));
 		if (delta < result)
 			result = delta;
 	}
-	return (0);
+	return (static_cast<unsigned int>(result));
 }
 
 unsigned int	Span::longestSpan( void ) const {
