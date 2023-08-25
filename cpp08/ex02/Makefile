@@ -3,16 +3,14 @@ SRC_DIR		= 	Sources/
 OBJ_DIR 	= 	Objects/
 
 ### files
-SRCS		= 	main.cpp \
-				UI.cpp \
-				Span.cpp
+SRCS		= 	main.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))
 
 OBJS		=	$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRCS))
 
 ### variables
-NAME		= ex00
+NAME		= ex02
 CC			= c++
 RM			= rm -rf
 INCLUDES	=	-I ./includes
