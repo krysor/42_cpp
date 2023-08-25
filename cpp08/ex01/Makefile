@@ -4,7 +4,6 @@ OBJ_DIR 	= 	Objects/
 
 ### files
 SRCS		= 	main.cpp \
-				UI.cpp \
 				Span.cpp
 
 SRCS		:=	$(addprefix $(SRC_DIR), $(SRCS))

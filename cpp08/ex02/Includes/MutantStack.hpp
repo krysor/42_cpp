@@ -2,32 +2,27 @@
 #ifndef __MUTANTSTACK_HPP__
 #define __MUTANTSTACK_HPP__
 
-#include <vector>
+#include <stack>
+#include <deque>
 
 template<class T> 
-class MutantStack {
-
-private:
-	
-	std::vector<T>	stack;
+class MutantStack : public std::stack<T> {
 
 public:
 	
-	MutantStack( void )						: stack(0) 				{}
-	MutantStack( const MutantStack& other ) : stack(other.stack)	{}
-	~MutantStack( void )											{}
-	MutantStack&	operator=( const MutantStack& other ) {
-		stack = other.stack;
-		return (*this);
+	MutantStack( void ) : std::stack<T>() {}
+	MutantStack( const MutantStack& other ) : std::stack<T>(other) {}
+	~MutantStack( void ) {}
+	MutantStack& operator=( const MutantStack& other ) {
+		*this = other;
+		return *this;
 	}
+	
+	typedef typename std::deque<T>::iterator	iterator;
 
-	T&		top( void )		const	{ return *stack.end()			; }
-	bool	empty( void )	const	{ return !size() ? true : false	; }
-	size_t	size( void )	const	{ return stack.size()			; }
-	void	push( const T& value )	{ stack.push_back(value)		; }
-	void	pop( void )				{ stack.pop_back()				; }
+	iterator	begin( void )	{ return this->c.begin(); }
+	iterator	end( void )		{ return this->c.end()  ; }
 
 };
-
 
 #endif

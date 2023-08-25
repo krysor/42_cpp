@@ -4,7 +4,14 @@
 
 #include <vector>
 #include <iterator>
-#include "UI.hpp"
+#include <string>
+#include <iostream>
+
+#define RESET	std::string("\33[0m")
+#define RED		std::string("\33[31m")
+#define GREEN	std::string("\33[32m")
+#define YELLOW	std::string("\33[33m")
+#define BLUE	std::string("\33[34m")
 
 class Span {
 
@@ -42,5 +49,6 @@ public:
 	unsigned int	longestSpan( void ) const;
 };
 
+void	printLine( std::string line );
 
 #endif

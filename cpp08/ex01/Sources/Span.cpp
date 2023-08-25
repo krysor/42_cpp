@@ -2,30 +2,30 @@
 
 Span::Span( void ) : integers(0), size(0)
 {
-	UI::printLine("[Span] Default constructor called");
+	//UI::printLine("[Span] Default constructor called");
 }
 
 Span::Span( unsigned int n ) : integers(0), size(n)
 {
-	UI::printLine("[Span] Default constructor called");
+	//UI::printLine("[Span] Default constructor called");
 }
 
 Span::Span( const Span& other ) : integers(other.integers), size(other.size)
 {
-	UI::printLine("[Span] Copy constructor called");
+	//UI::printLine("[Span] Copy constructor called");
 }
 
 Span&	Span::operator=( const Span& other )
 {
 	integers = other.integers;
 	size = other.size;
-	UI::printLine("[Span] Copy assignment operator called");
+	//UI::printLine("[Span] Copy assignment operator called");
 	return (*this);
 }
 
 Span::~Span( void )
 {
-	UI::printLine("[Span] Destructor called");
+	//UI::printLine("[Span] Destructor called");
 }
 
 const char* Span::SpanFull::what() const throw()
@@ -101,4 +101,9 @@ unsigned int	Span::longestSpan( void ) const {
 	min = *min_element(integers.begin(), integers.end());
 	delta = static_cast<long>(max) - min;
 	return (static_cast<unsigned int>(abs(delta)));
+}
+
+void	printLine( std::string line )
+{
+	std::cout << line << std::endl;
 }
