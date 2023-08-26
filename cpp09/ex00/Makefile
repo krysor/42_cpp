@@ -25,9 +25,6 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
 			mkdir -p $(@D)
 			${CC} $(INCLUDES) $(FLAGS) -c $< -o $@
 
-run:		all
-			./${NAME}
-
 all:		${NAME}
 
 clean:
