@@ -5,11 +5,19 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <time.h>
 
-#define	NAMEDATABASE "data.csv"
+#define	NAMEDATABASE		"data.csv"
+#define	FIRSTLINEDATABASE	"date,exchange_rate"
 
-bool	extractDataBase( std::map<std::string, float>& dataBase );
-bool	parseLine(std::string& line,
-				  std::map<std::string, float>& dataBase);
+#define	FEBRUARY	1
+#define APRIL		3
+#define JUNE		5
+#define	SEPTEMBER	8
+#define NOVEMBER	10
+
+typedef std::map<std::string, double>	dB;
+
+bool	extractDataBase( dB& dataBase );
 
 #endif
