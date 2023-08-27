@@ -1,22 +1,22 @@
 #include "BitcoinExchange.hpp"
 
-customTime::customTime( void ) {}
+CustomTime::CustomTime( void ) {}
 
-customTime::customTime( struct tm& time )
+CustomTime::CustomTime( struct tm& time )
 {
 	this->time.tm_mday = time.tm_mday;
 	this->time.tm_mon = time.tm_mon;
 	this->time.tm_year = time.tm_year;
 }
 
-customTime::customTime( const customTime& other  )
+CustomTime::CustomTime( const CustomTime& other  )
 {
 	operator=(other);
 }
 
-customTime::~customTime( void ) {}
+CustomTime::~CustomTime( void ) {}
 
-customTime& customTime::operator=( const customTime& other )
+CustomTime& CustomTime::operator=( const CustomTime& other )
 {
 	this->time.tm_mday = other.time.tm_mday;
 	this->time.tm_mon = other.time.tm_mon;
@@ -24,7 +24,7 @@ customTime& customTime::operator=( const customTime& other )
 	return (*this);
 }
 
-bool	customTime::operator==( const customTime& other ) const
+bool	CustomTime::operator==( const CustomTime& other ) const
 {
 	if (this->time.tm_mday == other.time.tm_mday
 	 && this->time.tm_mon == other.time.tm_mon
@@ -33,7 +33,7 @@ bool	customTime::operator==( const customTime& other ) const
 	return (false);
 }
 
-bool	customTime::operator <( const customTime& other ) const
+bool	CustomTime::operator <( const CustomTime& other ) const
 {
 	if (this->time.tm_year < other.time.tm_year
 	 || (this->time.tm_year == other.time.tm_year
@@ -45,28 +45,28 @@ bool	customTime::operator <( const customTime& other ) const
 	return (false);
 }
 
-bool	customTime::operator >( const customTime& other ) const
+bool	CustomTime::operator >( const CustomTime& other ) const
 {
 	if (operator==(other) == false && operator <(other) == false)
 	 	return (true);
 	return (false);
 }
 
-bool	customTime::operator>=( const customTime& other ) const
+bool	CustomTime::operator>=( const CustomTime& other ) const
 {
 	if (operator==(other) == true || operator >(other) == true)
 	 	return (true);
 	return (false);
 }
 
-bool	customTime::operator<=( const customTime& other ) const
+bool	CustomTime::operator<=( const CustomTime& other ) const
 {
 	if (operator==(other) == true || operator <(other) == true)
 	 	return (true);
 	return (false);
 }
 
-const customTime&	customTime::operator--( void )
+const CustomTime&	CustomTime::operator--( void )
 {
 	if (this->time.tm_mday > 1)
 	{
@@ -89,7 +89,7 @@ const customTime&	customTime::operator--( void )
 	return (*this);
 }
 
-struct tm& customTime::getTime( void )
+struct tm& CustomTime::getTime( void )
 {
 	return (this->time);
 }
@@ -179,9 +179,9 @@ bool	parseLine( std::string& line, data& dataBase )
 	lineExchangeRate = line.substr(indexComma + 1);
 	if (parseLineExchangeRate(lineExchangeRate, exchangeRate) == false)
 		return (false);
-	if (dataBase.count(customTime(time)) != 0)
+	if (dataBase.count(CustomTime(time)) != 0)
 		return (false);
-	dataBase[customTime(time)] = exchangeRate;
+	dataBase[CustomTime(time)] = exchangeRate;
 	return (true);
 }
 
@@ -243,7 +243,7 @@ bool	parseLineValue( std::string& lineValue, double& value )
 	return (false);
 }
 
-double	getResult( customTime time, double& value, data& dataBase )
+double	getResult( CustomTime time, double& value, data& dataBase )
 {	
 	while (time >= dataBase.begin()->first)
 	{
@@ -282,7 +282,7 @@ void	processLine( std::string& line, data& dataBase )
 	if (parseLineValue(lineValue, value) == false)
 		return ;
 	std::cout << lineTime << " => " << lineValue << " = ";
-	std::cout << getResult(customTime(time), value, dataBase);
+	std::cout << getResult(CustomTime(time), value, dataBase);
 	std::cout << std::endl;
 }
 

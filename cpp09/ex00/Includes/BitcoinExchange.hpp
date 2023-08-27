@@ -18,7 +18,7 @@
 #define	SEPTEMBER	8
 #define NOVEMBER	10
 
-class	customTime {
+class	CustomTime {
 
 private:
 
@@ -26,24 +26,24 @@ private:
 
 public:
 
-	customTime( void );
-	customTime( struct tm& time );
-	customTime( const customTime& other );
-	~customTime( void );
-	customTime& operator=( const customTime& other );
+	CustomTime( void );
+	CustomTime( struct tm& time );
+	CustomTime( const CustomTime& other );
+	~CustomTime( void );
+	CustomTime& operator=( const CustomTime& other );
 
-	bool	operator==( const customTime& other ) const;
-	bool	operator >( const customTime& other ) const;
-	bool	operator>=( const customTime& other ) const;
-	bool	operator <( const customTime& other ) const;
-	bool	operator<=( const customTime& other ) const;
+	bool	operator==( const CustomTime& other ) const;
+	bool	operator >( const CustomTime& other ) const;
+	bool	operator>=( const CustomTime& other ) const;
+	bool	operator <( const CustomTime& other ) const;
+	bool	operator<=( const CustomTime& other ) const;
 
-	const customTime&	operator--( void );
+	const CustomTime&	operator--( void );
 
 	struct tm& getTime( void );
 };
 
-typedef std::map<customTime, double>	data;
+typedef std::map<CustomTime, double>	data;
 
 bool	extractData( data& dataBase, const char* nameFile );
 bool	processInputFile( const char* nameFile, data& dataBase );
