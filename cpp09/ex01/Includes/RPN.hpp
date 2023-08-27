@@ -15,6 +15,7 @@
 #define ERREND 			"Error: at the end of the program there should be exactly one element left on the stack.\n"
 
 int		printErrMsg( const char* msg );
+bool	isOperator( char* s );
 int		operation( char c, std::stack<long>& stack );
 
 #endif

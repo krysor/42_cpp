@@ -11,8 +11,7 @@ int	main(int argc, char *argv[])
 	{
 		if (*argv[1] == ' ')
 			argv[1]++;
-		else if (*argv[1] == '+' || *argv[1] == '-'
-			  || *argv[1] == '*' || *argv[1] == '/')
+		else if (isOperator(argv[1]) == true)
 		{
 			if (operation(*argv[1], stack) == FAILED)
 				return (EXIT_FAILURE);

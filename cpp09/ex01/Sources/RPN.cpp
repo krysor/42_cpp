@@ -6,6 +6,14 @@ int	printErrMsg( const char* msg )
 	return (EXIT_FAILURE);
 }
 
+bool	isOperator( char* s )
+{
+	if ((*s == '+' || *s == '-' || *s == '*' || *s == '/')
+		&& (*(s + 1) == ' ' || *(s + 1) == '\0'))
+		return (true);
+	return (false);
+}
+
 int	operation( char c, std::stack<long>& stack )
 {
 	long	x;
