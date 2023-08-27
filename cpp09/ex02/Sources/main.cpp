@@ -19,7 +19,6 @@ int	main(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-
 /*
 	// struct timeval t1, t2;
 	// double elapsedTime;
@@ -30,4 +29,5 @@ int	main(int argc, char *argv[])
 
 	// elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000.0;      // sec to ms
     // elapsedTime += (t2.tv_usec - t1.tv_usec);   // us to ms
-    // printf("%f us.\n", elapsedTime);*/
+    // printf("%f us.\n", elapsedTime);
+*/
