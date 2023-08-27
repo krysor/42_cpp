@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <sys/time.h>
 
 #define ERRARGC		"Error: provide at least 2 arguments\n"
 #define ERRSORTED	"Error: the arguments are already sorted\n"
