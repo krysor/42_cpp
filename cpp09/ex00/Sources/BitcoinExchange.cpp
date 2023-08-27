@@ -68,13 +68,13 @@ bool	parseTime( struct tm* time )
 
 	day = time->tm_mday;
 	month = time->tm_mon;
-	year = time->tm_year + 1900;
+	year = time->tm_year;
 	if (day > 30 && (month == APRIL || month == JUNE
 		|| month == SEPTEMBER || month == NOVEMBER))
 		return (false);
 	if (month == FEBRUARY)
 	{
-		if (day == 29 && isLeapYear(year))
+		if (day == 29 && isLeapYear(year + 1900))
 			return (true);
 		if (day > 28)
 			return (false);
@@ -89,6 +89,9 @@ bool	parseLineTime( std::string& lineTime, struct tm* time )
 
 	substr = lineTime.c_str();	
 	ptr = strptime(substr, "%Y-%m-%d", time);
+	
+	std::cout << time->tm_mday << std::endl;
+	
 	if (ptr == NULL)
 		return (false);
 	if (*ptr == '\0' && parseTime(time) == true)
@@ -119,14 +122,16 @@ bool	parseLineExchangeRate( std::string& lineExchangeRate,
 	return (false);
 }
 
-bool	parseLine( std::string& line, dB& dataBase )
+bool	parseLine( std::string& line, data& dataBase )
 {
 	size_t		indexComma;
 	std::string	lineTime, lineExchangeRate;
 	struct tm	time;
 	double		exchangeRate;
 	
-	indexComma = line.find(",", 0);
+	if (line == FIRSTLINEDATABASE)
+		return (true);
+	indexComma = line.find(",", 0);//need to add protection here?
 	lineTime = line.substr(0, indexComma);
 	if (parseLineTime(lineTime, &time) == false)
 		return (false);
@@ -139,25 +144,23 @@ bool	parseLine( std::string& line, dB& dataBase )
 	return (true);
 }
 
-bool	extractDataBase( dB& dataBase )
+bool	extractData( data& dataBase, const char* nameFile )
 {
 	std::ifstream	streamDataBase;
 	std::string		line;
 	
-	streamDataBase.open(NAMEDATABASE, std::ios::in);
+	streamDataBase.open(nameFile, std::ios::in);
 	if (streamDataBase == NULL)
 	{
 		std::cout << "Error: could not open "
-				  << NAMEDATABASE << " file.\n";
+				  << nameFile << " file.\n";
 		return (false);
 	}
 	while (std::getline(streamDataBase, line))
 	{
-		if (line == FIRSTLINEDATABASE)
-			continue ;
 		if (parseLine(line, dataBase) == false)
 		{
-			std::cout << "Error: " << NAMEDATABASE
+			std::cout << "Error: " << nameFile
 					  << " file contains illegal line(s).\n";
 			streamDataBase.close();
 			return (false);

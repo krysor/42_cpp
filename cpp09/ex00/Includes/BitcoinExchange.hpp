@@ -9,6 +9,7 @@
 
 #define	NAMEDATABASE		"data.csv"
 #define	FIRSTLINEDATABASE	"date,exchange_rate"
+#define	FIRSTLINEINPUTFILE	"date | value"
 
 #define	FEBRUARY	1
 #define APRIL		3
@@ -35,8 +36,8 @@ public:
 	bool	operator <(const customTime& other) const;
 };
 
-typedef std::map<customTime, double>	dB;
+typedef std::map<customTime, double>	data;
 
-bool	extractDataBase( dB& dataBase );
+bool	extractData( data& dataBase, const char* nameFile );
 
 #endif
