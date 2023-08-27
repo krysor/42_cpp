@@ -213,7 +213,7 @@ bool	extractData( data& dataBase, const char* nameFile )
 
 bool	parseValue( double& value )
 {
-	if (value <= 0)
+	if (value < 0)
 	{
 		std::cout << "Error: not a positive number." << std::endl;
 		return (false);
@@ -243,14 +243,13 @@ bool	parseLineValue( std::string& lineValue, double& value )
 	return (false);
 }
 
-double	calculateResult( customTime time, double& value, data& dataBase )
-{
-	if (dataBase.count(time) == 1)
-		return (value * dataBase[time]);	
+double	getResult( customTime time, double& value, data& dataBase )
+{	
 	while (time >= dataBase.begin()->first)
 	{
-		while (parseTime(&time.getTime()) == false)
+		while (parseTime(&time.getTime()) == false) {
 			--time;
+		}
 		if (dataBase.count(time) == 1)
 			return (value * dataBase[time]);	
 		--time;
@@ -283,7 +282,7 @@ void	processLine( std::string& line, data& dataBase )
 	if (parseLineValue(lineValue, value) == false)
 		return ;
 	std::cout << lineTime << " => " << lineValue << " = ";
-	std::cout << calculateResult(customTime(time), value, dataBase);
+	std::cout << getResult(customTime(time), value, dataBase);
 	std::cout << std::endl;
 }
 
