@@ -16,7 +16,26 @@
 #define	SEPTEMBER	8
 #define NOVEMBER	10
 
-typedef std::map<std::string, double>	dB;
+class	customTime {
+
+private:
+
+	struct tm	time;
+
+public:
+
+	customTime( void );
+	customTime( struct tm& time );
+	customTime( const customTime& other );
+	~customTime( void );
+	customTime& operator=( const customTime& other );
+
+	bool	operator==( const customTime& other ) const;
+	bool	operator >(const customTime& other) const;
+	bool	operator <(const customTime& other) const;
+};
+
+typedef std::map<customTime, double>	dB;
 
 bool	extractDataBase( dB& dataBase );
 

@@ -1,5 +1,57 @@
 #include "BitcoinExchange.hpp"
 
+customTime::customTime( void ) {}
+
+customTime::customTime( struct tm& time )
+{
+	this->time.tm_mday = time.tm_mday;
+	this->time.tm_mon = time.tm_mon;
+	this->time.tm_year = time.tm_year;
+}
+
+customTime::customTime( const customTime& other  )
+{
+	operator=(other);
+}
+
+customTime::~customTime( void ) {}
+
+customTime& customTime::operator=( const customTime& other )
+{
+	this->time.tm_mday = other.time.tm_mday;
+	this->time.tm_mon = other.time.tm_mon;
+	this->time.tm_year = other.time.tm_year;
+	return (*this);
+}
+
+bool	customTime::operator==( const customTime& other ) const
+{
+	if (this->time.tm_mday == other.time.tm_mday
+	 && this->time.tm_mon == other.time.tm_mon
+	 && this->time.tm_year == other.time.tm_year)
+	 	return (true);
+	return (false);
+}
+
+bool	customTime::operator <( const customTime& other ) const
+{
+	if (this->time.tm_year < other.time.tm_year
+	 || (this->time.tm_year == other.time.tm_year
+	  && this->time.tm_mon < other.time.tm_mon)
+	 || (this->time.tm_year == other.time.tm_year
+	  && this->time.tm_mon == other.time.tm_mon
+	  && this->time.tm_mday < other.time.tm_mday))
+	 	return (true);
+	return (false);
+}
+
+bool	customTime::operator >( const customTime& other ) const
+{
+	if (operator==(other) == false && operator <(other) == false)
+	 	return (true);
+	return (false);
+}
+
 bool isLeapYear ( int year )
 {
     if (year % 400 == 0 || 
@@ -48,7 +100,7 @@ bool	parseExchangeRate( double& exchangeRate )
 {
 	if (exchangeRate != exchangeRate)
 		return (false);
-	if (exchangeRate == +inf)
+	if (exchangeRate == +INFINITY)
 		return (false);
 	if (exchangeRate < 0)
 		return (false);
@@ -56,11 +108,12 @@ bool	parseExchangeRate( double& exchangeRate )
 }
 
 bool	parseLineExchangeRate( std::string& lineExchangeRate,
-							   double& exchangeRate )
-{
-	char		*str_end;
+							   double& exchangeRate ) {
+	const char*	str;
+	char*		str_end;
 
-	exchangeRate = std::strtod(lineExchangeRate, &str_end);
+	str = lineExchangeRate.c_str();
+	exchangeRate = std::strtod(str, &str_end);
 	if (*str_end == '\0' && parseExchangeRate(exchangeRate) == true)
 		return (true);
 	return (false);
@@ -68,18 +121,21 @@ bool	parseLineExchangeRate( std::string& lineExchangeRate,
 
 bool	parseLine( std::string& line, dB& dataBase )
 {
+	size_t		indexComma;
+	std::string	lineTime, lineExchangeRate;
 	struct tm	time;
 	double		exchangeRate;
-	size_t		indexComma;
-	std::string	lineTime;
 	
 	indexComma = line.find(",", 0);
 	lineTime = line.substr(0, indexComma);
 	if (parseLineTime(lineTime, &time) == false)
 		return (false);
-
-	(void)dataBase;
-	
+	lineExchangeRate = line.substr(indexComma + 1);
+	if (parseLineExchangeRate(lineExchangeRate, exchangeRate) == false)
+		return (false);
+	if (dataBase.count(customTime(time)) != 0)
+		return (false);
+	dataBase[customTime(time)] = exchangeRate;
 	return (true);
 }
 
