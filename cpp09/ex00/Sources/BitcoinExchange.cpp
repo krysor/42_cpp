@@ -89,9 +89,6 @@ bool	parseLineTime( std::string& lineTime, struct tm* time )
 
 	substr = lineTime.c_str();	
 	ptr = strptime(substr, "%Y-%m-%d", time);
-	
-	std::cout << time->tm_mday << std::endl;
-	
 	if (ptr == NULL)
 		return (false);
 	if (*ptr == '\0' && parseTime(time) == true)
@@ -131,7 +128,9 @@ bool	parseLine( std::string& line, data& dataBase )
 	
 	if (line == FIRSTLINEDATABASE)
 		return (true);
-	indexComma = line.find(",", 0);//need to add protection here?
+	indexComma = line.find(",", 0);
+	if (indexComma == std::string::npos)
+		return (false);
 	lineTime = line.substr(0, indexComma);
 	if (parseLineTime(lineTime, &time) == false)
 		return (false);
@@ -167,5 +166,83 @@ bool	extractData( data& dataBase, const char* nameFile )
 		}
 	}
 	streamDataBase.close();
+	return (true);
+}
+
+bool	parseValue( long& value )
+{
+	if (value <= 0)
+	{
+		std::cout << "Error: not a positive number." << std::endl;
+		return (false);
+	}
+	if (value > 1000)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+bool	parseLineValue( std::string& lineValue, long& value )
+{
+	const char*	str;
+	char*		str_end;
+
+	str = lineValue.c_str();
+	value = std::strtol(str, &str_end, 10);
+	if (*str_end != '\0')
+	{
+		std::cout << "Error: bad input => " << lineValue << std::endl;
+		return (false);
+	}
+	if (*str_end == '\0' && parseValue(value) == true)
+		return (true);
+	return (false);
+}
+
+void	processLine( std::string& line, data& dataBase )
+{
+	size_t		indexSeparator;
+	std::string	lineTime, lineValue;
+	struct tm	time;
+	long		value;
+	
+	if (line == FIRSTLINEINPUTFILE)
+		return ;
+	indexSeparator = line.find(SEPARATORINPUTFILE, 0);
+	if (indexSeparator == std::string::npos)
+	{
+		std::cout << "Error: bad input => " << line << std::endl;
+		return ;
+	}
+	lineTime = line.substr(0, indexSeparator);
+	if (parseLineTime(lineTime, &time) == false)
+	{
+		std::cout << "Error: bad date => " << lineTime << std::endl;
+		return ;
+	}
+	lineValue = line.substr(indexSeparator + 1);
+	if (parseLineValue(lineValue, value) == false)
+		return ;
+	//make the calculation
+	(void)dataBase;
+}
+
+bool	processInputFile( const char* nameFile, data& dataBase )
+{
+	std::ifstream	streamInputFile;
+	std::string		line;
+	
+	streamInputFile.open(nameFile, std::ios::in);
+	if (streamInputFile == NULL)
+	{
+		std::cout << "Error: could not open "
+				  << nameFile << " file.\n";
+		return (false);
+	}
+	while (std::getline(streamInputFile, line))
+		processLine(line, dataBase);
+	streamInputFile.close();
 	return (true);
 }
