@@ -1,15 +1,18 @@
 #include "RPN.hpp"
 
-bool	calculate( char c, std::stack<long>& stack )
+int	printErrMsg( const char* msg )
+{
+	std::cerr << msg;
+	return (EXIT_FAILURE);
+}
+
+int	operation( char c, std::stack<long>& stack )
 {
 	long	x;
 	long	y;
 
 	if (stack.size() < 2)
-	{
-		std::cout << ERRSTACKSIZE;
-		return (false);
-	}
+		return (printErrMsg(ERRSTACKSIZE));
 	y = stack.top();
 	stack.pop();
 	x = stack.top();
@@ -23,11 +26,8 @@ bool	calculate( char c, std::stack<long>& stack )
 	else if (c == '/')
 	{
 		if (y == 0)
-		{
-			std::cout << ERRZERO;
-			return (false);
-		}
+			return (printErrMsg(ERRZERO));
 		stack.push(x / y);
 	}
-	return (true);
+	return (EXIT_SUCCESS);
 }
