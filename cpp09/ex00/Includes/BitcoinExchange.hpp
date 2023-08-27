@@ -33,8 +33,14 @@ public:
 	customTime& operator=( const customTime& other );
 
 	bool	operator==( const customTime& other ) const;
-	bool	operator >(const customTime& other) const;
-	bool	operator <(const customTime& other) const;
+	bool	operator >( const customTime& other ) const;
+	bool	operator>=( const customTime& other ) const;
+	bool	operator <( const customTime& other ) const;
+	bool	operator<=( const customTime& other ) const;
+
+	const customTime&	operator--( void );
+
+	struct tm& getTime( void );
 };
 
 typedef std::map<customTime, double>	data;

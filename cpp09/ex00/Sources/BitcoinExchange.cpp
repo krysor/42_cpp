@@ -52,6 +52,48 @@ bool	customTime::operator >( const customTime& other ) const
 	return (false);
 }
 
+bool	customTime::operator>=( const customTime& other ) const
+{
+	if (operator==(other) == true || operator >(other) == true)
+	 	return (true);
+	return (false);
+}
+
+bool	customTime::operator<=( const customTime& other ) const
+{
+	if (operator==(other) == true || operator <(other) == true)
+	 	return (true);
+	return (false);
+}
+
+const customTime&	customTime::operator--( void )
+{
+	if (this->time.tm_mday > 1)
+	{
+		this->time.tm_mday--;
+		return (*this);
+	}
+	if (this->time.tm_mon > 0)
+	{
+		this->time.tm_mday = 31;
+		this->time.tm_mon--;
+		return (*this);
+	}
+	if (this->time.tm_year > 1)
+	{
+		this->time.tm_year--;
+		this->time.tm_mon = 11;
+		this->time.tm_mday = 31;
+		return (*this);
+	}
+	return (*this);
+}
+
+struct tm& customTime::getTime( void )
+{
+	return (this->time);
+}
+
 bool isLeapYear ( int year )
 {
     if (year % 400 == 0 || 
@@ -169,7 +211,7 @@ bool	extractData( data& dataBase, const char* nameFile )
 	return (true);
 }
 
-bool	parseValue( long& value )
+bool	parseValue( double& value )
 {
 	if (value <= 0)
 	{
@@ -184,13 +226,13 @@ bool	parseValue( long& value )
 	return (true);
 }
 
-bool	parseLineValue( std::string& lineValue, long& value )
+bool	parseLineValue( std::string& lineValue, double& value )
 {
 	const char*	str;
 	char*		str_end;
 
 	str = lineValue.c_str();
-	value = std::strtol(str, &str_end, 10);
+	value = std::strtod(str, &str_end);
 	if (*str_end != '\0')
 	{
 		std::cout << "Error: bad input => " << lineValue << std::endl;
@@ -201,12 +243,27 @@ bool	parseLineValue( std::string& lineValue, long& value )
 	return (false);
 }
 
+double	calculateResult( customTime time, double& value, data& dataBase )
+{
+	if (dataBase.count(time) == 1)
+		return (value * dataBase[time]);	
+	while (time >= dataBase.begin()->first)
+	{
+		while (parseTime(&time.getTime()) == false)
+			--time;
+		if (dataBase.count(time) == 1)
+			return (value * dataBase[time]);	
+		--time;
+	}
+	return (0);
+}
+
 void	processLine( std::string& line, data& dataBase )
 {
 	size_t		indexSeparator;
 	std::string	lineTime, lineValue;
 	struct tm	time;
-	long		value;
+	double		value;
 	
 	if (line == FIRSTLINEINPUTFILE)
 		return ;
@@ -222,11 +279,12 @@ void	processLine( std::string& line, data& dataBase )
 		std::cout << "Error: bad date => " << lineTime << std::endl;
 		return ;
 	}
-	lineValue = line.substr(indexSeparator + 1);
+	lineValue = line.substr(indexSeparator + strlen(SEPARATORINPUTFILE));
 	if (parseLineValue(lineValue, value) == false)
 		return ;
-	//make the calculation
-	(void)dataBase;
+	std::cout << lineTime << " => " << lineValue << " = ";
+	std::cout << calculateResult(customTime(time), value, dataBase);
+	std::cout << std::endl;
 }
 
 bool	processInputFile( const char* nameFile, data& dataBase )
