@@ -10,3 +10,19 @@ void	printInt( long i )
 {
 	std::cout << i << " ";
 }
+
+void	printResult( size_t			size,
+					 const char*	name, 
+					 double 		time )
+{
+	std::cout << "Time to process a range of "
+			  << size
+			  << " elements with std::"
+			  << std::setw(6)
+			  << std::left
+			  << name
+			  << " : "
+			  << time
+			  << " us"
+			  << std::endl;
+}

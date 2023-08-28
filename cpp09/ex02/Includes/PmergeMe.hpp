@@ -19,19 +19,26 @@
 
 #define	BASE		10
 
-int		printMsg( const char* msg, int exitCode );
+int		printMsg( const char*	msg,
+				  int 			exitCode );
 void	printInt( long i );
+void	printResult( size_t 		size,
+					 const char*	name,
+					 double 		time );
 
 template <typename T>
 void	printContainer( T& container, const char* msg )
 {
-	std::cout << std::setw(6) << std::left << msg << ":  ";
+	std::cout << std::setw(6)
+			  << std::left
+			  << msg
+			  << ":  ";
 	for_each(container.begin(), container.end(), &printInt);
 	std::cout << std::endl;
 }
 
 template <typename T>
-bool	fillContainer( T& container, char *argv[] )
+bool	fillContainer( T& container, char*	argv[] )
 {
 	long	l;
 	char*	ptr;
@@ -44,6 +51,24 @@ bool	fillContainer( T& container, char *argv[] )
 		container.push_back(l);
 	}
 	return (SUCCESS);
+}
+
+template <typename T>
+double	timeContainer(T& container, char *argv[])
+{
+	struct timeval t1, t2;
+	double elapsedTime;
+	
+	gettimeofday(&t1, NULL);
+
+	(void)container;
+	(void)argv;
+	for (unsigned i = 0; i < 10000; i++) {;}
+
+	gettimeofday(&t2, NULL);
+	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
+    elapsedTime += (t2.tv_usec - t1.tv_usec);
+	return (elapsedTime);
 }
 
 // template <typename T>

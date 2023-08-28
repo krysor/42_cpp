@@ -1,10 +1,12 @@
 #include "PmergeMe.hpp"
 
-
-
 int	main(int argc, char *argv[])
 {
-	std::deque<long>	test;
+	std::deque<long>			test;
+	std::vector<unsigned long>	v;
+	std::deque<unsigned long>	d;
+	size_t						size;
+	double						time;
 	
 	if (argc < 3)
 		return (printMsg(ERRARGC, EXIT_FAILURE));
@@ -13,21 +15,10 @@ int	main(int argc, char *argv[])
 	printContainer(test, "Before");
 	sort(test.begin(), test.end());
 	printContainer(test, "After");
-	
-	// if (isSorted(v))
-	// 	return (printMsg(ERRSORTED, EXIT_FAILURE));
+	size = test.size();
+	time = timeContainer(v, argv);
+	printResult(size, "vector", time);
+	time = timeContainer(d, argv);
+	printResult(size, "deque", time);
 	return (EXIT_SUCCESS);
 }
-
-/*
-	// struct timeval t1, t2;
-	// double elapsedTime;
-	
-	// gettimeofday(&t1, NULL);
-	// for (unsigned i = 0; i < 10000; i++) {;}
-	// gettimeofday(&t2, NULL);
-
-	// elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000.0;      // sec to ms
-    // elapsedTime += (t2.tv_usec - t1.tv_usec);   // us to ms
-    // printf("%f us.\n", elapsedTime);
-*/
