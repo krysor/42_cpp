@@ -20,6 +20,13 @@
 #define	BASE		10
 #define NOT			-1
 
+struct Data {
+  
+  long	main;
+  long	side;
+
+};
+
 int		printMsg( const char*	msg,
 				  int 			exitCode );
 void	printInt( long i );
@@ -100,8 +107,8 @@ void	insertSingle( T& container, T& other, long single )
 		other.insert(other.begin(), single);
 	while (other.size() > 0)
 	{
-		container.insert(container.begin(), *other.begin());
-		other.erase(other.begin());
+		container.insert(container.begin(), *(other.end() - 1));
+		other.erase(other.end() - 1);
 	}
 }
 
@@ -136,10 +143,12 @@ T	sortContainer( T& container )
 		else
 			insertSingle(container, other, single);
 		return (container);
-	}	
+	}
 	else
 		container = sortContainer(container);
 	//imagine container sorted now
+
+
 
 	std::cout << "after if" << std::endl;
 	for_each(container.begin(), container.end(), &printInt);
