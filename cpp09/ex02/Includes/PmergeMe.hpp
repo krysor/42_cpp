@@ -5,14 +5,13 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <sys/time.h>
 
 #include <vector>
 #include <deque>
 
-#include <sys/time.h>
-
-#define	SUCCESS	true
-#define	FAILURE	false
+#define	SUCCESS		true
+#define	FAILURE		false
 
 #define ERRARGC		"Error: provide at least 2 arguments\n"
 #define ERRSORTED	"Error: the arguments are already sorted\n"
@@ -33,12 +32,14 @@ void	printContainer( T& container, const char* msg )
 			  << std::left
 			  << msg
 			  << ":  ";
-	for_each(container.begin(), container.end(), &printInt);
+	for_each(container.begin(),
+			 container.end(),
+			 &printInt);
 	std::cout << std::endl;
 }
 
 template <typename T>
-bool	fillContainer( T& container, char*	argv[] )
+bool	fillContainer( T& container, char *argv[] )
 {
 	long	l;
 	char*	ptr;
@@ -61,9 +62,7 @@ double	timeContainer(T& container, char *argv[])
 	
 	gettimeofday(&t1, NULL);
 
-	(void)container;
-	(void)argv;
-	for (unsigned i = 0; i < 10000; i++) {;}
+	fillContainer(container, argv);
 
 	gettimeofday(&t2, NULL);
 	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;

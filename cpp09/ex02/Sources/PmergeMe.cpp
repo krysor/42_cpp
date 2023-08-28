@@ -18,8 +18,7 @@ void	printResult( size_t			size,
 	std::cout << "Time to process a range of "
 			  << size
 			  << " elements with std::"
-			  << std::setw(6)
-			  << std::left
+			  << std::setw(6) << std::left
 			  << name
 			  << " : "
 			  << time
