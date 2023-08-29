@@ -1,97 +1,97 @@
 #include "BitcoinExchange.hpp"
 
-CustomTime::CustomTime( void ) {}
+Date::Date( void ) {}
 
-CustomTime::CustomTime( struct tm& time )
+Date::Date( struct tm& date )
 {
-	this->time.tm_mday = time.tm_mday;
-	this->time.tm_mon = time.tm_mon;
-	this->time.tm_year = time.tm_year;
+	this->date.tm_mday = date.tm_mday;
+	this->date.tm_mon = date.tm_mon;
+	this->date.tm_year = date.tm_year;
 }
 
-CustomTime::CustomTime( const CustomTime& other  )
+Date::Date( const Date& other  )
 {
 	operator=(other);
 }
 
-CustomTime::~CustomTime( void ) {}
+Date::~Date( void ) {}
 
-CustomTime& CustomTime::operator=( const CustomTime& other )
+Date& Date::operator=( const Date& other )
 {
-	this->time.tm_mday = other.time.tm_mday;
-	this->time.tm_mon = other.time.tm_mon;
-	this->time.tm_year = other.time.tm_year;
+	this->date.tm_mday = other.date.tm_mday;
+	this->date.tm_mon = other.date.tm_mon;
+	this->date.tm_year = other.date.tm_year;
 	return (*this);
 }
 
-bool	CustomTime::operator==( const CustomTime& other ) const
+bool	Date::operator==( const Date& other ) const
 {
-	if (this->time.tm_mday == other.time.tm_mday
-	 && this->time.tm_mon == other.time.tm_mon
-	 && this->time.tm_year == other.time.tm_year)
+	if (this->date.tm_mday == other.date.tm_mday
+	 && this->date.tm_mon == other.date.tm_mon
+	 && this->date.tm_year == other.date.tm_year)
 	 	return (true);
 	return (false);
 }
 
-bool	CustomTime::operator <( const CustomTime& other ) const
+bool	Date::operator <( const Date& other ) const
 {
-	if (this->time.tm_year < other.time.tm_year
-	 || (this->time.tm_year == other.time.tm_year
-	  && this->time.tm_mon < other.time.tm_mon)
-	 || (this->time.tm_year == other.time.tm_year
-	  && this->time.tm_mon == other.time.tm_mon
-	  && this->time.tm_mday < other.time.tm_mday))
+	if (this->date.tm_year < other.date.tm_year
+	 || (this->date.tm_year == other.date.tm_year
+	  && this->date.tm_mon < other.date.tm_mon)
+	 || (this->date.tm_year == other.date.tm_year
+	  && this->date.tm_mon == other.date.tm_mon
+	  && this->date.tm_mday < other.date.tm_mday))
 	 	return (true);
 	return (false);
 }
 
-bool	CustomTime::operator >( const CustomTime& other ) const
+bool	Date::operator >( const Date& other ) const
 {
 	if (operator==(other) == false && operator <(other) == false)
 	 	return (true);
 	return (false);
 }
 
-bool	CustomTime::operator>=( const CustomTime& other ) const
+bool	Date::operator>=( const Date& other ) const
 {
 	if (operator==(other) == true || operator >(other) == true)
 	 	return (true);
 	return (false);
 }
 
-bool	CustomTime::operator<=( const CustomTime& other ) const
+bool	Date::operator<=( const Date& other ) const
 {
 	if (operator==(other) == true || operator <(other) == true)
 	 	return (true);
 	return (false);
 }
 
-const CustomTime&	CustomTime::operator--( void )
+const Date&	Date::operator--( void )
 {
-	if (this->time.tm_mday > 1)
+	if (this->date.tm_mday > 1)
 	{
-		this->time.tm_mday--;
+		this->date.tm_mday--;
 		return (*this);
 	}
-	if (this->time.tm_mon > 0)
+	if (this->date.tm_mon > 0)
 	{
-		this->time.tm_mday = 31;
-		this->time.tm_mon--;
+		this->date.tm_mday = 31;
+		this->date.tm_mon--;
 		return (*this);
 	}
-	if (this->time.tm_year > 1)
+	if (this->date.tm_year > 1)
 	{
-		this->time.tm_year--;
-		this->time.tm_mon = 11;
-		this->time.tm_mday = 31;
+		this->date.tm_year--;
+		this->date.tm_mon = 11;
+		this->date.tm_mday = 31;
 		return (*this);
 	}
 	return (*this);
 }
 
-struct tm& CustomTime::getTime( void )
+struct tm& Date::getDate( void )
 {
-	return (this->time);
+	return (this->date);
 }
 
 bool isLeapYear ( int year )
@@ -102,15 +102,15 @@ bool isLeapYear ( int year )
     return (false);
 }
 
-bool	parseTime( struct tm* time )
+bool	parseDate( struct tm* date )
 {
 	int	day;
 	int	month;
 	int	year;
 
-	day = time->tm_mday;
-	month = time->tm_mon;
-	year = time->tm_year;
+	day = date->tm_mday;
+	month = date->tm_mon;
+	year = date->tm_year;
 	if (day > 30 && (month == APRIL || month == JUNE
 		|| month == SEPTEMBER || month == NOVEMBER))
 		return (false);
@@ -124,16 +124,16 @@ bool	parseTime( struct tm* time )
 	return (true);
 }
 
-bool	parseLineTime( std::string& lineTime, struct tm* time )
+bool	parseLineDate( std::string& lineDate, struct tm* date )
 {
 	char*		ptr;
 	const char*	substr;
 
-	substr = lineTime.c_str();	
-	ptr = strptime(substr, "%Y-%m-%d", time);
+	substr = lineDate.c_str();	
+	ptr = strptime(substr, "%Y-%m-%d", date);
 	if (ptr == NULL)
 		return (false);
-	if (*ptr == '\0' && parseTime(time) == true)
+	if (*ptr == '\0' && parseDate(date) == true)
 		return (true);
 	return (false);
 }
@@ -164,8 +164,8 @@ bool	parseLineExchangeRate( std::string& lineExchangeRate,
 bool	parseLine( std::string& line, data& dataBase )
 {
 	size_t		indexComma;
-	std::string	lineTime, lineExchangeRate;
-	struct tm	time;
+	std::string	lineDate, lineExchangeRate;
+	struct tm	date;
 	double		exchangeRate;
 	
 	if (line == FIRSTLINEDATABASE)
@@ -173,15 +173,15 @@ bool	parseLine( std::string& line, data& dataBase )
 	indexComma = line.find(",", 0);
 	if (indexComma == std::string::npos)
 		return (false);
-	lineTime = line.substr(0, indexComma);
-	if (parseLineTime(lineTime, &time) == false)
+	lineDate = line.substr(0, indexComma);
+	if (parseLineDate(lineDate, &date) == false)
 		return (false);
 	lineExchangeRate = line.substr(indexComma + 1);
 	if (parseLineExchangeRate(lineExchangeRate, exchangeRate) == false)
 		return (false);
-	if (dataBase.count(CustomTime(time)) != 0)
+	if (dataBase.count(Date(date)) != 0)
 		return (false);
-	dataBase[CustomTime(time)] = exchangeRate;
+	dataBase[Date(date)] = exchangeRate;
 	return (true);
 }
 
@@ -243,26 +243,26 @@ bool	parseLineValue( std::string& lineValue, double& value )
 	return (false);
 }
 
-double	getResult( CustomTime time, double& value, data& dataBase )
+double	getResult( Date date, double& value, data& dataBase )
 {	
-	while (time >= dataBase.begin()->first)
+	while (date >= dataBase.begin()->first)
 	{
-		while (parseTime(&time.getTime()) == false) {
-			--time;
+		while (parseDate(&date.getDate()) == false) {
+			--date;
 		}
-		if (dataBase.count(time) == 1)
-			return (value * dataBase[time]);	
-		--time;
+		if (dataBase.count(date) == 1)
+			return (value * dataBase[date]);	
+		--date;
 	}
-	return (0);
+	return (-1);
 }
 
 void	processLine( std::string& line, data& dataBase )
 {
 	size_t		indexSeparator;
-	std::string	lineTime, lineValue;
-	struct tm	time;
-	double		value;
+	std::string	lineDate, lineValue;
+	struct tm	date;
+	double		value, result;
 	
 	if (line == FIRSTLINEINPUTFILE)
 		return ;
@@ -272,18 +272,28 @@ void	processLine( std::string& line, data& dataBase )
 		std::cout << "Error: bad input => " << line << std::endl;
 		return ;
 	}
-	lineTime = line.substr(0, indexSeparator);
-	if (parseLineTime(lineTime, &time) == false)
+	lineDate = line.substr(0, indexSeparator);
+	if (parseLineDate(lineDate, &date) == false)
 	{
-		std::cout << "Error: bad date => " << lineTime << std::endl;
+		std::cout << "Error: bad date => " << lineDate << std::endl;
 		return ;
 	}
 	lineValue = line.substr(indexSeparator + strlen(SEPARATORINPUTFILE));
 	if (parseLineValue(lineValue, value) == false)
 		return ;
-	std::cout << lineTime << " => " << lineValue << " = ";
-	std::cout << getResult(CustomTime(time), value, dataBase);
-	std::cout << std::endl;
+	result = getResult(Date(date), value, dataBase);
+	if (result < 0)
+	{
+		std::cout << "Error: no date found before the date => " << lineDate << std::endl;
+		return ;
+	}
+	std::cout << lineDate
+			  << " => "
+			  << lineValue
+			  << " = "
+			  << std::setprecision (2) << std::fixed
+			  << result
+			  << std::endl;
 }
 
 bool	processInputFile( const char* nameFile, data& dataBase )
