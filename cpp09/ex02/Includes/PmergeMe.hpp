@@ -126,53 +126,83 @@ void	printNthRow( T& matrix, unsigned long n )
 // }
 
 
-// template <typename T>
-// void	comparePairs( T& container )
-// {
-// 	typename T::iterator	it;
-// 	long					temp;
+template <typename T>
+void	comparePairs( T& container )
+{
+	typename T::iterator	it;
 
-// 	it = container.begin();
-// 	while (it != container.end() && it + 1 != container.end())
+	it = container.begin();
+	while (it != container.end() && (it + 1) != container.end())
+	{
+		if ( *((*it).begin()) > *((*(it + 1)).begin()) )
+		{
+			std::cout << "left" << std::endl;
+
+			if (it != container.end())
+				std::cout << *((*it).begin()) << std::endl;
+			
+			(*it).insert((*it).end(), (*(it + 1)).begin(), (*(it + 1)).end());
+			it = container.erase(it + 1);
+			
+			if (it != container.end())
+				std::cout << *((*it).begin()) << std::endl;
+			//printNthRow(container, 0);
+			//printNthRow(container, 1);
+		}
+		else
+		{
+			std::cout << "right" << std::endl;
+			
+			if (it != container.end())
+				std::cout << *((*it).begin()) << std::endl;
+			
+			(*(it + 1)).insert((*(it + 1)).end(), (*it).begin(), (*it).end());
+			it = container.erase(it) + 1;
+
+			if (it != container.end())
+				std::cout << *((*it).begin()) << std::endl;
+			//printNthRow(container, 0);
+			//printNthRow(container, 1);
+		}
+	}
+}
+
+// template <typename T>
+// void	insertSingle( T& container, T& other, long single )
+// {
+// 	if (single > *container.begin())
+// 		container.push_back(single);
+// 	else if (single  > *other.begin())
+// 		other.push_back(single);
+// 	else
+// 		other.insert(other.begin(), single);
+// 	while (other.size() > 0)
 // 	{
-// 		if ( *((*it).begin()) > *((*(it + 1)).begin()) )
-// 		{
-// 			temp = *((*(it + 1)).begin());
-// 			(*it).push_back(temp); //not enough, have to paste multiple numbers
-// 			it = 
-// 			it = container.erase(it + 1);
-// 		}
-// 		else
-// 		{
-// 			other.push_back(*it);
-// 			it = container.erase(it) + 1;
-// 		}
+// 		container.insert(container.begin(), *(other.end() - 1));
+// 		other.erase(other.end() - 1);
 // 	}
 // }
 
 template <typename T>
-void	insertSingle( T& container, T& other, long single )
-{
-	if (single > *container.begin())
-		container.push_back(single);
-	else if (single  > *other.begin())
-		other.push_back(single);
-	else
-		other.insert(other.begin(), single);
-	while (other.size() > 0)
-	{
-		container.insert(container.begin(), *(other.end() - 1));
-		other.erase(other.end() - 1);
-	}
-}
-
-template <typename T>
 T	mergeInsertion( T& matrix )
 {
-	//long	single = NOT;
+	long	single = NOT;
 	
 	printNthRow(matrix, 0);
-	printContainer(*(matrix.begin()), "test inside");
+	printNthRow(matrix, 1);
+
+	//printContainer(*(matrix.begin()), "test inside");
+
+	if (matrix.size() % 2 == 1)
+	{
+		single = *(*(matrix.end() - 1)).begin();
+		matrix.erase(matrix.end() - 1);
+	}
+
+	comparePairs(matrix);
+
+	printNthRow(matrix, 0);
+	printNthRow(matrix, 1);
 
 	return (matrix);
 	// comparePairs(matrix, other);
