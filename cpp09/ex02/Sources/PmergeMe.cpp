@@ -8,7 +8,8 @@ int	printMsg( const char* msg, int exitCode )
 
 void	printInt( long i )
 {
-	std::cout << i << " ";
+	std::cout << i;
+	std::cout << " ";
 }
 
 void	printResult( size_t			size,
