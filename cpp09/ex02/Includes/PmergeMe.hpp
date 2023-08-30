@@ -27,12 +27,13 @@ struct Data {
 
 };
 
-int		printMsg( const char*	msg,
-				  int 			exitCode );
-void	printInt( long i );
-void	printResult( size_t 		size,
-					 const char*	name,
-					 double 		time );
+int				printMsg( const char*	msg,
+						  int 			exitCode );
+void			printInt( long i );
+void			printResult( size_t 		size,
+					 		 const char*	name,
+					 		 double 		time );
+unsigned long	getGroupSize( unsigned long iGroup );
 
 
 template <typename T>
@@ -125,13 +126,11 @@ void	comparePairs( T& container )
 }
 
 template <typename T>
-void	fillSideChain( T& matrix, T& sideChain )
+void	createSideChain( T& matrix, T& sideChain )
 {
 	unsigned long	l;
 	unsigned long	halfColumnSize;
 
-	if (matrix.front().size() == 1)
-		return ;
 	halfColumnSize = matrix.at(0).size() / 2;
 	l = -1;
 	while (++l < matrix.size())
@@ -145,11 +144,10 @@ void	fillSideChain( T& matrix, T& sideChain )
 }
 
 template <typename T>
-void	binaryInsertion( T& mainChain, T& single )
+void	fillSideChain( T& mainChain, T& sideChain, T& single)
 {
-	T	sideChain(mainChain.size());
-
-	fillSideChain(mainChain, sideChain);
+	if (mainChain.front().size() > 1)
+		createSideChain(mainChain, sideChain);
 	if (sideChain.front().size() > 0)
 	{
 		mainChain.insert(mainChain.begin(), sideChain.front());
@@ -157,8 +155,29 @@ void	binaryInsertion( T& mainChain, T& single )
 	}
 	if (single.front().size() > 0)
 		sideChain.insert(sideChain.end(), single.front());
+}
 
-	//insertion here
+template <typename T>
+void	binaryInsertion( T& mainChain, T& single )
+{
+	T				sideChain(mainChain.size());
+	unsigned long	iGroup;
+	unsigned long	iSideToInsert;
+
+	fillSideChain(mainChain, sideChain, single);
+	iGroup = 0;
+	while (sideChain.size() > 0)
+	{
+		iSideToInsert = getGroupSize(iGroup) - 1;
+		if (sideChain.size() - 1 < iSideToInsert)
+			iSideToInsert = sideChain.size() - 1;
+		while (iSideToInsert >= 0)
+		{
+			//binary search insert
+			iSideToInsert--;
+		}
+		iGroup++;
+	}
 }
 
 /*
@@ -195,7 +214,6 @@ T	mergeInsertion( T& matrix )
 	if (matrix.size() % 2 == 1)
 	{
 		single.front().insert(single.front().end(), matrix.back().begin(), matrix.back().end());
-		//push_back(matrix.back().front());
 		matrix.pop_back();
 	}
 	if (matrix.size() > 2)
