@@ -16,12 +16,16 @@ int	main(int argc, char *argv[])
 	sort(test.begin(), test.end());
 	if (hasDuplicates(test))
 		return (printMsg(ERRDUPL, EXIT_FAILURE));
-	//printContainer(test, "After");
+	printContainer(test, "After");
 	size = test.size();
 	time = timeContainer(v, argv);
-	//printResult(size, "vector", time);
-	//time = timeContainer(d, argv);
-	//printResult(size, "deque", time);
+	assert(v.size() == size);
+	assert(isSorted(v));
+	printResult(size, "vector", time);
+	time = timeContainer(d, argv);
+	printResult(size, "deque", time);
+	assert(d.size() == size);
+	assert(isSorted(d));
 	return (EXIT_SUCCESS);
 }
 

@@ -2,7 +2,6 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -34,7 +33,6 @@ void	printResult( size_t 		size,
 					 const char*	name,
 					 double 		time );
 long	getGroupSize( unsigned long iGroup );
-
 
 template <typename T>
 bool	fillContainer( T& container, char *argv[] )
@@ -158,11 +156,20 @@ void	fillSideChain( T& mainChain, T& sideChain, T& single)
 }
 
 template <typename T>
-long	getIMainToInsert( T& mainChain, long value )
+unsigned long	binarySearch( T& mainChain,
+							  long value,
+							  unsigned long start,
+							  unsigned long end )
 {
-	(void)mainChain;
-	(void)value;
-	return (0);
+	unsigned long	mid;
+
+	if (start >= end)
+		return (start);
+	mid = start + (end - start) / 2;
+	if (value < mainChain.at(mid).front())
+		return (binarySearch(mainChain, value, start, mid));
+	else
+		return (binarySearch(mainChain, value, mid + 1, end));
 }
 
 template <typename T>
@@ -180,32 +187,18 @@ void	binaryInsertion( T& mainChain, T& single )
 			iSide = sideChain.size() - 1;
 		while (iSide >= 0)
 		{
-			iMain = getIMainToInsert(mainChain, sideChain.at(iSide).front());
-			mainChain.insert(mainChain.begin() + iMain, sideChain.at(iSide));
+			iMain = binarySearch(mainChain,
+								 sideChain.at(iSide).front(),
+								 0,
+								 mainChain.size() - 1);
+			mainChain.insert(mainChain.begin() + iMain,
+							 sideChain.at(iSide));
 			sideChain.erase(sideChain.begin() + iSide);
 			iSide--;
 		}
 		iGroup++;
 	}
 }
-
-/*
-	std::cout << "before" << std::endl;
-	std::cout << "main" << std::endl;
-	printNthRow(mainChain, 0);
-	printNthRow(mainChain, 1);
-	std::cout << "side" << std::endl;
-	printNthRow(sideChain, 0);
-	printNthRow(sideChain, 1);
-
-	std::cout << "after" << std::endl;
-	std::cout << "main" << std::endl;
-	printNthRow(mainChain, 0);
-	printNthRow(mainChain, 1);
-	std::cout << "side" << std::endl;
-	printNthRow(sideChain, 0);
-	printNthRow(sideChain, 1);
-*/
 
 template <typename T>
 T	mergeInsertion( T& matrix )
@@ -244,10 +237,21 @@ double	timeContainer( T& matrix, char *argv[] )
 	transpose(matrix);
 	matrix = mergeInsertion(matrix);
 	gettimeofday(&t2, NULL);
-	printNthRow(matrix, 0);
 	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
     elapsedTime += (t2.tv_usec - t1.tv_usec);
 	return (elapsedTime);
+}
+
+template <typename T>
+bool	isSorted( T& matrix )
+{
+	for (typename T::iterator it = matrix.begin();
+		 it + 1 != matrix.end(); it++)
+	{
+		if (*(*it).begin() > *((*(it + 1)).begin()))
+			return (false);
+	}
+	return (true);
 }
 
 #endif
