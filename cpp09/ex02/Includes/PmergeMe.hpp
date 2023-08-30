@@ -27,13 +27,13 @@ struct Data {
 
 };
 
-int				printMsg( const char*	msg,
-						  int 			exitCode );
-void			printInt( long i );
-void			printResult( size_t 		size,
-					 		 const char*	name,
-					 		 double 		time );
-unsigned long	getGroupSize( unsigned long iGroup );
+int		printMsg( const char*	msg,
+				  int 			exitCode );
+void	printInt( long i );
+void	printResult( size_t 		size,
+					 const char*	name,
+					 double 		time );
+long	getGroupSize( unsigned long iGroup );
 
 
 template <typename T>
@@ -158,23 +158,32 @@ void	fillSideChain( T& mainChain, T& sideChain, T& single)
 }
 
 template <typename T>
+long	getIMainToInsert( T& mainChain, long value )
+{
+	(void)mainChain;
+	(void)value;
+	return (0);
+}
+
+template <typename T>
 void	binaryInsertion( T& mainChain, T& single )
 {
-	T				sideChain(mainChain.size());
-	unsigned long	iGroup;
-	unsigned long	iSideToInsert;
+	T		sideChain(mainChain.size());
+	long	iGroup, iSide, iMain;
 
 	fillSideChain(mainChain, sideChain, single);
 	iGroup = 0;
 	while (sideChain.size() > 0)
 	{
-		iSideToInsert = getGroupSize(iGroup) - 1;
-		if (sideChain.size() - 1 < iSideToInsert)
-			iSideToInsert = sideChain.size() - 1;
-		while (iSideToInsert >= 0)
+		iSide = getGroupSize(iGroup) - 1;
+		if (sideChain.size() - 1 < (unsigned long)iSide)
+			iSide = sideChain.size() - 1;
+		while (iSide >= 0)
 		{
-			//binary search insert
-			iSideToInsert--;
+			iMain = getIMainToInsert(mainChain, sideChain.at(iSide).front());
+			mainChain.insert(mainChain.begin() + iMain, sideChain.at(iSide));
+			sideChain.erase(sideChain.begin() + iSide);
+			iSide--;
 		}
 		iGroup++;
 	}
@@ -235,153 +244,10 @@ double	timeContainer( T& matrix, char *argv[] )
 	transpose(matrix);
 	matrix = mergeInsertion(matrix);
 	gettimeofday(&t2, NULL);
+	printNthRow(matrix, 0);
 	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
     elapsedTime += (t2.tv_usec - t1.tv_usec);
 	return (elapsedTime);
 }
 
 #endif
-
-/*
-template <typename T>
-void	printContainer( T& container, const char* msg )
-{
-	std::cout << std::setw(6)
-			  << std::left
-			  << msg
-			  << ":  ";
-	for_each(container.begin(),
-			 container.end(),
-			 &printInt);
-	std::cout << std::endl;
-}
-
-template <typename T>
-bool	fillContainer( T& container, char *argv[] )
-{
-	long	l;
-	char*	ptr;
-	
-	while (*(++argv))
-	{
-		l = strtol(*argv, &ptr, BASE);
-		if (l < 0 || *ptr != '\0')
-			return (FAILURE);
-		container.push_back(l);
-	}
-	return (SUCCESS);
-}
-
-template <typename T>
-bool	containsDuplicates( T& container )
-{
-	for (typename T::iterator it = container.begin();
-		 it + 1 != container.end(); it++)
-	{
-		if (*it == *(it + 1))
-			return (true);
-	}
-	return (false);
-}
-
-template <typename T>
-void	comparePairs( T& container, T& other )
-{
-	typename T::iterator	it;
-
-	it = container.begin();
-	while (it != container.end() && it + 1 != container.end())
-	{
-		if (*it > *(it + 1))
-		{
-			other.push_back(*(it + 1));
-			it = container.erase(it + 1);
-		}
-		else
-		{
-			other.push_back(*it);
-			it = container.erase(it) + 1;
-		}
-	}
-}
-
-template <typename T>
-void	insertSingle( T& container, T& other, long single )
-{
-	if (single > *container.begin())
-		container.push_back(single);
-	else if (single  > *other.begin())
-		other.push_back(single);
-	else
-		other.insert(other.begin(), single);
-	while (other.size() > 0)
-	{
-		container.insert(container.begin(), *(other.end() - 1));
-		other.erase(other.end() - 1);
-	}
-}
-
-template <typename T>
-T	sortContainer( T& container )
-{
-	T		other;
-	T		otherOld;
-	T		containerOld;
-	long	single = NOT;
-	
-	comparePairs(container, other);
-	if (other.size() < container.size())
-	{
-		single = *(container.end() - 1);
-		container.erase(container.end() - 1);
-	}
-	otherOld = other;
-	containerOld = container;
-
-	std::cout << "before if" << std::endl;
-	for_each(container.begin(), container.end(), &printInt);
-	std::cout << std::endl;
-	for_each(other.begin(), other.end(), &printInt);
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-	if (container.size() == 1)
-	{
-		if (single == NOT)
-			container.insert(container.begin(), *other.begin());
-		else
-			insertSingle(container, other, single);
-		return (container);
-	}
-	else
-		container = sortContainer(container);
-	//imagine container sorted now
-
-
-
-	std::cout << "after if" << std::endl;
-	for_each(container.begin(), container.end(), &printInt);
-	std::cout << std::endl;
-	for_each(other.begin(), other.end(), &printInt);
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-	return (container);
-}
-
-template <typename T>
-double	timeContainer( T& container, char *argv[] )
-{
-	struct timeval t1, t2;
-	double elapsedTime;
-	
-	gettimeofday(&t1, NULL);
-	fillContainer(container, argv);
-
-	container = sortContainer(container);
-	
-	gettimeofday(&t2, NULL);
-	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
-    elapsedTime += (t2.tv_usec - t1.tv_usec);
-	return (elapsedTime);
-}*/

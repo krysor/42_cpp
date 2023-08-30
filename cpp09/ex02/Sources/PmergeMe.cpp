@@ -27,7 +27,7 @@ void	printResult( size_t			size,
 			  << std::endl;
 }
 
-unsigned long	getGroupSize( unsigned long iGroup )
+long	getGroupSize( unsigned long iGroup )
 {
 	if (iGroup == 0 || iGroup == 1)
 		return (2);
