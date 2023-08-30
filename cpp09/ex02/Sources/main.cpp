@@ -23,8 +23,8 @@ int	main(int argc, char *argv[])
 	assert(isSorted(v));
 	printResult(size, "vector", time);
 	time = timeContainer(d, argv);
-	printResult(size, "deque", time);
 	assert(d.size() == size);
 	assert(isSorted(d));
+	printResult(size, "deque", time);
 	return (EXIT_SUCCESS);
 }
