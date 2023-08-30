@@ -124,26 +124,32 @@ void	comparePairs( T& container )
 	}
 }
 
-void	fillSideChain( T& mainChain, T& sideChain )
+template <typename T>
+void	fillSideChain( T& matrix, T& sideChain )
 {
 	unsigned long	l;
+	unsigned long	halfColumnSize;
 
-	if (mainChain.front().size() == 1)
+	if (matrix.front().size() == 1)
 		return ;
-	l = 0;
-	while (l < matrix.size())
+	halfColumnSize = matrix.at(0).size() / 2;
+	l = -1;
+	while (++l < matrix.size())
 	{
-		
+		sideChain.at(l).insert(sideChain.at(l).end(),
+							   matrix.at(l).begin() + halfColumnSize,
+							   matrix.at(l).end());
+		matrix.at(l).erase(matrix.at(l).begin() + halfColumnSize,
+						   matrix.at(l).end());
 	}
 }
 
 template <typename T>
 void	binaryInsertion( T& mainChain, T& single )
 {
-	T	sideChain(mainChain.size() / 2);
+	T	sideChain(mainChain.size());
 
 	fillSideChain(mainChain, sideChain);
-	(void)matrix;
 	(void)single;
 }
 
@@ -182,12 +188,7 @@ double	timeContainer( T& matrix, char *argv[] )
 	gettimeofday(&t1, NULL);
 	fillContainer(*matrix.begin(), argv);
 	transpose(matrix);
-	
-	printNthRow(matrix, 0);
 	matrix = mergeInsertion(matrix);
-	printNthRow(matrix, 0);
-	printNthRow(matrix, 1);
-
 	gettimeofday(&t2, NULL);
 	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
     elapsedTime += (t2.tv_usec - t1.tv_usec);
