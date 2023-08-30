@@ -2,11 +2,11 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
 #include <sys/time.h>
-
 #include <vector>
 #include <deque>
 
@@ -52,7 +52,8 @@ bool	fillContainer( T& container, char *argv[] )
 }
 
 template <typename T>
-void	printContainer( T& container, const char* msg )
+void	printContainer( T& container,
+						const char* msg )
 {
 	std::cout << std::setw(6)
 			  << std::left
@@ -65,7 +66,7 @@ void	printContainer( T& container, const char* msg )
 }
 
 template <typename T>
-bool	containsDuplicates( T& container )
+bool	hasDuplicates( T& container )
 {
 	for (typename T::iterator it = container.begin();
 		 it + 1 != container.end(); it++)
@@ -79,52 +80,28 @@ bool	containsDuplicates( T& container )
 template <typename T>
 void	transpose( T& matrix )
 {	
-	typename T::iterator	column;
 	long					nb;
-	unsigned int			i = 1;
+	unsigned int			i;
 
-	column = matrix.begin();
-	while ((*column).size() > 1)
+	i = matrix.front().size() - 1;
+	while (matrix.front().size() > 1)
 	{
-		nb = *((*column).begin() + 1);
-		(*(column + i)).push_back(nb);
-		(*column).erase((*column).begin() + 1);
-		i++;
+		nb = matrix.front().back();
+		matrix.at(i).push_back(nb);
+		matrix.front().pop_back();
+		i--;
 	}
 }
 
 template <typename T>
 void	printNthRow( T& matrix, unsigned long n )
 {
-	if ((*(matrix.begin())).size() <= n)
+	if (matrix.front().size() <= n)
 		return ;
-	for (typename T::iterator it = matrix.begin();
-		it != matrix.end(); it++)
-	{
-		std::cout << *((*it).begin() + n) << " ";
-	}
+	for (unsigned int l = 0; l < matrix.size(); l++)
+		std::cout << matrix.at(l).at(n) << " ";
 	std::cout << std::endl;
 }
-
-// template <typename T>
-// bool	fill2DContainer( T& container, char *argv[] )
-// {
-// 	long		l;
-// 	char*		ptr;
-// 	typename T::iterator	it;
-	
-// 	it = container.begin();
-// 	while (*(++argv))
-// 	{
-// 		l = strtol(*argv, &ptr, BASE);
-// 		if (l < 0 || *ptr != '\0')
-// 			return (FAILURE);
-// 		(*it).push_back(l);
-// 		it++;
-// 	}
-// 	return (SUCCESS);
-// }
-
 
 template <typename T>
 void	comparePairs( T& container )
@@ -136,113 +113,63 @@ void	comparePairs( T& container )
 	{
 		if ( *((*it).begin()) > *((*(it + 1)).begin()) )
 		{
-			std::cout << "left" << std::endl;
-
-			if (it != container.end())
-				std::cout << *((*it).begin()) << std::endl;
-			
 			(*it).insert((*it).end(), (*(it + 1)).begin(), (*(it + 1)).end());
 			it = container.erase(it + 1);
-			
-			if (it != container.end())
-				std::cout << *((*it).begin()) << std::endl;
-			//printNthRow(container, 0);
-			//printNthRow(container, 1);
 		}
 		else
 		{
-			std::cout << "right" << std::endl;
-			
-			if (it != container.end())
-				std::cout << *((*it).begin()) << std::endl;
-			
 			(*(it + 1)).insert((*(it + 1)).end(), (*it).begin(), (*it).end());
 			it = container.erase(it) + 1;
-
-			if (it != container.end())
-				std::cout << *((*it).begin()) << std::endl;
-			//printNthRow(container, 0);
-			//printNthRow(container, 1);
 		}
 	}
 }
 
-// template <typename T>
-// void	insertSingle( T& container, T& other, long single )
-// {
-// 	if (single > *container.begin())
-// 		container.push_back(single);
-// 	else if (single  > *other.begin())
-// 		other.push_back(single);
-// 	else
-// 		other.insert(other.begin(), single);
-// 	while (other.size() > 0)
-// 	{
-// 		container.insert(container.begin(), *(other.end() - 1));
-// 		other.erase(other.end() - 1);
-// 	}
-// }
+void	fillSideChain( T& mainChain, T& sideChain )
+{
+	unsigned long	l;
+
+	if (mainChain.front().size() == 1)
+		return ;
+	l = 0;
+	while (l < matrix.size())
+	{
+		
+	}
+}
+
+template <typename T>
+void	binaryInsertion( T& mainChain, T& single )
+{
+	T	sideChain(mainChain.size() / 2);
+
+	fillSideChain(mainChain, sideChain);
+	(void)matrix;
+	(void)single;
+}
 
 template <typename T>
 T	mergeInsertion( T& matrix )
 {
-	long	single = NOT;
+	T	single(1);
 	
-	printNthRow(matrix, 0);
-	printNthRow(matrix, 1);
-
-	//printContainer(*(matrix.begin()), "test inside");
-
+	if (matrix.size() == 1)
+		return (matrix);
+	if (matrix.size() == 2)
+	{
+		if (matrix.at(0).front() > matrix.at(1).front())
+			matrix.front().swap(matrix.at(1));
+		return (matrix);
+	}
 	if (matrix.size() % 2 == 1)
 	{
-		single = *(*(matrix.end() - 1)).begin();
-		matrix.erase(matrix.end() - 1);
+		single.front().push_back(matrix.back().front());
+		matrix.pop_back();
 	}
-
-	comparePairs(matrix);
-
-	printNthRow(matrix, 0);
-	printNthRow(matrix, 1);
-
-	return (matrix);
-	// comparePairs(matrix, other);
-	// if (other.size() < matrix.size())
-	// {
-	// 	single = *(matrix.end() - 1);
-	// 	matrix.erase(matrix.end() - 1);
-	// }
-
-	// std::cout << "before if" << std::endl;
-	// for_each(matrix.begin(), matrix.end(), &printInt);
-	// std::cout << std::endl;
-	// for_each(other.begin(), other.end(), &printInt);
-	// std::cout << std::endl;
-	// std::cout << std::endl;
-
-	// if (container.size() == 1)
-	// {
-	// 	if (single == NOT)
-	// 		container.insert(container.begin(), *other.begin());
-	// 	else
-	// 		insertSingle(container, other, single);
-	// 	return (container);
-	// }
-	// else
-	// 	container = sortContainer(container);
-
-
-
-	//imagine container sorted now
-
-
-
-	// std::cout << "after if" << std::endl;
-	// for_each(container.begin(), container.end(), &printInt);
-	// std::cout << std::endl;
-	// for_each(other.begin(), other.end(), &printInt);
-	// std::cout << std::endl;
-	// std::cout << std::endl;
-
+	if (matrix.size() > 2)
+		comparePairs(matrix);
+	matrix = mergeInsertion(matrix);
+	if (matrix.front().size() != 1 || single.front().size() != 0)
+		binaryInsertion(matrix, single);
 	return (matrix);
 }
 
@@ -254,8 +181,13 @@ double	timeContainer( T& matrix, char *argv[] )
 	
 	gettimeofday(&t1, NULL);
 	fillContainer(*matrix.begin(), argv);
-	transpose(matrix);	
-	matrix = mergeInsertion(matrix);\
+	transpose(matrix);
+	
+	printNthRow(matrix, 0);
+	matrix = mergeInsertion(matrix);
+	printNthRow(matrix, 0);
+	printNthRow(matrix, 1);
+
 	gettimeofday(&t2, NULL);
 	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000000;
     elapsedTime += (t2.tv_usec - t1.tv_usec);

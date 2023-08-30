@@ -14,7 +14,7 @@ int	main(int argc, char *argv[])
 		return (printMsg("Error", EXIT_FAILURE));
 	printContainer(test, "Before");
 	sort(test.begin(), test.end());
-	if (containsDuplicates(test))
+	if (hasDuplicates(test))
 		return (printMsg(ERRDUPL, EXIT_FAILURE));
 	//printContainer(test, "After");
 	size = test.size();
