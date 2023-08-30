@@ -35,6 +35,16 @@ void	printResult( size_t 		size,
 long	getGroupSize( unsigned long iGroup );
 
 template <typename T>
+void	printNthRow( T& matrix, unsigned long n )
+{
+	if (matrix.front().size() <= n)
+		return ;
+	for (unsigned int l = 0; l < matrix.size(); l++)
+		std::cout << matrix.at(l).at(n) << " ";
+	std::cout << std::endl;
+}
+
+template <typename T>
 bool	fillContainer( T& container, char *argv[] )
 {
 	long		l;
@@ -93,16 +103,6 @@ void	transpose( T& matrix )
 }
 
 template <typename T>
-void	printNthRow( T& matrix, unsigned long n )
-{
-	if (matrix.front().size() <= n)
-		return ;
-	for (unsigned int l = 0; l < matrix.size(); l++)
-		std::cout << matrix.at(l).at(n) << " ";
-	std::cout << std::endl;
-}
-
-template <typename T>
 void	comparePairs( T& container )
 {
 	typename T::iterator	it;
@@ -151,8 +151,29 @@ void	fillSideChain( T& mainChain, T& sideChain, T& single)
 		mainChain.insert(mainChain.begin(), sideChain.front());
 		sideChain.erase(sideChain.begin());
 	}
+
+	//std::cout << "single.front().size(): " << single.front().size() << std::endl;
 	if (single.front().size() > 0)
-		sideChain.insert(sideChain.end(), single.front());
+	{
+		// std::cout << "mainChain before fill:" << std::endl;
+		// printNthRow(mainChain, 0);
+		// std::cout << "sideChain before fill:" << std::endl;
+		// printNthRow(sideChain, 0);
+		// std::cout << "single before fill:" << std::endl;
+		// printNthRow(single, 0);
+
+		if (sideChain.front().size() == 0)
+			sideChain = single;
+		else
+			sideChain.insert(sideChain.end(), single.front());
+
+		// std::cout << "mainChain after fill:" << std::endl;
+		// printNthRow(mainChain, 0);
+		// std::cout << "sideChain after fill:" << std::endl;
+		// printNthRow(sideChain, 0);
+		// std::cout << "single after fill:" << std::endl;
+		// printNthRow(single, 0);
+	}
 }
 
 template <typename T>
@@ -178,19 +199,46 @@ void	binaryInsertion( T& mainChain, T& single )
 	T		sideChain(mainChain.size());
 	long	iGroup, iSide, iMain;
 
+	// std::cout << "mainChain before fill:" << std::endl;
+	// printNthRow(mainChain, 0);
+	// std::cout << "sideChain before fill:" << std::endl;
+	// printNthRow(sideChain, 0);
+	// std::cout << "single before fill:" << std::endl;
+	// printNthRow(single, 0);
+
 	fillSideChain(mainChain, sideChain, single);
+
+	// std::cout << "mainChain after fill:" << std::endl;
+	// printNthRow(mainChain, 0);
+	// std::cout << "sideChain after fill:" << std::endl;
+	// printNthRow(sideChain, 0);
+	// std::cout << "single after fill:" << std::endl;
+	// printNthRow(single, 0);
+
 	iGroup = 0;
 	while (sideChain.size() > 0)
 	{
 		iSide = getGroupSize(iGroup) - 1;
 		if (sideChain.size() - 1 < (unsigned long)iSide)
 			iSide = sideChain.size() - 1;
+		//std::cout << "before or after segv1" << std::endl;
 		while (iSide >= 0)
 		{
+			//std::cout << "before or after segv2" << std::endl;
+//
+			//std::cout << "main before" << std::endl;
+			//printNthRow(mainChain, 0);
+			//printNthRow(mainChain, 1);
+			//std::cout << "side before" << std::endl;
+			//printNthRow(sideChain, 0);
+			//printNthRow(sideChain, 1);
+
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
 								 mainChain.size() - 1);
+
+			//std::cout << "before or after segv3" << std::endl;
 			mainChain.insert(mainChain.begin() + iMain,
 							 sideChain.at(iSide));
 			sideChain.erase(sideChain.begin() + iSide);
@@ -205,12 +253,13 @@ T	mergeInsertion( T& matrix )
 {
 	T	single(1);
 	
+	//printNthRow(matrix, 0);
 	if (matrix.size() == 1)
 		return (matrix);
 	if (matrix.size() == 2)
 	{
 		if (matrix.at(0).front() > matrix.at(1).front())
-			matrix.front().swap(matrix.at(1));
+			matrix.front().swap(matrix.at(1));		
 		return (matrix);
 	}
 	if (matrix.size() % 2 == 1)
