@@ -150,8 +150,34 @@ void	binaryInsertion( T& mainChain, T& single )
 	T	sideChain(mainChain.size());
 
 	fillSideChain(mainChain, sideChain);
-	(void)single;
+	if (sideChain.front().size() > 0)
+	{
+		mainChain.insert(mainChain.begin(), sideChain.front());
+		sideChain.erase(sideChain.begin());
+	}
+	if (single.front().size() > 0)
+		sideChain.insert(sideChain.end(), single.front());
+
+	//insertion here
 }
+
+/*
+	std::cout << "before" << std::endl;
+	std::cout << "main" << std::endl;
+	printNthRow(mainChain, 0);
+	printNthRow(mainChain, 1);
+	std::cout << "side" << std::endl;
+	printNthRow(sideChain, 0);
+	printNthRow(sideChain, 1);
+
+	std::cout << "after" << std::endl;
+	std::cout << "main" << std::endl;
+	printNthRow(mainChain, 0);
+	printNthRow(mainChain, 1);
+	std::cout << "side" << std::endl;
+	printNthRow(sideChain, 0);
+	printNthRow(sideChain, 1);
+*/
 
 template <typename T>
 T	mergeInsertion( T& matrix )
@@ -168,7 +194,8 @@ T	mergeInsertion( T& matrix )
 	}
 	if (matrix.size() % 2 == 1)
 	{
-		single.front().push_back(matrix.back().front());
+		single.front().insert(single.front().end(), matrix.back().begin(), matrix.back().end());
+		//push_back(matrix.back().front());
 		matrix.pop_back();
 	}
 	if (matrix.size() > 2)
