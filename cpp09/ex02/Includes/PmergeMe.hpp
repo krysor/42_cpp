@@ -150,7 +150,7 @@ void	createSideChain( T& matrix, T& sideChain )
 template <typename T>
 void	fillSideChain( T& mainChain, T& sideChain, T& single)
 {
-	if (mainChain.front().size() > 1 && mainChain.size() > 2)
+	if (mainChain.front().size() > 1 && mainChain.front().size() != single.front().size())// && mainChain.size() > 2 instead of the second condition)
 		createSideChain(mainChain, sideChain);
 	if (sideChain.front().size() > 0)
 	{
@@ -175,7 +175,7 @@ unsigned long	binarySearch( T& mainChain,
 	unsigned long	mid;
 
 	if (start >= end)
-		return (start);
+		return (end);//before start
 	mid = start + (end - start) / 2;
 	if (value < mainChain.at(mid).front())
 		return (binarySearch(mainChain, value, start, mid));
@@ -189,7 +189,6 @@ void	binaryInsertion( T& mainChain, T& single )
 	T		sideChain(mainChain.size());
 	long	iGroup, iSide, iMain;
 
-	std::cout << "before or after segv6\n";
 	fillSideChain(mainChain, sideChain, single);
 	iGroup = 0;
 	while (sideChain.size() > 0)
@@ -202,8 +201,7 @@ void	binaryInsertion( T& mainChain, T& single )
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
-								 mainChain.size() - 1);
-			std::cout << "before or after segv7\n";
+								 mainChain.size());//cahnged from mainChain.size() - 1
 			mainChain.insert(mainChain.begin() + iMain,
 							 sideChain.at(iSide));
 			sideChain.erase(sideChain.begin() + iSide);
@@ -234,10 +232,8 @@ T	mergeInsertion( T& matrix )
 	if (matrix.size() > 2)
 		comparePairs(matrix);
 	matrix = mergeInsertion(matrix);
-	std::cout << "before or after segv4\n";
 	if (matrix.front().size() != 1 || single.front().size() != 0)
 		binaryInsertion(matrix, single);
-	std::cout << "before or after segv5\n";
 	return (matrix);
 }
 
