@@ -18,7 +18,7 @@
 #define	SUCCESS		true
 #define	FAILURE		false
 
-#define ERRARGC		"Error: provide at least 2 arguments\n"
+#define ERRARGC		"Error: provide at least 1 argument\n"
 #define ERRSORTED	"Error: the arguments are already sorted\n"
 #define	ERRDUPL		"Error: the list of arguments has duplicates\n"
 

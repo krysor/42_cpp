@@ -8,10 +8,10 @@ int	main(int argc, char *argv[])
 	std::vector< std::vector<long> >	v(argc - 1);
 	std::deque < std::deque <long> >	d(argc - 1);
 
-	if (argc < 3)
+	if (argc < 2)
 		return (printMsg(ERRARGC, EXIT_FAILURE));
 	if (fillContainer(test, argv) == FAILURE)
-		return (printMsg("Error", EXIT_FAILURE));
+		return (printMsg("Error\n", EXIT_FAILURE));
 	printContainer(test, "Before");
 	sort(test.begin(), test.end());
 	if (hasDuplicates(test))
