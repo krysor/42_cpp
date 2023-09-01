@@ -13,6 +13,7 @@
 #define ERRZERO 		"Error: division by zero.\n"
 #define ERRINPUT 		"Error: incorrect input.\n"
 #define ERREND 			"Error: at the end of the program there should be exactly one element left on the stack.\n"
+#define ERRVAL			"Error: the number passed as argument is equal to or larger than 10.\n"
 
 int		printErrMsg( const char* msg );
 bool	isOperator( char* s );
