@@ -116,7 +116,6 @@ void	comparePairs( T& container )
 	it = container.begin();
 	while (it != container.end() && (it + 1) != container.end())
 	{
-		std::cout << "comparePairs" << std::endl;
 		if ( *((*it).begin()) > *((*(it + 1)).begin()) )
 		{
 			(*it).insert((*it).end(), (*(it + 1)).begin(), (*(it + 1)).end());
@@ -140,44 +139,18 @@ void	createSideChain( T& matrix, T& sideChain )
 	l = -1;
 	while (++l < matrix.size())
 	{
-		std::cout << BLUE << "l=" << l << RESET << std::endl;
-		std::cout << RED << "before createSideChain" << RESET << std::endl;
-		std::cout << "matrix size: " << matrix.size() << std::endl;
-		std::cout << "matrix column size: " << matrix.at(l).size() << std::endl;
-		printNthRow(matrix, 0);
-		std::cout << "sideChain size: " << sideChain.size() << std::endl;
-		std::cout << "sideChain column size: " << sideChain.at(l).size() << std::endl;
-		//printNthRow(sideChain, 0);
-		
 		sideChain.at(l).insert(sideChain.at(l).end(),//maybe begin heer
 							   matrix.at(l).begin() + halfColumnSize,
 							   matrix.at(l).end());
-
-		std::cout << YELLOW << "inside createSideChain" << RESET << std::endl;
-		std::cout << "matrix size: " << matrix.size() << std::endl;
-		std::cout << "matrix column size: " << matrix.at(l).size() << std::endl;
-		printNthRow(matrix, 0);
-		std::cout << "sideChain size: " << sideChain.size() << std::endl;
-		std::cout << "sideChain column size: " << sideChain.at(l).size() << std::endl;
-		//printNthRow(sideChain, 0);
-		
 		matrix.at(l).erase(matrix.at(l).begin() + halfColumnSize,
 						   matrix.at(l).end());
-		
-		std::cout << GREEN << "after createSideChain" << RESET << std::endl;
-		std::cout << "matrix size: " << matrix.size() << std::endl;
-		std::cout << "matrix column size: " << matrix.at(l).size() << std::endl;
-		printNthRow(matrix, 0);
-		std::cout << "sideChain size: " << sideChain.size() << std::endl;
-		std::cout << "sideChain column size: " << sideChain.at(l).size() << std::endl;
-		//printNthRow(sideChain, 0);
 	}
 }
 
 template <typename T>
 void	fillSideChain( T& mainChain, T& sideChain, T& single)
 {
-	if (mainChain.front().size() > 1)
+	if (mainChain.front().size() > 1 && mainChain.size() > 2)
 		createSideChain(mainChain, sideChain);
 	if (sideChain.front().size() > 0)
 	{
@@ -201,7 +174,6 @@ unsigned long	binarySearch( T& mainChain,
 {
 	unsigned long	mid;
 
-	std::cout << "binarySearch" << std::endl;
 	if (start >= end)
 		return (start);
 	mid = start + (end - start) / 2;
@@ -217,18 +189,15 @@ void	binaryInsertion( T& mainChain, T& single )
 	T		sideChain(mainChain.size());
 	long	iGroup, iSide, iMain;
 
-	std::cout << "binaryInsertion" << std::endl;
 	fillSideChain(mainChain, sideChain, single);
 	iGroup = 0;
 	while (sideChain.size() > 0)
 	{
-		std::cout << "binary insertion outer loop" << std::endl;
 		iSide = getGroupSize(iGroup) - 1;
 		if (sideChain.size() - 1 < (unsigned long)iSide)
 			iSide = sideChain.size() - 1;
 		while (iSide >= 0)
 		{
-			std::cout << "binary insertion inner loop" << std::endl;
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
@@ -246,8 +215,7 @@ template <typename T>
 T	mergeInsertion( T& matrix )
 {
 	T	single(1);
-	
-	std::cout << "mergeInsertion" << std::endl;
+
 	if (matrix.size() == 1)
 		return (matrix);
 	if (matrix.size() == 2)
@@ -291,7 +259,6 @@ bool	isSorted( T& matrix )
 	for (typename T::iterator it = matrix.begin();
 		 it + 1 != matrix.end(); it++)
 	{
-		std::cout << "isSorted" << std::endl;
 		if (*(*it).begin() > *((*(it + 1)).begin()))
 			return (false);
 	}

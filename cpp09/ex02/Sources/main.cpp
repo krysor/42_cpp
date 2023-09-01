@@ -19,7 +19,6 @@ int	main(int argc, char *argv[])
 	printContainer(test, "After");
 	size = test.size();
 	time = timeContainer(v, argv);
-	printNthRow(v, 0);//DELETE LATER
 	assert(v.size() == size);
 	assert(isSorted(v));
 	printResult(size, "vector", time);
