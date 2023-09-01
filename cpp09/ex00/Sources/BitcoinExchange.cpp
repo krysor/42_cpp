@@ -269,8 +269,6 @@ void	processLine( std::string& line, data& dataBase )
 	struct tm	date;
 	double		value, result;
 	
-	if (line == FIRSTLINEINPUTFILE || line.empty() == true)
-		return ;
 	indexSeparator = line.find(SEPARATORINPUTFILE, 0);
 	if (indexSeparator == std::string::npos)
 	{
@@ -305,6 +303,7 @@ bool	processInputFile( const char* nameFile, data& dataBase )
 {
 	std::ifstream	streamInputFile;
 	std::string		line;
+	bool			firstLine;
 	
 	streamInputFile.open(nameFile, std::ios::in);
 	if (streamInputFile == NULL)
@@ -313,8 +312,22 @@ bool	processInputFile( const char* nameFile, data& dataBase )
 				  << nameFile << " file.\n";
 		return (false);
 	}
+	firstLine = true;
 	while (std::getline(streamInputFile, line))
+	{
+		if (firstLine == true)
+		{
+			firstLine = false;
+			if (line == FIRSTLINEINPUTFILE)
+				continue ;
+			std::cout << "Error: first line not equal to \""
+					  << FIRSTLINEINPUTFILE << "\"" << std::endl;
+			return (false);
+		}
+		if (line.empty() == true)
+			continue ;
 		processLine(line, dataBase);
+	}
 	streamInputFile.close();
 	return (true);
 }
