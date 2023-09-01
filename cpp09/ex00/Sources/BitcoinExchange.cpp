@@ -264,7 +264,7 @@ void	processLine( std::string& line, data& dataBase )
 	struct tm	date;
 	double		value, result;
 	
-	if (line == FIRSTLINEINPUTFILE)
+	if (line == FIRSTLINEINPUTFILE || line.empty() == true)
 		return ;
 	indexSeparator = line.find(SEPARATORINPUTFILE, 0);
 	if (indexSeparator == std::string::npos)
