@@ -231,6 +231,11 @@ bool	parseLineValue( std::string& lineValue, double& value )
 	const char*	str;
 	char*		str_end;
 
+	if (lineValue.empty())
+	{
+		std::cout << "Error: no value provided as input" << std::endl;
+		return (false);
+	}
 	str = lineValue.c_str();
 	value = std::strtod(str, &str_end);
 	if (*str_end != '\0')
