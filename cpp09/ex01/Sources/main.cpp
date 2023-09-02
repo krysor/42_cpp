@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 			stack.push(strtol(argv[1], &ptr, 10));
 			if (*ptr != ' ' && *ptr != '\0')
 				return (printErrMsg(ERRINPUT));
-			if (stack.top() > 10)
+			if (stack.top() >= 10)
 				return (printErrMsg(ERRVAL));
 			argv[1] = ptr;
 		}
