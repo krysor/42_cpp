@@ -8,6 +8,8 @@
 #include <sys/time.h>
 #include <vector>
 #include <deque>
+#include <cassert>
+#include <cmath>
 
 #define RESET	std::string("\33[0m")
 #define RED		std::string("\33[31m")
@@ -175,7 +177,7 @@ unsigned long	binarySearch( T& mainChain,
 	unsigned long	mid;
 
 	if (start >= end)
-		return (end);//before start
+		return (end);
 	mid = start + (end - start) / 2;
 	if (value < mainChain.at(mid).front())
 		return (binarySearch(mainChain, value, start, mid));
@@ -187,25 +189,50 @@ template <typename T>
 void	binaryInsertion( T& mainChain, T& single )
 {
 	T		sideChain(mainChain.size());
-	long	iGroup, iSide, iMain;
+	long	iGroup, iSide, iEnd, iMain, iEndMax;
+
 
 	fillSideChain(mainChain, sideChain, single);
+
+
+	iEndMax = 2;//not sure if correct
+
+
 	iGroup = 0;
 	while (sideChain.size() > 0)
 	{
 		iSide = getGroupSize(iGroup) - 1;
 		if (sideChain.size() - 1 < (unsigned long)iSide)
 			iSide = sideChain.size() - 1;
+
+
+		if (iGroup == 0 && sideChain.size() == 1)
+			iEnd = mainChain.size();
+		else
+		{
+			iEndMax *= 2; 
+			iEnd = iEndMax - 1;
+		}
+			
+
 		while (iSide >= 0)
 		{
+			printNthRow(mainChain, 0);
+			printNthRow(sideChain, 0);
+			std::cout << RED << "iEnd=" << iEnd << RESET << std::endl;
+			std::cout << GREEN << "to insert=" << sideChain.at(iSide).front() << RESET << std::endl;
+
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
-								 mainChain.size());//cahnged from mainChain.size() - 1
+								 iEnd);//mainChain.size());
 			mainChain.insert(mainChain.begin() + iMain,
 							 sideChain.at(iSide));
 			sideChain.erase(sideChain.begin() + iSide);
 			iSide--;
+
+			if (iMain == iEnd)
+				iEnd--;
 		}
 		iGroup++;
 	}

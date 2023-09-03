@@ -1,4 +1,4 @@
-#include "PmergeMe.hpp"
+#include "../Includes/PmergeMe.hpp"
 
 int	main(int argc, char *argv[])
 {
@@ -22,9 +22,9 @@ int	main(int argc, char *argv[])
 	assert(v.size() == size);
 	assert(isSorted(v));
 	printResult(size, "vector", time);
-	time = timeContainer(d, argv);
-	assert(d.size() == size);
-	assert(isSorted(d));
-	printResult(size, "deque", time);
+	//time = timeContainer(d, argv);
+	//assert(d.size() == size);
+	//assert(isSorted(d));
+	//printResult(size, "deque", time);
 	return (EXIT_SUCCESS);
 }

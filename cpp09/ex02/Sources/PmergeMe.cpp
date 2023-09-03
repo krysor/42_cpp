@@ -1,4 +1,4 @@
-#include "PmergeMe.hpp"
+#include "../Includes/PmergeMe.hpp"
 
 int	printMsg( const char* msg, int exitCode )
 {
@@ -31,5 +31,5 @@ long	getGroupSize( unsigned long iGroup )
 {
 	if (iGroup == 0 || iGroup == 1)
 		return (2);
-	return (pow(2, iGroup) + getGroupSize(iGroup - 2));
+	return (std::pow(2, iGroup) + getGroupSize(iGroup - 2));
 }
