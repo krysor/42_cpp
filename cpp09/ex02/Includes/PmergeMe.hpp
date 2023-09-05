@@ -189,50 +189,25 @@ template <typename T>
 void	binaryInsertion( T& mainChain, T& single )
 {
 	T		sideChain(mainChain.size());
-	long	iGroup, iSide, iEnd, iMain, iEndMax;
-
+	long	iGroup, iSide, iMain;
 
 	fillSideChain(mainChain, sideChain, single);
-
-
-	iEndMax = 2;//not sure if correct
-
-
 	iGroup = 0;
 	while (sideChain.size() > 0)
 	{
 		iSide = getGroupSize(iGroup) - 1;
 		if (sideChain.size() - 1 < (unsigned long)iSide)
 			iSide = sideChain.size() - 1;
-
-
-		if (iGroup == 0 && sideChain.size() == 1)
-			iEnd = mainChain.size();
-		else
-		{
-			iEndMax *= 2; 
-			iEnd = iEndMax - 1;
-		}
-			
-
 		while (iSide >= 0)
 		{
-			printNthRow(mainChain, 0);
-			printNthRow(sideChain, 0);
-			std::cout << RED << "iEnd=" << iEnd << RESET << std::endl;
-			std::cout << GREEN << "to insert=" << sideChain.at(iSide).front() << RESET << std::endl;
-
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
-								 iEnd);//mainChain.size());
+								 mainChain.size());
 			mainChain.insert(mainChain.begin() + iMain,
 							 sideChain.at(iSide));
 			sideChain.erase(sideChain.begin() + iSide);
 			iSide--;
-
-			if (iMain == iEnd)
-				iEnd--;
 		}
 		iGroup++;
 	}
@@ -293,3 +268,58 @@ bool	isSorted( T& matrix )
 }
 
 #endif
+
+/*
+template <typename T>
+void	binaryInsertion( T& mainChain, T& single )
+{
+	T		sideChain(mainChain.size());
+	long	iGroup, iSide, iEnd, iMain, iEndMax;
+
+
+	fillSideChain(mainChain, sideChain, single);
+
+
+	iEndMax = 2;//not sure if correct
+
+
+	iGroup = 0;
+	while (sideChain.size() > 0)
+	{
+		iSide = getGroupSize(iGroup) - 1;
+		if (sideChain.size() - 1 < (unsigned long)iSide)
+			iSide = sideChain.size() - 1;
+
+
+		if (iGroup == 0 && sideChain.size() == 1)
+			iEnd = mainChain.size();
+		else
+		{
+			iEndMax *= 2;//this incorrect
+			iEnd = iEndMax - 1;
+		}
+			
+
+		while (iSide >= 0)
+		{
+			printNthRow(mainChain, 0);
+			std::cout << "      ";
+			printNthRow(sideChain, 0);
+			std::cout << RED << "iEnd=" << iEnd << RESET << std::endl;
+			std::cout << GREEN << "to insert=" << sideChain.at(iSide).front() << RESET << std::endl;
+
+			iMain = binarySearch(mainChain,
+								 sideChain.at(iSide).front(),
+								 0,
+								 iEnd);//mainChain.size());
+			mainChain.insert(mainChain.begin() + iMain,
+							 sideChain.at(iSide));
+			sideChain.erase(sideChain.begin() + iSide);
+			iSide--;
+
+			if (iMain == iEnd)
+				iEnd--;
+		}
+		iGroup++;
+	}
+}*/
