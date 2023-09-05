@@ -188,18 +188,14 @@ unsigned long	binarySearch( T& mainChain,
 template <typename T>
 void	binaryInsertion( T& mainChain, T& single )
 {
-	T		sideChain(mainChain.size());
-	long	iGroup, iSide, iMain;
-
-	unsigned long	leftToInsert;
-	unsigned long	iGroupStart;
-	unsigned long	offset;
-
+	T				sideChain(mainChain.size());
+	long			iGroup, iSide, iMain;
+	unsigned long	leftToInsert, iGroupStart, offset;
 
 	fillSideChain(mainChain, sideChain, single);
-	iGroupStart = 0;
 	iGroup = 0;
-	offset = 2;//mainChain.size() - sideChain.size();
+	iGroupStart = 0;
+	offset = 2;
 	leftToInsert = sideChain.size();
 	while (leftToInsert > 0)
 	{
@@ -215,14 +211,6 @@ void	binaryInsertion( T& mainChain, T& single )
 			iSide = sideChain.size() - 1;
 		while (iSide >= (long)iGroupStart)
 		{
-			// std::cout << RED;
-			// printNthRow(mainChain, 0);
-			// std::cout << RESET;
-			// printNthRow(sideChain, 0);
-
-			// std::cout << "iSide=" << iSide << std::endl;
-			// std::cout << "offset=" << offset << std::endl;
-
 			iMain = binarySearch(mainChain,
 								 sideChain.at(iSide).front(),
 								 0,
